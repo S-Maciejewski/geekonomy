@@ -6,3 +6,7 @@ Indicators can be explored here: https://databank.worldbank.org/source/world-dev
 
 
 MVP: user is presented with i.e. 5 indicators in form of graphs or raw time series and 4 country names. They have to guess which country matches the data
+
+
+Nice to have:
+- upon clicking the answer, user sees the metrics for choosen country displayed on the plots (to see the comparison between his guess and the country portrayed by metrics)
