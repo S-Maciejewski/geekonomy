@@ -82,26 +82,32 @@ def parse():
         conn = psycopg2.connect(**params)
 
         cur = conn.cursor()
+        cur.execute('select count(*) from "WDIData"')
+        data_table_len = cur.fetchone()[0]
+        print('%d rows left to process' % data_table_len)
 
-        cur.execute('SELECT * from "WDIData" limit 1')
+        for i in range(0, data_table_len):
+            cur.execute('SELECT * from "WDIData" limit 1')
+            res = cur.fetchone()
 
-        res = cur.fetchone()
+            df = pd.DataFrame(index=WDI_COLS).transpose()
+            df = df.append(pd.Series(res, index=WDI_COLS), ignore_index=True)
 
-        df = pd.DataFrame(index=WDI_COLS).transpose()
-        df = df.append(pd.Series(res, index=WDI_COLS), ignore_index=True)
+            values = df.loc[:, '1960':'2020'].transpose()
+            values.replace('', 'null', inplace=True)
+            # values.dropna(0, inplace=True)
 
-        values = df.loc[:, '1960':'2020'].transpose()
-        values.replace('', np.nan, inplace=True)
-        values.dropna(0, inplace=True)
-
-        insert_statement = ''
-        for idx, row in values.iterrows():
-            insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (res[0], res[1], res[2], res[3], idx, row[0])
-            
-        print(insert_statement)
-        # TODO
-        resp = cur.execute(insert_statement) 
-        print(resp)
+            insert_statement = ''
+            for idx, row in values.iterrows():
+                insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (res[0], res[1], res[2], res[3], idx, row[0])
+                
+            # print(insert_statement)
+            cur.execute(insert_statement)
+            delete_statement = "delete from \"WDIData\" where \"Country Code\" = '%s' and \"Indicator Code\" = '%s';\n" % (res[1], res[3])
+            # print(delete_statement)
+            cur.execute(delete_statement)
+            print('%s - %s processed, %d left to process' % (res[1], res[3], data_table_len - i - 1))
+            conn.commit()
 
         cur.close()
 
