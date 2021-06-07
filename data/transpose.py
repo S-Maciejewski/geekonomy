@@ -73,6 +73,7 @@ WDI_COLS = [
     'remarks'
 ]
 
+# TODO: take into account only relevant countries and metrics, as parsing the whole database would take approx. 260 days
 
 def parse():
     conn = None
@@ -99,7 +100,7 @@ def parse():
 
             insert_statement = ''
             for idx, row in values.iterrows():
-                insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (res[0], res[1], res[2], res[3], idx, row[0])
+                insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (res[0].replace("'", "''"), res[1], res[2].replace("'", "''"), res[3], idx, row[0])
                 
             # print(insert_statement)
             cur.execute(insert_statement)
