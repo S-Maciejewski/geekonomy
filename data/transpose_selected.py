@@ -2,7 +2,7 @@
 import psycopg2
 from config import config
 import pandas as pd
-import numpy as np
+import csv
 
 WDI_COLS = [
     'Country Name',
@@ -73,77 +73,13 @@ WDI_COLS = [
     'remarks'
 ]
 
-SUPPORTED_COUNTRIES = [
-    'ARE',
-    'ARG',
-    'AUS',
-    'AUT',
-    'BEL',
-    'BGD',
-    'BGR',
-    'BLR',
-    'BRA',
-    'CAN',
-    'CHE',
-    'CHL',
-    'CHN',
-    'COL',
-    'CZE',
-    'DEU',
-    'DNK',
-    'EGY',
-    'ESP',
-    'EST',
-    'EUU',
-    'FIN',
-    'FRA',
-    'GBR',
-    'GRC',
-    'HRV',
-    'HUN',
-    'IND',
-    'ISR',
-    'ITA',
-    'JPN',
-    'KEN',
-    'KOR',
-    'LTU',
-    'LVA',
-    'MDG',
-    'MEX',
-    'MLT',
-    'MOZ',
-    'NGA',
-    'NLD',
-    'NOR',
-    'NZL',
-    'PAK',
-    'PHL',
-    'POL',
-    'PRT',
-    'RUS',
-    'SVN',
-    'TZA',
-    'UKR',
-    'USA',
-    'VEN',
-    'VNM',
-    'WLD'
-]
+with open('../server/config/supported_countries.csv', newline='') as file:
+    reader = csv.reader(file)
+    SUPPORTED_COUNTRIES = [item[0] for item in list(reader)]
 
-
-SUPPORTED_METRICS = [
-    'NY.GDP.MKTP.KD.ZG',  # GDP growth
-    'NY.GDP.MKTP.CD',  # GDP (current US$)
-    'SP.POP.TOTL',  # Population, total
-    'SP.POP.GROW',  # Population growth (annual %)
-    'SE.SEC.ENRR',  # School enrollment, secondary (% gross)
-    'SE.XPD.TOTL.GD.ZS',  # Govt expenditure on education (% of GDP)
-    'SP.RUR.TOTL.ZS',  # Rural population (% of total population)
-    'SP.URB.TOTL.IN.ZS',  # Urban population (% of total population)
-    'AG.LND.CROP.ZS',  # Permanent cropland (% of land area)
-
-]
+with open('../server/config/supported_metrics.csv', newline='') as file:
+    reader = csv.reader(file)
+    SUPPORTED_METRICS = [item[0] for item in list(reader)]
 
 
 def parse():
@@ -159,24 +95,28 @@ def parse():
 
         for i in range(0, len(SUPPORTED_METRICS)):
             select_query = 'select * from "WDIData" where "Indicator Code" = \'%s\' and "Country Code" in (%s);' % (
-                SUPPORTED_METRICS[i], str(SUPPORTED_COUNTRIES).replace('[', '').replace(']', '')
+                SUPPORTED_METRICS[i], str(SUPPORTED_COUNTRIES).replace(
+                    '[', '').replace(']', '')
             )
             cur.execute(select_query)
             fetched_records = cur.fetchall()
             for record in fetched_records:
                 df = pd.DataFrame(index=WDI_COLS).transpose()
-                df = df.append(pd.Series(record, index=WDI_COLS), ignore_index=True)
+                df = df.append(pd.Series(record, index=WDI_COLS),
+                               ignore_index=True)
 
                 values = df.loc[:, '1960':'2020'].transpose()
                 values.replace('', 'null', inplace=True)
 
                 insert_statement = ''
                 for idx, row in values.iterrows():
-                    insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (record[0].replace("'", "''"), record[1], record[2].replace("'", "''"), record[3], idx, row[0])
-                    
+                    insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (
+                        record[0].replace("'", "''"), record[1], record[2].replace("'", "''"), record[3], idx, row[0])
+
                 # print(insert_statement)
                 cur.execute(insert_statement)
-            print('%s processed, %d metrics left to process' % (record[3], len(SUPPORTED_METRICS) - i - 1))
+            print('%s processed, %d metrics left to process' %
+                  (record[3], len(SUPPORTED_METRICS) - i - 1))
             conn.commit()
 
         cur.close()

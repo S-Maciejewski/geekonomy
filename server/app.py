@@ -5,18 +5,14 @@ app = Flask(__name__)
 
 WB_API_URL = 'http://api.worldbank.org/v2'
 # countries for WDI db: http://api.worldbank.org/v2/sources/2/country/data?format=json
-SUPPORTED_METRICS = [
-    'NY.GDP.MKTP.KD.ZG',  # GDP growth
-    'NY.GDP.MKTP.CD',  # GDP (current US$)
-    'SP.POP.TOTL',  # Population, total
-    'SP.POP.GROW',  # Population growth (annual %)
-    'SE.SEC.ENRR',  # School enrollment, secondary (% gross)
-    'SE.XPD.TOTL.GD.ZS',  # Govt expenditure on education (% of GDP)
-    'SP.RUR.TOTL.ZS',  # Rural population (% of total population)
-    'SP.URB.TOTL.IN.ZS',  # Urban population (% of total population)
-    'AG.LND.CROP.ZS',  # Permanent cropland (% of land area)
 
-]
+with open('../server/config/supported_countries.csv', newline='') as file:
+    reader = csv.reader(file)
+    SUPPORTED_COUNTRIES = [item[0] for item in list(reader)]
+
+with open('../server/config/supported_metrics.csv', newline='') as file:
+    reader = csv.reader(file)
+    SUPPORTED_METRICS = [item[0] for item in list(reader)]
 
 
 @app.route('/')
