@@ -72,7 +72,6 @@ WDI_COLS = [
     '2020',
     'remarks'
 ]
-
 # TODO: take into account only relevant countries and metrics, as parsing the whole database would take approx. 260 days
 
 def parse():
