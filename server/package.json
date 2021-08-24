@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "start": "npx ts-node src/index.ts",
+    "dev": "npx tsc -w src/index.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^16.7.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "@fastify/session": "^6.1.1",
+    "fastify": "^3.20.2",
+    "fastify-cookie": "^5.3.1"
+  }
+}

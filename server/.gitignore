@@ -1,7 +1,3 @@
+node_modules
+database.ini
 .idea
-__pycache__/
-*.pyc
-venv/bin
-venv/lib
-venv/lib64
-venv/include
