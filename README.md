@@ -10,3 +10,4 @@ MVP: user is presented with i.e. 5 indicators in form of graphs or raw time seri
 
 Nice to have:
 - upon clicking the answer, user sees the metrics for choosen country displayed on the plots (to see the comparison between his guess and the country portrayed by metrics)
+- country (or countries if metrics for them are shown) is highlighted on the map upon clicking answer
