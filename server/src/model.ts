@@ -1,14 +1,23 @@
-export interface GameState {
-    score: number
-    quizData: QuizData
+import { GameState } from "./GameState";
+
+export interface UserSession {
+    sessionId: string
+    state: GameState
 }
 
 export interface QuizData {
     indicators: IndicatorData[]
-    countries: string[]
+    countries: Country[]
+    correctCountry: Country
 }
 
 export interface IndicatorData {
     series: [number, number][]
-    indicatorName: string
+    name: string
+    code: string
+}
+
+export interface Country {
+    name: string
+    code: string
 }

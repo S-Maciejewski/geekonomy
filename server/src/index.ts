@@ -1,7 +1,7 @@
 import fastify, {FastifyRequest} from 'fastify'
 import fastifyCookie from 'fastify-cookie'
 import fastifySession from '@fastify/session'
-import {randomInt, randomUUID} from 'crypto'
+import {Session} from './Session';
 
 const server = fastify()
 server.register(fastifyCookie)
@@ -13,21 +13,20 @@ server.register(fastifySession, {
     },
 })
 
+const session = new Session()
 
 server.addHook('preHandler', (request, reply, next) => {
-    request.session.sessionId = request.session.sessionId ?? randomUUID()
-    // @ts-ignore
-    request.session.user = randomInt(100)
+    if (!session.getById(request.session.sessionId)) session.createSession(request.session.sessionId)
     next()
 })
 
-server.get('/quizData', async (request, reply) => {
-    // @ts-ignore
-    return `${request.session.sessionId} - ${request.session.user}`
+server.get('/sessionTest', async (request, reply) => {
+    session.getById(request.session.sessionId).state.score += 1
+    return `${request.session.sessionId} - score: ${JSON.stringify(session.getById(request.session.sessionId))}`
 })
 
-server.get('/ping', async (request, reply) => {
-    return 'pong\n'
+server.get('/quizData', async (request, reply) => {
+    return ''
 })
 
 server.listen(8080, (err, address) => {
