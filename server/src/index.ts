@@ -25,7 +25,7 @@ server.get('/sessionTest', async (request, reply) => {
     return `${request.session.sessionId} - score: ${JSON.stringify(session.getById(request.session.sessionId))}`
 })
 
-server.get('/quizData', async (request, reply) => {
+server.get('/quiz', async (request, reply) => {
     return ''
 })
 

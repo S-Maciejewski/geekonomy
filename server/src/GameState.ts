@@ -8,4 +8,8 @@ export class GameState {
         this.score = 0
         this.quizData = undefined
     }
+
+    updateQuizData () {
+
+    }
 }
