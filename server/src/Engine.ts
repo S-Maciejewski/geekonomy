@@ -1,28 +1,29 @@
-import {GameState} from './GameState'
-import {UserSession} from "./model";
+import {Country, Indicator, UserSession} from "./model";
+import * as _ from 'lodash';
+import {Repository} from "./Repository";
 
 const supported = require('../config/supported.json')
-import * as _ from 'lodash';
 
 const COUNTRIES_COUNT = 4
 const INDICATORS_COUNT = 4
 
 export interface EngineContract {
-    generateQuiz(session: UserSession): UserSession
+    generateQuizData(session: UserSession): Promise<UserSession>
 
     handleResult(session: UserSession): UserSession
 }
 
 export class Engine implements EngineContract {
+    repository: Repository
     constructor() {
-
+        this.repository = new Repository()
     }
 
-    generateQuiz(session: UserSession): UserSession {
-        const randomCountries = _.sampleSize(supported.countries, COUNTRIES_COUNT)
-        const randomIndicators = _.sampleSize(supported.indicators, INDICATORS_COUNT)
-
-
+    async generateQuizData(session: UserSession): Promise<UserSession> {
+        const randomCountries: Country[] = _.sampleSize(supported.countries, COUNTRIES_COUNT)
+        const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, INDICATORS_COUNT)
+        const correctCountry = randomCountries[0]
+        session.state.quizData = await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators)
         return session
     }
 

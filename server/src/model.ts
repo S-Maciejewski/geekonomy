@@ -13,11 +13,16 @@ export interface QuizData {
 
 export interface IndicatorData {
     series: [number, number][]
+    indicator: Indicator
+    country?: Country
+}
+
+export interface Country {
     name: string
     code: string
 }
 
-export interface Country {
+export interface Indicator {
     name: string
     code: string
 }

@@ -1,92 +1,350 @@
 {
   "countries": [
-    "ARE",
-    "ARG",
-    "AUS",
-    "AUT",
-    "BEL",
-    "BGD",
-    "BGR",
-    "BLR",
-    "BRA",
-    "CAN",
-    "CHE",
-    "CHL",
-    "CHN",
-    "COL",
-    "CZE",
-    "DEU",
-    "DNK",
-    "EGY",
-    "ESP",
-    "EST",
-    "EUU",
-    "FIN",
-    "FRA",
-    "GBR",
-    "GRC",
-    "HRV",
-    "HUN",
-    "IND",
-    "ISR",
-    "ITA",
-    "JPN",
-    "KEN",
-    "KOR",
-    "LTU",
-    "LVA",
-    "MDG",
-    "MEX",
-    "MLT",
-    "MOZ",
-    "NGA",
-    "NLD",
-    "NOR",
-    "NZL",
-    "PAK",
-    "PHL",
-    "POL",
-    "PRT",
-    "RUS",
-    "SVN",
-    "TZA",
-    "UKR",
-    "USA",
-    "VEN",
-    "VNM",
-    "WLD"
+    {
+      "code": "ARE",
+      "name": "United Arab Emirates"
+    },
+    {
+      "code": "ARG",
+      "name": "Argentina"
+    },
+    {
+      "code": "AUS",
+      "name": "Australia"
+    },
+    {
+      "code": "AUT",
+      "name": "Austria"
+    },
+    {
+      "code": "BEL",
+      "name": "Belgium"
+    },
+    {
+      "code": "BGD",
+      "name": "Bangladesh"
+    },
+    {
+      "code": "BGR",
+      "name": "Bulgaria"
+    },
+    {
+      "code": "BLR",
+      "name": "Belarus"
+    },
+    {
+      "code": "BRA",
+      "name": "Brazil"
+    },
+    {
+      "code": "CAN",
+      "name": "Canada"
+    },
+    {
+      "code": "CHE",
+      "name": "Switzerland"
+    },
+    {
+      "code": "CHL",
+      "name": "Chile"
+    },
+    {
+      "code": "CHN",
+      "name": "China"
+    },
+    {
+      "code": "COL",
+      "name": "Colombia"
+    },
+    {
+      "code": "CZE",
+      "name": "Czech Republic"
+    },
+    {
+      "code": "DEU",
+      "name": "Germany"
+    },
+    {
+      "code": "DNK",
+      "name": "Denmark"
+    },
+    {
+      "code": "EGY",
+      "name": "Egypt, Arab Rep."
+    },
+    {
+      "code": "ESP",
+      "name": "Spain"
+    },
+    {
+      "code": "EST",
+      "name": "Estonia"
+    },
+    {
+      "code": "EUU",
+      "name": "European Union"
+    },
+    {
+      "code": "FIN",
+      "name": "Finland"
+    },
+    {
+      "code": "FRA",
+      "name": "France"
+    },
+    {
+      "code": "GBR",
+      "name": "United Kingdom"
+    },
+    {
+      "code": "GRC",
+      "name": "Greece"
+    },
+    {
+      "code": "HRV",
+      "name": "Croatia"
+    },
+    {
+      "code": "HUN",
+      "name": "Hungary"
+    },
+    {
+      "code": "IND",
+      "name": "India"
+    },
+    {
+      "code": "ISR",
+      "name": "Israel"
+    },
+    {
+      "code": "ITA",
+      "name": "Italy"
+    },
+    {
+      "code": "JPN",
+      "name": "Japan"
+    },
+    {
+      "code": "KEN",
+      "name": "Kenya"
+    },
+    {
+      "code": "KOR",
+      "name": "Korea, Rep."
+    },
+    {
+      "code": "LTU",
+      "name": "Lithuania"
+    },
+    {
+      "code": "LVA",
+      "name": "Latvia"
+    },
+    {
+      "code": "MDG",
+      "name": "Madagascar"
+    },
+    {
+      "code": "MEX",
+      "name": "Mexico"
+    },
+    {
+      "code": "MLT",
+      "name": "Malta"
+    },
+    {
+      "code": "MOZ",
+      "name": "Mozambique"
+    },
+    {
+      "code": "NGA",
+      "name": "Nigeria"
+    },
+    {
+      "code": "NLD",
+      "name": "Netherlands"
+    },
+    {
+      "code": "NOR",
+      "name": "Norway"
+    },
+    {
+      "code": "NZL",
+      "name": "New Zealand"
+    },
+    {
+      "code": "PAK",
+      "name": "Pakistan"
+    },
+    {
+      "code": "PHL",
+      "name": "Philippines"
+    },
+    {
+      "code": "POL",
+      "name": "Poland"
+    },
+    {
+      "code": "PRT",
+      "name": "Portugal"
+    },
+    {
+      "code": "RUS",
+      "name": "Russian Federation"
+    },
+    {
+      "code": "SVN",
+      "name": "Slovenia"
+    },
+    {
+      "code": "TZA",
+      "name": "Tanzania"
+    },
+    {
+      "code": "UKR",
+      "name": "Ukraine"
+    },
+    {
+      "code": "USA",
+      "name": "United States"
+    },
+    {
+      "code": "VEN",
+      "name": "Venezuela, RB"
+    },
+    {
+      "code": "VNM",
+      "name": "Vietnam"
+    },
+    {
+      "code": "WLD",
+      "name": "World"
+    }
   ],
   "indicators": [
-    "NY.GDP.MKTP.KD.ZG",
-    "NY.GDP.MKTP.CD",
-    "SP.POP.TOTL",
-    "SP.POP.GROW",
-    "SE.SEC.ENRR",
-    "SE.XPD.TOTL.GD.ZS",
-    "SP.RUR.TOTL.ZS",
-    "SP.URB.TOTL.IN.ZS",
-    "AG.LND.CROP.ZS",
-    "AG.LND.ARBL.ZS",
-    "AG.LND.FRST.ZS",
-    "AG.SRF.TOTL.K2",
-    "EG.ELC.ACCS.ZS",
-    "EN.ATM.CO2E.PC",
-    "FP.CPI.TOTL.ZG",
-    "FR.INR.RINR",
-    "GB.XPD.RSDV.GD.ZS",
-    "GC.XPN.TOTL.GD.ZS",
-    "IS.RRS.TOTL.KM",
-    "IT.NET.USER.ZS",
-    "MS.MIL.TOTL.P1",
-    "SG.VAW.REAS.ZS",
-    "SH.DTH.IMRT",
-    "SH.ALC.PCAP.LI",
-    "SH.MED.PHYS.ZS",
-    "SH.MED.BEDS.ZS",
-    "SI.POV.UMIC.GP",
-    "SL.UEM.TOTL.NE.ZS",
-    "SP.POP.0014.TO",
-    "SP.DYN.LE00.IN",
-    "TM.VAL.FOOD.ZS.UN"
+    {
+      "code": "AG.LND.ARBL.ZS",
+      "name": "Arable land (% of land area)"
+    },
+    {
+      "code": "AG.LND.CROP.ZS",
+      "name": "Permanent cropland (% of land area)"
+    },
+    {
+      "code": "AG.LND.FRST.ZS",
+      "name": "Forest area (% of land area)"
+    },
+    {
+      "code": "AG.SRF.TOTL.K2",
+      "name": "Surface area (sq. km)"
+    },
+    {
+      "code": "EG.ELC.ACCS.ZS",
+      "name": "Access to electricity (% of population)"
+    },
+    {
+      "code": "EN.ATM.CO2E.PC",
+      "name": "CO2 emissions (metric tons per capita)"
+    },
+    {
+      "code": "FP.CPI.TOTL.ZG",
+      "name": "Inflation, consumer prices (annual %)"
+    },
+    {
+      "code": "FR.INR.RINR",
+      "name": "Real interest rate (%)"
+    },
+    {
+      "code": "GB.XPD.RSDV.GD.ZS",
+      "name": "Research and development expenditure (% of GDP)"
+    },
+    {
+      "code": "GC.XPN.TOTL.GD.ZS",
+      "name": "Expense (% of GDP)"
+    },
+    {
+      "code": "IS.RRS.TOTL.KM",
+      "name": "Rail lines (total route-km)"
+    },
+    {
+      "code": "IT.NET.USER.ZS",
+      "name": "Individuals using the Internet (% of population)"
+    },
+    {
+      "code": "MS.MIL.TOTL.P1",
+      "name": "Armed forces personnel, total"
+    },
+    {
+      "code": "NY.GDP.MKTP.CD",
+      "name": "GDP (current US$)"
+    },
+    {
+      "code": "NY.GDP.MKTP.KD.ZG",
+      "name": "GDP growth (annual %)"
+    },
+    {
+      "code": "SE.SEC.ENRR",
+      "name": "School enrollment, secondary (% gross)"
+    },
+    {
+      "code": "SE.XPD.TOTL.GD.ZS",
+      "name": "Government expenditure on education, total (% of GDP)"
+    },
+    {
+      "code": "SG.VAW.REAS.ZS",
+      "name": "Women who believe a husband is justified in beating his wife (any of five reasons) (%)"
+    },
+    {
+      "code": "SH.ALC.PCAP.LI",
+      "name": "Total alcohol consumption per capita (liters of pure alcohol, projected estimates, 15+ years of age)"
+    },
+    {
+      "code": "SH.DTH.IMRT",
+      "name": "Number of infant deaths"
+    },
+    {
+      "code": "SH.MED.BEDS.ZS",
+      "name": "Hospital beds (per 1,000 people)"
+    },
+    {
+      "code": "SH.MED.PHYS.ZS",
+      "name": "Physicians (per 1,000 people)"
+    },
+    {
+      "code": "SI.POV.UMIC.GP",
+      "name": "Poverty gap at $5.50 a day (2011 PPP) (%)"
+    },
+    {
+      "code": "SL.UEM.TOTL.NE.ZS",
+      "name": "Unemployment, total (% of total labor force) (national estimate)"
+    },
+    {
+      "code": "SP.DYN.LE00.IN",
+      "name": "Life expectancy at birth, total (years)"
+    },
+    {
+      "code": "SP.POP.0014.TO",
+      "name": "Population ages 0-14, total"
+    },
+    {
+      "code": "SP.POP.GROW",
+      "name": "Population growth (annual %)"
+    },
+    {
+      "code": "SP.POP.TOTL",
+      "name": "Population, total"
+    },
+    {
+      "code": "SP.RUR.TOTL.ZS",
+      "name": "Rural population (% of total population)"
+    },
+    {
+      "code": "SP.URB.TOTL.IN.ZS",
+      "name": "Urban population (% of total population)"
+    },
+    {
+      "code": "TM.VAL.FOOD.ZS.UN",
+      "name": "Food imports (% of merchandise imports)"
+    }
   ]
 }
