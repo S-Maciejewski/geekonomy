@@ -1,12 +1,16 @@
 {
   "scripts": {
     "start": "npx ts-node src/index.ts",
-    "dev": "npx tsc -w src/index.ts"
+    "dev": "npx tsc -w src/index.ts",
+    "test": "jest"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.172",
     "@types/node": "^16.7.1",
     "@types/pg": "^8.6.1",
+    "jest": "^27.2.5",
+    "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   },
@@ -16,5 +20,37 @@
     "fastify-cookie": "^5.3.1",
     "lodash": "^4.17.21",
     "pg": "^8.7.1"
+  },
+  "jest": {
+    "globals": {
+      "ts-jest": {
+        "diagnostics": false
+      }
+    },
+    "testEnvironment": "node",
+    "reporters": [
+      "default"
+    ],
+    "transform": {
+      ".ts": "ts-jest"
+    },
+    "testRegex": "\\.(test|spec)\\.ts$",
+    "testPathIgnorePatterns": [
+      "<rootDir>/tests/utils/"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "modulePaths": [
+      "<rootDir>/src"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/dist"
+    ],
+    "verbose": true
   }
 }
