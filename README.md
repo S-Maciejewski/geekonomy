@@ -11,3 +11,5 @@ MVP: user is presented with i.e. 5 indicators in form of graphs or raw time seri
 Nice to have:
 - upon clicking the answer, user sees the metrics for choosen country displayed on the plots (to see the comparison between his guess and the country portrayed by metrics)
 - country (or countries if metrics for them are shown) is highlighted on the map upon clicking answer
+
+- save pre-calculated quizes in an efficient way (lots of them i.e. as JSON files on S3?) to minimize the cost of running a heavy Postgres instance. It could eliminate the need for database, thus minimizing hosting costs, epspecially if reads from S3 are infrequent at the beginning
