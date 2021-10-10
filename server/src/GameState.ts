@@ -1,4 +1,4 @@
-import {QuizData} from "./model";
+import {QuizClientResponse, QuizData} from "./model";
 
 export class GameState {
     score: number
@@ -9,7 +9,15 @@ export class GameState {
         this.quizData = undefined
     }
 
-    updateQuizData () {
+    updateQuizData(quizData: QuizData) {
+        this.quizData = quizData;
+    }
 
+    getStateForClient() {
+        return ({
+            score: this.score,
+            indicators: this.quizData?.indicators,
+            countries: this.quizData?.countries
+        }) as QuizClientResponse
     }
 }

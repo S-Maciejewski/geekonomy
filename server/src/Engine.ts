@@ -15,6 +15,7 @@ export class Engine implements EngineContract {
     INDICATORS_COUNT = 4
 
     repository: Repository
+
     constructor() {
         this.repository = new Repository()
     }
@@ -23,11 +24,11 @@ export class Engine implements EngineContract {
         const randomCountries: Country[] = _.sampleSize(supported.countries, this.COUNTRIES_COUNT)
         const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, this.INDICATORS_COUNT)
         const correctCountry = randomCountries[0]
-        session.state.quizData = {
+        session.state.updateQuizData({
             indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
             countries: randomCountries,
             correctCountry
-        }
+        })
         return session
     }
 

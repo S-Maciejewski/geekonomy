@@ -6,7 +6,6 @@ describe('game Engine', () => {
 
     const engine = new Engine()
     let userSession: UserSession
-    process.env.PG_CONNECTION_STRING = 'postgresql://postgres:pwd@localhost:5432/postgres'
     beforeEach(() => {
         userSession = {
             sessionId: '1',

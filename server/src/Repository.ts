@@ -36,7 +36,7 @@ export class Repository {
             client.release()
             return indicatorData
         } catch (e) {
-            console.error('Could not fetch data from Postgres')
+            console.error('Could not fetch data from Postgres', e)
             return []
         }
     }

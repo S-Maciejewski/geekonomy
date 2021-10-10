@@ -26,3 +26,9 @@ export interface Indicator {
     name: string
     code: string
 }
+
+export interface QuizClientResponse {
+    score: number
+    indicators: IndicatorData[],
+    countries: Country[]
+}

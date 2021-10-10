@@ -1,8 +1,10 @@
-import fastify, {FastifyRequest} from 'fastify'
+import fastify from 'fastify'
 import fastifyCookie from 'fastify-cookie'
 import fastifySession from '@fastify/session'
 import {Session} from './Session';
+import {Engine} from "./Engine";
 
+require('dotenv').config()
 const server = fastify()
 server.register(fastifyCookie)
 server.register(fastifySession, {
@@ -14,6 +16,7 @@ server.register(fastifySession, {
 })
 
 const session = new Session()
+const engine = new Engine()
 
 server.addHook('preHandler', (request, reply, next) => {
     if (!session.getById(request.session.sessionId)) session.createSession(request.session.sessionId)
@@ -26,7 +29,13 @@ server.get('/sessionTest', async (request, reply) => {
 })
 
 server.get('/quiz', async (request, reply) => {
-    return ''
+    const userSession = session.getById(request.session.sessionId)
+    try {
+        await engine.generateQuizData(userSession)
+        reply.code(200).send(userSession.state.getStateForClient())
+    } catch (e) {
+        reply.code(500).send('Could not fetch quiz data')
+    }
 })
 
 server.listen(8080, (err, address) => {
