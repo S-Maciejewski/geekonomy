@@ -20,4 +20,12 @@ export class GameState {
             countries: this.quizData?.countries
         }) as QuizClientResponse
     }
+
+    clearScore() {
+        this.score = 0
+    }
+
+    incrementScore() {
+        this.score += 1
+    }
 }
