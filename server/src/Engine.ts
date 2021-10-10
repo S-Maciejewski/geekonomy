@@ -4,9 +4,6 @@ import {Repository} from "./Repository";
 
 const supported = require('../config/supported.json')
 
-const COUNTRIES_COUNT = 4
-const INDICATORS_COUNT = 4
-
 export interface EngineContract {
     generateQuizData(session: UserSession): Promise<UserSession>
 
@@ -14,16 +11,23 @@ export interface EngineContract {
 }
 
 export class Engine implements EngineContract {
+    COUNTRIES_COUNT = 4
+    INDICATORS_COUNT = 4
+
     repository: Repository
     constructor() {
         this.repository = new Repository()
     }
 
     async generateQuizData(session: UserSession): Promise<UserSession> {
-        const randomCountries: Country[] = _.sampleSize(supported.countries, COUNTRIES_COUNT)
-        const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, INDICATORS_COUNT)
+        const randomCountries: Country[] = _.sampleSize(supported.countries, this.COUNTRIES_COUNT)
+        const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, this.INDICATORS_COUNT)
         const correctCountry = randomCountries[0]
-        session.state.quizData = await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators)
+        session.state.quizData = {
+            indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
+            countries: randomCountries,
+            correctCountry
+        }
         return session
     }
 

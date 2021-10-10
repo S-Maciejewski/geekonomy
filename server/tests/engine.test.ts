@@ -1,22 +1,24 @@
-import { Engine } from '../src/Engine'
-import { GameState } from '../src/GameState'
-import { UserSession } from '../src/model'
+import {Engine} from '../src/Engine'
+import {GameState} from '../src/GameState'
+import {UserSession} from '../src/model'
 
-describe('game engine tests', () => {
+describe('game Engine', () => {
 
-	const engine = new Engine()
-	let userSession: UserSession
-	beforeEach(() => {
-		userSession = {
+    const engine = new Engine()
+    let userSession: UserSession
+    process.env.PG_CONNECTION_STRING = 'postgresql://postgres:pwd@localhost:5432/postgres'
+    beforeEach(() => {
+        userSession = {
             sessionId: '1',
             state: new GameState()
         }
-	})
+    })
 
-    test('generate quiz data', async () => {
-    	userSession = await engine.generateQuizData(userSession)
-        // TODO: engine test with mocked UserSession
-        expect(userSession.state.quizData).toBeTruthy()
-        // expect(true).toBeTruthy()
+    test('should generate valid quiz data', async () => {
+        userSession = await engine.generateQuizData(userSession)
+        expect(userSession.state.quizData).not.toBeUndefined()
+        expect(userSession.state.quizData?.indicators).toHaveLength(engine.INDICATORS_COUNT)
+        expect(userSession.state.quizData?.countries).toHaveLength(engine.COUNTRIES_COUNT)
+        expect(userSession.state.quizData?.correctCountry).toBeTruthy()
     })
 })

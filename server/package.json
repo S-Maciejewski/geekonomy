@@ -51,6 +51,7 @@
     "modulePathIgnorePatterns": [
       "<rootDir>/dist"
     ],
-    "verbose": true
+    "verbose": true,
+    "setupFiles": ["<rootDir>/tests/setEnv.js"]
   }
 }
