@@ -44,7 +44,6 @@ export class Engine implements EngineContract {
             throw ('Could not find the quiz to answer')
 
         const answerClientResponse = ({
-            score: session.state.score,
             country: answer,
             correctCountry: session.state.quizData.correctCountry.name,
         })
@@ -53,12 +52,14 @@ export class Engine implements EngineContract {
             session.state.incrementScore()
             return ({
                 ...answerClientResponse,
+                score: session.state.score,
                 correct: true
             })
         }
         session.state.clearScore()
         return ({
             ...answerClientResponse,
+            score: session.state.score,
             correct: false
         })
     }
