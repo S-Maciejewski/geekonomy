@@ -1,90 +1,38 @@
 import * as React from "react";
 import {Plot} from "../components/Plot";
 import {DecisionControls} from "../components/DecisionControls";
-import {GameState, IndicatorData} from "../model";
+import {ApiClient} from "../utils/ApiClient";
+import {useEffect, useState} from "react";
+import {GameState} from "../model";
 
 
 export const GameView: React.FC = () => {
-    const data: IndicatorData = {
-        series: [
-            [1960, 29637450],
-            [1961, 29964000],
-            [1962, 30308500],
-            [1963, 30712000],
-            [1964, 31139450],
-            [1965, 31444950],
-            [1966, 31681000],
-            [1967, 31987155],
-            [1968, 32294655],
-            [1969, 32548300],
-            [1970, 32664300],
-            [1971, 32783500],
-            [1972, 33055650],
-            [1973, 33357200],
-            [1974, 33678899],
-            [1975, 34015199],
-            [1976, 34356300],
-            [1977, 34689050],
-            [1978, 34965600],
-            [1979, 35247217],
-            [1980, 35574150],
-            [1981, 35898587],
-            [1982, 36230481],
-            [1983, 36571808],
-            [1984, 36904134],
-            [1985, 37201885],
-            [1986, 37456119],
-            [1987, 37668045],
-            [1988, 37824487],
-            [1989, 37961529],
-            [1990, 38110782],
-            [1991, 38246193],
-            [1992, 38363667],
-            [1993, 38461408],
-            [1994, 38542652],
-            [1995, 38594998],
-            [1996, 38624370],
-            [1997, 38649660],
-            [1998, 38663481],
-            [1999, 38660271],
-            [2000, 38258629],
-            [2001, 38248076],
-            [2002, 38230364],
-            [2003, 38204570],
-            [2004, 38182222],
-            [2005, 38165445],
-            [2006, 38141267],
-            [2007, 38120560],
-            [2008, 38125759],
-            [2009, 38151603],
-            [2010, 38042794],
-            [2011, 38063255],
-            [2012, 38063164],
-            [2013, 38040196],
-            [2014, 38011735],
-            [2015, 37986412],
-            [2016, 37970087],
-            [2017, 37974826],
-            [2018, 37974750],
-            [2019, 37965475]
-        ],
-        // countryCode: 'POL',
-        // countryName: 'Poland',
-        indicatorName: 'Population, total'
-    }
+    const [state, setState] = useState<GameState>({} as GameState)
+    const [loading, setLoading] = useState<Boolean>(true)
 
-    const state: GameState = {
-        score: 0,
-        quizData: {
-            indicators: [data],
-            countries: ['Poland']
+
+    async function getGameState() {
+        try {
+            setLoading(true)
+            const res = await ApiClient.getQuizGameState()
+            setState(res)
+        } finally {
+            setLoading(false)
         }
     }
 
+
+    useEffect(() => {
+        getGameState()
+    }, [])
+
     return (
         <div>
-            <Plot data={state.quizData.indicators[0]}/>
-            <DecisionControls countries={state.quizData.countries}/>
+            {loading && <div>data loading...</div>}
+            {!loading && <>
+                <Plot data={state.indicators[0]}/>
+                <DecisionControls countries={state.countries}/>
+            </>}
         </div>
     )
 }

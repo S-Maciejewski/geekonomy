@@ -11,11 +11,11 @@ export interface PlotProps {
 export const Plot: React.FC<PlotProps> = (props: PlotProps) => {
     const highchartsOptions: Highcharts.Options = {
         title: {
-            text: props.data.indicatorName
+            text: props.data.indicator.name
         },
         series: [
             {
-                name: props.data.indicatorName,
+                name: props.data.indicator.name,
                 // @ts-ignore
                 data: props.data.series
             }

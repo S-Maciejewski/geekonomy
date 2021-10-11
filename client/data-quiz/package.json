@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.22.0",
     "highcharts": "^9.2.1",
     "highcharts-react-official": "^3.0.0",
     "react": "^17.0.2",
@@ -20,6 +21,7 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/react": "^17.0.19"
   },
   "eslintConfig": {

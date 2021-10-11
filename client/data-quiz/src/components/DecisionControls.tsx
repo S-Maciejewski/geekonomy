@@ -1,7 +1,8 @@
 import React from "react";
+import { Country } from "../model";
 
 export interface ControlsProps {
-    countries: string[]
+    countries: Country[]
 }
 
 export const DecisionControls: React.FC<ControlsProps> = (props: ControlsProps) => {
@@ -10,7 +11,7 @@ export const DecisionControls: React.FC<ControlsProps> = (props: ControlsProps) 
             {
                 props.countries.map(country =>
                     <button>
-                        {country}
+                        {country.name}
                     </button>
                 )
             }

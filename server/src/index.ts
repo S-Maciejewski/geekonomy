@@ -9,7 +9,7 @@ const server = fastify()
 server.register(fastifyCookie)
 server.register(fastifySession, {
     cookieName: 'sessionId',
-    secret: 'a secret with minimum length of 32 characters',
+    secret: process.env.SESSION_SECRET || 'a secret with minimum length of 32 characters',
     cookie: {
         secure: false,
     },
@@ -23,12 +23,11 @@ server.addHook('preHandler', (request, reply, next) => {
     next()
 })
 
-server.get('/sessionTest', async (request, reply) => {
-    session.getById(request.session.sessionId).state.score += 1
-    return `${request.session.sessionId} - score: ${JSON.stringify(session.getById(request.session.sessionId))}`
-})
-
 server.get('/quiz', async (request, reply) => {
+    reply.headers({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET"
+    })
     const userSession = session.getById(request.session.sessionId)
     try {
         await engine.generateQuizData(userSession)
@@ -39,6 +38,10 @@ server.get('/quiz', async (request, reply) => {
 })
 
 server.post('/answer', async (request, reply) => {
+    reply.headers({
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "POST"
+    })
     const userSession = session.getById(request.session.sessionId)
     const {answer} = request.body as { answer: string }
     try {
