@@ -11,7 +11,7 @@ export interface PlotsProps {
 export const Plots: React.FC<PlotsProps & StandardProps> = (props: PlotsProps) => {
     return <div className={styles.plots}>
         {
-            props.indicators.map((indicator => <Plot className={styles.plot} data={indicator}/>))
+            props.indicators.map((indicator => <Plot data={indicator}/>))
         }
     </div>
 }

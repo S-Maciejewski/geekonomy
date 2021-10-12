@@ -1,8 +1,16 @@
 .plot {
-  width: 50%;
+  width: 100%;
+  //padding: 10px;
+}
+
+.highcharts {
+  width: 100%;
 }
 
 .plots {
-  display: flex;
-  flex-direction: row;
+  width: 100%;
+  display: grid;
+  -webkit-align-items: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
 }

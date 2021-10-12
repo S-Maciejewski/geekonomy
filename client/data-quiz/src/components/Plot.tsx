@@ -3,6 +3,7 @@ import * as Highcharts from 'highcharts'
 import HighchartsReact from "highcharts-react-official";
 import {IndicatorData} from "../model";
 import {StandardProps} from "./types";
+import styles from './Plots.module.scss'
 
 export interface PlotProps {
     data: IndicatorData
@@ -28,7 +29,7 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({data, options, classN
         ...options
     }
 
-    return <div className={className}>
-        <HighchartsReact highcharts={Highcharts} options={highchartsOptions}/>
+    return <div className={styles.plot}>
+        <HighchartsReact className={styles.highcharts} highcharts={Highcharts} options={highchartsOptions}/>
     </div>
 }
