@@ -1,5 +1,6 @@
 import fastify from 'fastify'
 import fastifyCookie from 'fastify-cookie'
+import fastifyCors from 'fastify-cors'
 import fastifySession from '@fastify/session'
 import {Session} from './Session';
 import {Engine} from "./Engine";
@@ -7,6 +8,10 @@ import {Engine} from "./Engine";
 require('dotenv').config()
 const server = fastify()
 server.register(fastifyCookie)
+server.register(fastifyCors, {
+    origin: 'http://localhost:3000',
+    credentials: true
+})
 server.register(fastifySession, {
     cookieName: 'sessionId',
     secret: process.env.SESSION_SECRET || 'a secret with minimum length of 32 characters',
@@ -24,10 +29,6 @@ server.addHook('preHandler', (request, reply, next) => {
 })
 
 server.get('/quiz', async (request, reply) => {
-    reply.headers({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET"
-    })
     const userSession = session.getById(request.session.sessionId)
     try {
         await engine.generateQuizData(userSession)
@@ -38,10 +39,6 @@ server.get('/quiz', async (request, reply) => {
 })
 
 server.post('/answer', async (request, reply) => {
-    reply.headers({
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "POST"
-    })
     const userSession = session.getById(request.session.sessionId)
     const {answer} = request.body as { answer: string }
     try {

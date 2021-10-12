@@ -17,7 +17,10 @@ export const GameView: React.FC = () => {
             setLoading(true)
             const res = await ApiClient.getQuizGameState()
             setState(res)
-        } finally {
+        } catch (e) {
+            console.log('Error on getting game state', e)
+        }
+        finally {
             setLoading(false)
         }
     }
@@ -36,7 +39,10 @@ export const GameView: React.FC = () => {
             </div>}
             {!loading && <>
                 <Plots indicators={state.indicators}/>
-                <DecisionControls countries={state.countries}/>
+                <div>
+                    Score: {state.score}
+                    <DecisionControls countries={state.countries}/>
+                </div>
             </>}
         </div>
     )

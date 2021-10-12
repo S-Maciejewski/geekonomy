@@ -29,3 +29,10 @@ export interface QuizClientResponse {
     indicators: IndicatorData[],
     countries: Country[]
 }
+
+export interface AnswerClientResponse {
+    score: number,
+    country: string,
+    correctCountry: string,
+    correct: boolean
+}
