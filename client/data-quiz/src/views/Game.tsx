@@ -1,9 +1,10 @@
 import * as React from "react";
-import {Plot} from "../components/Plot";
 import {DecisionControls} from "../components/DecisionControls";
 import {ApiClient} from "../utils/ApiClient";
 import {useEffect, useState} from "react";
 import {GameState} from "../model";
+import {CircularProgress} from "@mui/material";
+import {Plots} from "../components/Plots";
 
 
 export const GameView: React.FC = () => {
@@ -28,9 +29,13 @@ export const GameView: React.FC = () => {
 
     return (
         <div>
-            {loading && <div>data loading...</div>}
+            {loading &&
+            <div>
+                <CircularProgress/>
+                data loading...
+            </div>}
             {!loading && <>
-                <Plot data={state.indicators[0]}/>
+                <Plots indicators={state.indicators}/>
                 <DecisionControls countries={state.countries}/>
             </>}
         </div>

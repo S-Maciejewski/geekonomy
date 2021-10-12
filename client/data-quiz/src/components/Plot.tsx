@@ -2,30 +2,33 @@ import * as React from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from "highcharts-react-official";
 import {IndicatorData} from "../model";
+import {StandardProps} from "./types";
 
 export interface PlotProps {
     data: IndicatorData
     options?: Highcharts.Options
 }
 
-export const Plot: React.FC<PlotProps> = (props: PlotProps) => {
-    console.log(props)
+export const Plot: React.FC<PlotProps & StandardProps> = ({data, options, className}) => {
+
     const highchartsOptions: Highcharts.Options = {
         title: {
-            text: props.data.indicator.name
+            text: data.indicator.name
         },
         series: [
             {
-                name: props.data.indicator.name,
+                name: data.indicator.name,
                 // @ts-ignore
-                data: props.data.series
+                data: data.series
             }
         ],
         legend: {
             enabled: false
         },
-        ...props.options
+        ...options
     }
 
-    return <HighchartsReact highcharts={Highcharts} options={highchartsOptions}/>
+    return <div className={className}>
+        <HighchartsReact highcharts={Highcharts} options={highchartsOptions}/>
+    </div>
 }
