@@ -9,6 +9,7 @@ export interface PlotProps {
 }
 
 export const Plot: React.FC<PlotProps> = (props: PlotProps) => {
+    console.log(props)
     const highchartsOptions: Highcharts.Options = {
         title: {
             text: props.data.indicator.name

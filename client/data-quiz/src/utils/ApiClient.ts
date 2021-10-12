@@ -6,9 +6,14 @@ export class ApiClient {
 
     static async getQuizGameState(): Promise<GameState> {
         const res = await axios.get<QuizClientResponse>(ApiClient.getUrl('quiz'))
-        return ({
+        const state = ({
             ...res.data
         })
+        state.indicators.forEach(indicatorData => {
+            // @ts-ignore
+            indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
+        })
+        return state
     }
 
 
