@@ -235,10 +235,6 @@
       "name": "Forest area (% of land area)"
     },
     {
-      "code": "AG.SRF.TOTL.K2",
-      "name": "Surface area (sq. km)"
-    },
-    {
       "code": "EG.ELC.ACCS.ZS",
       "name": "Access to electricity (% of population)"
     },
