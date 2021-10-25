@@ -13,8 +13,9 @@ export class GameState {
         this.quizData = quizData;
     }
 
-    getStateForClient() {
+    getStateForClient(sessionId: string) {
         return ({
+            sessionId,
             score: this.score,
             indicators: this.quizData?.indicators,
             countries: this.quizData?.countries

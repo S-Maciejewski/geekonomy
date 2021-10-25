@@ -1,5 +1,6 @@
 import {UserSession} from "./model";
 import {GameState} from "./GameState";
+import {randomUUID} from "crypto";
 
 export class Session {
     sessions: UserSession[]
@@ -13,9 +14,9 @@ export class Session {
         return this.sessions.filter(session => session.sessionId === sessionId)[0]
     }
 
-    createSession(sessionId: string): void {
+    createSession(): void {
         const session = {
-            sessionId,
+            sessionId: randomUUID(),
             state: new GameState()
         }
         this.sessions.push(session)

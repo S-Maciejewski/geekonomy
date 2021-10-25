@@ -28,12 +28,14 @@ export interface Indicator {
 }
 
 export interface QuizClientResponse {
+    sessionId: string
     score: number
     indicators: IndicatorData[],
     countries: Country[]
 }
 
 export interface AnswerClientResponse {
+    sessionId: string
     score: number,
     country: string,
     correctCountry: string,

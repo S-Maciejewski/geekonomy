@@ -44,6 +44,7 @@ export class Engine implements EngineContract {
             throw ('Could not find the quiz to answer')
 
         const answerClientResponse = ({
+            sessionId: session.sessionId,
             country: answer,
             correctCountry: session.state.quizData.correctCountry.name,
         })
