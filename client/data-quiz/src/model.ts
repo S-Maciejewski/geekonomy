@@ -1,4 +1,5 @@
 export interface GameState {
+    sessionId: string
     score: number
     indicators: IndicatorData[]
     countries: Country[]
@@ -25,14 +26,16 @@ export interface Indicator {
 }
 
 export interface QuizClientResponse {
+    sessionId: string
     score: number
-    indicators: IndicatorData[],
+    indicators: IndicatorData[]
     countries: Country[]
 }
 
 export interface AnswerClientResponse {
-    score: number,
-    country: string,
-    correctCountry: string,
+    sessionId: string
+    score: number
+    country: string
+    correctCountry: string
     correct: boolean
 }
