@@ -5,41 +5,15 @@ export class ApiClient {
     static API_URL = 'http://127.0.0.1:8080'
     static sessionIdKey = 'sessionId'
 
-    // static async handleSession(): Promise<void> {
-    //     let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
-    //     if (!sessionId) {
-    //         console.log('No sessionId found, getting new session')
-    //         // TODO: get new session from server
-    //         sessionId = 'sessionIdFromServer'
-    //         localStorage.setItem('sessionId', ApiClient.sessionIdKey)
-    //         console.log('Got new sessionId, stored in localStorage:', localStorage.getItem(ApiClient.sessionIdKey))
-    //     }
-    //     console.log('Session id:', sessionId)
-    // }
-
     static async getQuizGameState(): Promise<GameState> {
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
-        console.log(`sessionId in localStorage: ${sessionId}`)
 
         const res = await axios.get<QuizClientResponse>(ApiClient.getUrl('quiz'), {
-            params: {sessionId: 'test'}
+            params: {sessionId}
         })
 
-        const state = ({
-            ...res.data
-        })
-
-        console.log('state:', state)
-
-        if (!sessionId) {
-            console.log('No sessionId found, getting new session')
-            // TODO clean this up
-            console.log(res.data)
-            sessionId = res.data.sessionId
-            localStorage.setItem(state.sessionId, ApiClient.sessionIdKey)
-            console.log('Got new sessionId, stored in localStorage:', localStorage.getItem(ApiClient.sessionIdKey))
-        }
-
+        const state = ({...res.data})
+        ApiClient.refreshStoredSession(sessionId, state.sessionId)
         state.indicators.forEach(indicatorData => {
             // @ts-ignore
             indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
@@ -58,5 +32,12 @@ export class ApiClient {
 
     static getUrl(path: string) {
         return `${ApiClient.API_URL}/${path}`
+    }
+
+    private static refreshStoredSession(sessionId: string | null, stateSessionId: string) {
+        if (!sessionId || sessionId !== stateSessionId) {
+            console.log(`No matching session found on server - received a fresh session: ${stateSessionId}`)
+            localStorage.setItem(ApiClient.sessionIdKey, stateSessionId)
+        }
     }
 }

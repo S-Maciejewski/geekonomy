@@ -11,7 +11,6 @@ export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
     const [loading, setLoading] = useState<Boolean>(true)
 
-
     async function getGameState() {
         try {
             setLoading(true)
