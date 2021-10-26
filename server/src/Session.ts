@@ -20,7 +20,7 @@ export class Session {
             state: new GameState()
         }
         this.sessions.push(session)
-        console.log(`A new session created: ${session.sessionId}`)
+        console.log(`A new session created: ${session.sessionId}, total sessions: ${this.sessions.length}`)
     }
 
     deleteSession(sessionId: string): void {

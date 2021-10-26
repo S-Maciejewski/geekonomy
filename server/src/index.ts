@@ -1,7 +1,5 @@
 import fastify from 'fastify'
-import {fastifyCookie, FastifyCookieOptions} from 'fastify-cookie'
 import fastifyCors from 'fastify-cors'
-import fastifySession from '@fastify/session'
 import {Session} from './Session';
 import {Engine} from "./Engine";
 import {UserSession} from "./model";
@@ -14,36 +12,24 @@ server.register(fastifyCors, {
     credentials: true
 })
 
-// server.register(fastifyCookie, {
-//     secret: process.env.SESSION_SECRET || 'a secret with minimum length of 32 characters',
-//     parseOptions: {}
-// } as FastifyCookieOptions)
-// server.register(fastifySession, {
-//     cookieName: 'sessionId',
-//     secret: process.env.SESSION_SECRET || 'a secret with minimum length of 32 characters',
-//     cookie: {
-//         secure: false,
-//     },
-// })
-
 const session = new Session()
 const engine = new Engine(4, 4)
 
 server.addHook('preHandler', (request, reply, next) => {
     const {sessionId} = request.query as { sessionId: string }
-    console.log('received sessionId: ', sessionId)
     if (!session.getById(sessionId)) session.createSession()
     next()
 })
 
 server.get('/quiz', async (request, reply) => {
     const {sessionId} = request.query as { sessionId: string }
+
     // TODO fix this terrible workaround - it does not guarantee to scale past 1 client
     const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
-    console.log(`sessionId in request quiz: ${sessionId}, userSession id: ${userSession.sessionId}`)
+    console.log(`request sessionId: ${sessionId}, userSession sessionId: ${userSession.sessionId}`)
 
     try {
-        await engine.generateQuizData(userSession)
+        if (!userSession.state.quizData) await engine.generateQuizData(userSession)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
         console.error(`Could not fetch quiz data for ${sessionId}`, e)
