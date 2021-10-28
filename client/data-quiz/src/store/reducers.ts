@@ -1,15 +1,17 @@
 import {Action, ActionType, GetQuizAction, PostAnswerAction} from "./actions";
-import {GameState} from "../model";
+import {ControlsState, GameState} from "../model";
 
 const initialState: GameState = {
     sessionId: '',
     score: 0,
     indicators: [],
-    countries: []
+    countries: [],
+    controlsState: ControlsState.DECISION_ENABLED
 }
 
 const handleGetQuiz = (state: GameState, action: GetQuizAction): GameState => {
     return {
+        ...state,
         ...action.state
     }
 }
@@ -27,6 +29,8 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
 }
 
 export default function reducer(state = initialState, action: Action): GameState {
+    console.log('reducer input: ', state, action)
+
     switch (action.type) {
         case ActionType.GET_QUIZ:
             state = handleGetQuiz(state, action as GetQuizAction)

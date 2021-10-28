@@ -4,6 +4,7 @@ export interface GameState {
     indicators: IndicatorData[]
     countries: Country[]
     lastAnswer?: LastAnswer
+    controlsState: ControlsState
 }
 
 export interface IndicatorData {
@@ -37,7 +38,10 @@ export interface QuizClientResponse {
 export interface AnswerClientResponse extends LastAnswer {
     sessionId: string
     score: number
-    // country: string
-    // correctCountry: string
-    // correct: boolean
+}
+
+export enum ControlsState {
+    DECISION_ENABLED,
+    NEXT_QUIZ,
+    NEW_GAME,
 }

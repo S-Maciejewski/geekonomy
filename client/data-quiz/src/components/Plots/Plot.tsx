@@ -1,8 +1,8 @@
 import * as React from 'react'
 import * as Highcharts from 'highcharts'
 import HighchartsReact from "highcharts-react-official";
-import {IndicatorData} from "../model";
-import {StandardProps} from "./types";
+import {IndicatorData} from "../../model";
+import {StandardProps} from "../types";
 import styles from './Plots.module.scss'
 
 export interface PlotProps {
@@ -10,7 +10,7 @@ export interface PlotProps {
     options?: Highcharts.Options
 }
 
-export const Plot: React.FC<PlotProps & StandardProps> = ({data, options, className}) => {
+export const Plot: React.FC<PlotProps & StandardProps> = ({data, options}) => {
 
     const highchartsOptions: Highcharts.Options = {
         title: {

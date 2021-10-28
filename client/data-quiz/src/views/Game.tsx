@@ -1,33 +1,36 @@
 import * as React from "react";
-import {DecisionControls} from "../components/DecisionControls";
-import {ApiClient} from "../services/ApiClient";
+import {DecisionControls} from "../components/DecisionControls/DecisionControls";
 import {useEffect, useState} from "react";
 import {GameState} from "../model";
 import {CircularProgress} from "@mui/material";
-import {Plots} from "../components/Plots";
-import { store } from "../store/store";
+import {Plots} from "../components/Plots/Plots";
+import {store} from "../store/store";
+import {Engine} from "../services/Engine";
+import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
 
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
     const [loading, setLoading] = useState<Boolean>(true)
 
+    // TODO: Handle graceful shutdown if server not found
     async function getGameState() {
         try {
             setLoading(true)
-            await ApiClient.getQuizGameState()
-            setState(store.getState())
+            await Engine.getGameState()
         } catch (e) {
             console.log('Error on getting game state', e)
-        }
-        finally {
+        } finally {
             setLoading(false)
         }
     }
-    // TODO: Subscribe to score changes
 
     useEffect(() => {
         getGameState()
+
+        store.subscribe(() => {
+            setState(store.getState())
+        })
     }, [])
 
     return (
@@ -40,8 +43,8 @@ export const GameView: React.FC = () => {
             {!loading && <>
                 <Plots indicators={state.indicators}/>
                 <div>
-                    Score: {state.score}
-                    <DecisionControls countries={state.countries}/>
+                    <ScoreIndicator score={state.score} lastAnswer={state.lastAnswer}/>
+                    <DecisionControls controlsState={state.controlsState} countries={state.countries}/>
                 </div>
             </>}
         </div>

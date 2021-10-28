@@ -28,6 +28,7 @@ server.get('/quiz', async (request, reply) => {
     const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
     console.log(`request sessionId: ${sessionId}, userSession sessionId: ${userSession.sessionId}`)
 
+    // TODO handle getting new quiz data after answering / resetting the game
     try {
         if (!userSession.state.quizData) await engine.generateQuizData(userSession)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
