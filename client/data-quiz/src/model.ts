@@ -3,11 +3,7 @@ export interface GameState {
     score: number
     indicators: IndicatorData[]
     countries: Country[]
-}
-
-export interface QuizData {
-    indicators: IndicatorData[]
-    countries: Country[]
+    lastAnswer?: LastAnswer
 }
 
 export interface IndicatorData {
@@ -17,12 +13,18 @@ export interface IndicatorData {
 
 export interface Country {
     name: string
-    code: string
+    code?: string
 }
 
 export interface Indicator {
     name: string
-    code: string
+    code?: string
+}
+
+export interface LastAnswer {
+    country: string
+    correctCountry: string
+    correct: boolean
 }
 
 export interface QuizClientResponse {
@@ -32,10 +34,10 @@ export interface QuizClientResponse {
     countries: Country[]
 }
 
-export interface AnswerClientResponse {
+export interface AnswerClientResponse extends LastAnswer {
     sessionId: string
     score: number
-    country: string
-    correctCountry: string
-    correct: boolean
+    // country: string
+    // correctCountry: string
+    // correct: boolean
 }

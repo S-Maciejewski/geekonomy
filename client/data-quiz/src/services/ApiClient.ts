@@ -1,13 +1,15 @@
 import axios from "axios"
-import {AnswerClientResponse, GameState, QuizClientResponse} from "../model";
+import {AnswerClientResponse, QuizClientResponse} from "../model";
+import {store} from "../store/store";
+import {ActionType, GetQuizAction} from "../store/actions";
 
 export class ApiClient {
     static API_URL = 'http://127.0.0.1:8080'
     static sessionIdKey = 'sessionId'
 
-    static async getQuizGameState(): Promise<GameState> {
+    static async getQuizGameState(): Promise<void> {
+        // TODO: Decide whether to store sessionId in loaclStorage manually or use persisted redux
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
-
         const res = await axios.get<QuizClientResponse>(ApiClient.getUrl('quiz'), {
             params: {sessionId}
         })
@@ -18,15 +20,25 @@ export class ApiClient {
             // @ts-ignore
             indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
         })
-        return state
+
+        store.dispatch(({
+            type: ActionType.GET_QUIZ,
+            state
+        }) as GetQuizAction)
     }
 
     static async postQuizAnswer(answer: string): Promise<void> {
-        const res = await axios.post(ApiClient.getUrl('answer'), {
+        let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
+        const res = await axios.post<{ answer: string }, AnswerClientResponse>(ApiClient.getUrl('answer'), {
             answer
         }, {
-            withCredentials: true
+            params: {sessionId}
         })
+
+        store.dispatch(({
+            type: ActionType.POST_ANSWER,
+            res
+        }))
     }
 
 

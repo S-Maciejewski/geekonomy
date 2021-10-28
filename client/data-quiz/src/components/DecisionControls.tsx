@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
+import {Button} from "@mui/material";
 import React from "react";
-import { Country } from "../model";
+import {Country} from "../model";
 import styles from './DecisionControls.module.scss'
-import {ApiClient} from "../utils/ApiClient";
+import {ApiClient} from "../services/ApiClient";
 
 export interface ControlsProps {
     countries: Country[]
@@ -10,8 +10,9 @@ export interface ControlsProps {
 
 export const DecisionControls: React.FC<ControlsProps> = (props: ControlsProps) => {
     async function selectAnswer(answer: string) {
-        ApiClient.postQuizAnswer(answer)
+        await ApiClient.postQuizAnswer(answer)
     }
+
     return (
         <div className={styles.decisionControls}>
             {
