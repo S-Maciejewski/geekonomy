@@ -3,6 +3,7 @@ import fastifyCors from 'fastify-cors'
 import {Session} from './Session';
 import {Engine} from "./Engine";
 import {UserSession} from "./model";
+import {QuizStatus} from "./GameState";
 
 require('dotenv').config()
 const server = fastify()
@@ -28,9 +29,10 @@ server.get('/quiz', async (request, reply) => {
     const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
     console.log(`request sessionId: ${sessionId}, userSession sessionId: ${userSession.sessionId}`)
 
-    // TODO handle getting new quiz data after answering / resetting the game
     try {
-        if (!userSession.state.quizData) await engine.generateQuizData(userSession)
+        if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
+            await engine.generateQuizData(userSession)
+        console.debug(`correct country:`, userSession.state.quizData?.correctCountry)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
         console.error(`Could not fetch quiz data for ${sessionId}`, e)
@@ -42,6 +44,11 @@ server.post('/answer', async (request, reply) => {
     const {sessionId} = request.query as { sessionId: string }
     const userSession = session.getById(sessionId)
     const {answer} = request.body as { answer: string }
+
+    if (userSession.state.quizStatus !== QuizStatus.FRESH_QUIZ) {
+        reply.code(204).send()
+        return
+    }
     try {
         const response = await engine.handleAnswer(userSession, answer)
         reply.code(200).send(response)

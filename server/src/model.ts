@@ -1,4 +1,4 @@
-import { GameState } from "./GameState";
+import {GameState, QuizStatus} from "./GameState";
 
 export interface UserSession {
     sessionId: string
@@ -27,17 +27,19 @@ export interface Indicator {
     code: string
 }
 
-export interface QuizClientResponse {
+export interface ServerResponse {
     sessionId: string
     score: number
-    indicators: IndicatorData[],
+    quizStatus: QuizStatus
+}
+
+export interface QuizServerResponse extends ServerResponse {
+    indicators: IndicatorData[]
     countries: Country[]
 }
 
-export interface AnswerClientResponse {
-    sessionId: string
-    score: number,
-    country: string,
-    correctCountry: string,
+export interface AnswerServerResponse extends ServerResponse {
+    country: string
+    correctCountry: string
     correct: boolean
 }

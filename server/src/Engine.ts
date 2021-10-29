@@ -1,6 +1,7 @@
-import {AnswerClientResponse, Country, Indicator, UserSession} from "./model";
+import {AnswerServerResponse, Country, Indicator, UserSession} from "./model";
 import * as _ from 'lodash';
 import {Repository} from "./Repository";
+import {QuizStatus} from "./GameState";
 
 const supported = require('../config/supported.json')
 
@@ -12,7 +13,7 @@ only handling the state changes for user session for which Engine methods are ca
 export interface EngineContract {
     generateQuizData(session: UserSession): Promise<void>
 
-    handleAnswer(session: UserSession, answer: string): AnswerClientResponse
+    handleAnswer(session: UserSession, answer: string): AnswerServerResponse
 }
 
 export class Engine implements EngineContract {
@@ -39,12 +40,13 @@ export class Engine implements EngineContract {
         return
     }
 
-    handleAnswer(session: UserSession, answer: string): AnswerClientResponse {
+    handleAnswer(session: UserSession, answer: string): AnswerServerResponse {
         if (!session.state.quizData)
             throw ('Could not find the quiz to answer')
 
         const answerClientResponse = ({
             sessionId: session.sessionId,
+            quizStatus: QuizStatus.QUIZ_ANSWERED,
             country: answer,
             correctCountry: session.state.quizData.correctCountry.name,
         })

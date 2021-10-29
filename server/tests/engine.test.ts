@@ -37,6 +37,11 @@ describe('game Engine', () => {
         expect(response.correct).toBeFalsy()
     })
 
+    test('should handle multiple correct responses', async () => {
+        // TODO
+        expect(true).toBeTruthy()
+    })
+
     async function getAnswerResponse(correct: boolean) {
         await engine.generateQuizData(userSession)
         expect(userSession.state.quizData).not.toBeUndefined()
