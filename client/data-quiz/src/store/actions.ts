@@ -1,4 +1,4 @@
-import {AnswerClientResponse, GameState} from "../model";
+import {AnswerServerResponse, GameState} from "../model";
 
 export enum ActionType {
     GET_QUIZ = 'GET_QUIZ',
@@ -16,5 +16,5 @@ export interface GetQuizAction extends Action {
 
 export interface PostAnswerAction extends Action {
     type: ActionType.POST_ANSWER
-    res: AnswerClientResponse
+    res: AnswerServerResponse
 }

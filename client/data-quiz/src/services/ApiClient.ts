@@ -1,5 +1,5 @@
 import axios from "axios"
-import {AnswerClientResponse, QuizClientResponse} from "../model";
+import {AnswerServerResponse, QuizServerResponse} from "../model";
 import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
 
@@ -10,7 +10,7 @@ export class ApiClient {
     static async getQuizGameState(): Promise<void> {
         // TODO: Decide whether to store sessionId in localStorage manually or use persisted redux
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
-        const res = await axios.get<QuizClientResponse>(ApiClient.getUrl('quiz'), {
+        const res = await axios.get<QuizServerResponse>(ApiClient.getUrl('quiz'), {
             params: {sessionId}
         })
 
@@ -29,7 +29,7 @@ export class ApiClient {
 
     static async postQuizAnswer(answer: string): Promise<void> {
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
-        const res = await axios.post<{ answer: string }, { data: AnswerClientResponse }>(ApiClient.getUrl('answer'), {
+        const res = await axios.post<{ answer: string }, { data: AnswerServerResponse }>(ApiClient.getUrl('answer'), {
             answer
         }, {
             params: {sessionId}

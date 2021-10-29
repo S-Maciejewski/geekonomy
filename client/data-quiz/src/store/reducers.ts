@@ -1,12 +1,13 @@
 import {Action, ActionType, GetQuizAction, PostAnswerAction} from "./actions";
-import {ControlsState, GameState} from "../model";
+import {ControlsState, GameState, QuizStatus} from "../model";
 
 const initialState: GameState = {
     sessionId: '',
     score: 0,
     indicators: [],
     countries: [],
-    controlsState: ControlsState.DECISION_ENABLED
+    quizStatus: QuizStatus.NO_QUIZ,
+    controlsState: ControlsState.DECISION_ENABLED,
 }
 
 const handleGetQuiz = (state: GameState, action: GetQuizAction): GameState => {
@@ -20,6 +21,7 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
     return {
         ...state,
         score: action.res.score,
+        quizStatus: action.res.quizStatus,
         lastAnswer: {
             country: action.res.country,
             correctCountry: action.res.correctCountry,

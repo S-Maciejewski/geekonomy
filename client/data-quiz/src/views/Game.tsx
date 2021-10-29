@@ -1,7 +1,7 @@
 import * as React from "react";
 import {DecisionControls} from "../components/DecisionControls/DecisionControls";
 import {useEffect, useState} from "react";
-import {GameState} from "../model";
+import {GameState, QuizStatus} from "../model";
 import {CircularProgress} from "@mui/material";
 import {Plots} from "../components/Plots/Plots";
 import {store} from "../store/store";
@@ -43,7 +43,8 @@ export const GameView: React.FC = () => {
             {!loading && <>
                 <Plots indicators={state.indicators}/>
                 <div>
-                    <ScoreIndicator score={state.score} lastAnswer={state.lastAnswer}/>
+                    {state.quizStatus === QuizStatus.QUIZ_ANSWERED &&
+                    <ScoreIndicator score={state.score} lastAnswer={state.lastAnswer}/>}
                     <DecisionControls controlsState={state.controlsState} countries={state.countries}/>
                 </div>
             </>}
