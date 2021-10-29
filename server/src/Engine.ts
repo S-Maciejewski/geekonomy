@@ -31,7 +31,7 @@ export class Engine implements EngineContract {
     async generateQuizData(session: UserSession): Promise<void> {
         const randomCountries: Country[] = _.sampleSize(supported.countries, this.COUNTRIES_COUNT)
         const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, this.INDICATORS_COUNT)
-        const correctCountry = randomCountries[0]
+        const correctCountry = _.sample(randomCountries) as Country
         session.state.updateQuizData({
             indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
             countries: randomCountries,

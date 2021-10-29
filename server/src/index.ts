@@ -27,12 +27,11 @@ server.get('/quiz', async (request, reply) => {
 
     // TODO fix this terrible workaround - it does not guarantee to scale past 1 client
     const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
-    console.log(`request sessionId: ${sessionId}, userSession sessionId: ${userSession.sessionId}`)
 
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
             await engine.generateQuizData(userSession)
-        console.debug(`correct country:`, userSession.state.quizData?.correctCountry)
+        console.debug(`request sessionId: ${sessionId}, correct country:`, userSession.state.quizData?.correctCountry)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
         console.error(`Could not fetch quiz data for ${sessionId}`, e)
