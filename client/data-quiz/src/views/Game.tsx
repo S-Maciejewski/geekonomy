@@ -43,9 +43,8 @@ export const GameView: React.FC = () => {
             {!loading && <>
                 <Plots indicators={state.indicators}/>
                 <div>
-                    {state.quizStatus === QuizStatus.QUIZ_ANSWERED &&
-                    <ScoreIndicator score={state.score} lastAnswer={state.lastAnswer}/>}
-                    <DecisionControls controlsState={state.controlsState} countries={state.countries}/>
+                    <ScoreIndicator quizStatus={state.quizStatus} score={state.score} lastAnswer={state.lastAnswer}/>
+                    <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>
                 </div>
             </>}
         </div>

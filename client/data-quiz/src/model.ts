@@ -11,7 +11,6 @@ export interface GameState {
     countries: Country[]
     quizStatus: QuizStatus
     lastAnswer?: LastAnswer
-    controlsState: ControlsState
 }
 
 export interface IndicatorData {
@@ -48,10 +47,4 @@ export interface QuizServerResponse extends ServerResponse {
 
 export interface AnswerServerResponse extends ServerResponse, LastAnswer {
 
-}
-
-export enum ControlsState {
-    DECISION_ENABLED,
-    NEXT_QUIZ,
-    NEW_GAME,
 }

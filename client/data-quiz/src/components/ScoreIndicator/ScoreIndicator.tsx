@@ -1,9 +1,10 @@
 import React from "react";
-import {LastAnswer} from "../../model";
+import {LastAnswer, QuizStatus} from "../../model";
 
 export interface ScoreProps {
     score: number
     lastAnswer?: LastAnswer
+    quizStatus: QuizStatus
 }
 
 const prettyPrint = (lastAnswer: LastAnswer) => {
@@ -12,11 +13,11 @@ const prettyPrint = (lastAnswer: LastAnswer) => {
         `You were incorrect, the country in question was ${lastAnswer.correctCountry} - your answer was ${lastAnswer.country}`
 }
 
-export const ScoreIndicator: React.FC<ScoreProps> = (props: ScoreProps) => {
+export const ScoreIndicator: React.FC<ScoreProps> = ({score, lastAnswer, quizStatus}) => {
     return <>
-        {props.lastAnswer && <div>
-            <span>{prettyPrint(props.lastAnswer)}</span>
+        {lastAnswer && quizStatus === QuizStatus.QUIZ_ANSWERED && <div>
+            <span>{prettyPrint(lastAnswer)}</span>
         </div>}
-        Score: {props.score}
+        Score: {score}
     </>
 }

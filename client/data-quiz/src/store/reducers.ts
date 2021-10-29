@@ -1,5 +1,5 @@
 import {Action, ActionType, GetQuizAction, PostAnswerAction} from "./actions";
-import {ControlsState, GameState, QuizStatus} from "../model";
+import {GameState, QuizStatus} from "../model";
 
 const initialState: GameState = {
     sessionId: '',
@@ -7,7 +7,6 @@ const initialState: GameState = {
     indicators: [],
     countries: [],
     quizStatus: QuizStatus.NO_QUIZ,
-    controlsState: ControlsState.DECISION_ENABLED,
 }
 
 const handleGetQuiz = (state: GameState, action: GetQuizAction): GameState => {
