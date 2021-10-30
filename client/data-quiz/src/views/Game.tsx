@@ -1,27 +1,26 @@
 import * as React from "react";
 import {DecisionControls} from "../components/DecisionControls/DecisionControls";
 import {useEffect, useState} from "react";
-import {GameState, QuizStatus} from "../model";
-import {CircularProgress} from "@mui/material";
+import {GameState} from "../model";
 import {Plots} from "../components/Plots/Plots";
 import {store} from "../store/store";
 import {Engine} from "../services/Engine";
 import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
+import {Loading} from "../components/Loading/Loading";
 
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
     const [loading, setLoading] = useState<Boolean>(true)
 
-    // TODO: Handle graceful shutdown if server not found
     async function getGameState() {
         try {
             setLoading(true)
             await Engine.getGameState()
+            setLoading(false)
         } catch (e) {
             console.log('Error on getting game state', e)
-        } finally {
-            setLoading(false)
+            setTimeout(getGameState, 5000)
         }
     }
 
@@ -35,11 +34,7 @@ export const GameView: React.FC = () => {
 
     return (
         <div>
-            {loading &&
-            <div>
-                <CircularProgress/>
-                data loading...
-            </div>}
+            {loading && <Loading/>}
             {!loading && <>
                 <Plots indicators={state.indicators}/>
                 <div>
