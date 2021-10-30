@@ -9,7 +9,7 @@ require('dotenv').config()
 const server = fastify()
 
 server.register(fastifyCors, {
-    origin: 'http://localhost:3000',
+    origin: '*',
     credentials: true
 })
 

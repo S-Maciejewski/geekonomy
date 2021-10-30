@@ -7,6 +7,7 @@ import {store} from "../store/store";
 import {Engine} from "../services/Engine";
 import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
 import {Loading} from "../components/Loading/Loading";
+import styles from './Game.module.scss'
 
 
 export const GameView: React.FC = () => {
@@ -37,9 +38,14 @@ export const GameView: React.FC = () => {
             {loading && <Loading/>}
             {!loading && <>
                 <Plots indicators={state.indicators}/>
-                <div>
-                    <ScoreIndicator quizStatus={state.quizStatus} score={state.score} lastAnswer={state.lastAnswer}/>
-                    <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>
+                <div className={styles.bottomContainer}>
+                    <div>
+                        <ScoreIndicator quizStatus={state.quizStatus} score={state.score}
+                                        lastAnswer={state.lastAnswer}/>
+                    </div>
+                    <div>
+                        <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>
+                    </div>
                 </div>
             </>}
         </div>
