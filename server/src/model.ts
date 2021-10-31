@@ -2,6 +2,7 @@ import {GameState, QuizStatus} from "./GameState";
 
 export interface UserSession {
     sessionId: string
+    activeAt: number
     state: GameState
 }
 

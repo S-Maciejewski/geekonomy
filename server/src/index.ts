@@ -13,7 +13,7 @@ server.register(fastifyCors, {
     credentials: true
 })
 
-const session = new Session()
+const session = new Session(3600)
 const engine = new Engine(4, 4)
 
 server.addHook('preHandler', (request, reply, next) => {
@@ -31,7 +31,7 @@ server.get('/quiz', async (request, reply) => {
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
             await engine.generateQuizData(userSession)
-        console.debug(`request sessionId: ${sessionId}, correct country:`, userSession.state.quizData?.correctCountry)
+        console.debug(`request sessionId: ${sessionId}, score: ${userSession.state.score}, correct country:`, userSession.state.quizData?.correctCountry)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
         console.error(`Could not fetch quiz data for ${sessionId}`, e)
