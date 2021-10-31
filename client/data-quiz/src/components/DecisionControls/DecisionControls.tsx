@@ -11,8 +11,13 @@ export interface ControlsProps {
 
 export const DecisionControls: React.FC<ControlsProps> = ({countries, quizStatus}) => {
 
-    return <>
+    return (<div className={styles.container}>
         <div className={styles.decisionControls}>
+            <Button disabled={quizStatus !== QuizStatus.QUIZ_ANSWERED} onClick={() => {
+                Engine.getGameState()
+            }} variant={'contained'} className={styles.nextQuiz}>
+                Next quiz
+            </Button>
             {
                 countries.map(country =>
                     <div className={styles.button}>
@@ -24,18 +29,5 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, quizStatus
                 )
             }
         </div>
-        {
-            quizStatus === QuizStatus.QUIZ_ANSWERED &&
-            <Button onClick={() => {
-                Engine.getGameState()
-            }}>
-                Next quiz
-            </Button>
-        }
-        {/*// TODO: A reset game button*/}
-        {/*<Button onClick={() => {*/}
-        {/*}}>*/}
-        {/*    New game*/}
-        {/*</Button>*/}
-    </>
-}
+    </div>
+)}

@@ -11,7 +11,7 @@ export interface ScoreProps {
 const prettyPrint = (lastAnswer: LastAnswer) => {
     return lastAnswer.correct ?
         <span>Your answer was correct!</span> :
-        <span>You were incorrect, the country in question was <b>{lastAnswer.correctCountry}</b> - your answer was {lastAnswer.country}</span>
+        <span>You were incorrect, the country in question was <b>{lastAnswer.correctCountry}</b> - your answer was <i>{lastAnswer.country}</i></span>
 }
 
 export const ScoreIndicator: React.FC<ScoreProps> = ({score, lastAnswer, quizStatus}) => {

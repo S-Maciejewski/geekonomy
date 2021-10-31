@@ -41,6 +41,10 @@ export class ApiClient {
         }))
     }
 
+    static setApiUrl(url: string) {
+        console.log(`Setting API_URL to: ${url}`)
+        ApiClient.API_URL = url
+    }
 
     static getUrl(path: string) {
         return `${ApiClient.API_URL}/${path}`

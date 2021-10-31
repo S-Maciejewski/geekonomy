@@ -8,6 +8,7 @@ import {Engine} from "../services/Engine";
 import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
 import {Loading} from "../components/Loading/Loading";
 import styles from './Game.module.scss'
+import {ServerAddress} from "../components/ServerAddress/ServerAddress";
 
 
 export const GameView: React.FC = () => {
@@ -42,6 +43,9 @@ export const GameView: React.FC = () => {
                     <div>
                         <ScoreIndicator quizStatus={state.quizStatus} score={state.score}
                                         lastAnswer={state.lastAnswer}/>
+                    </div>
+                    <div className={styles.rightSide}>
+                        <ServerAddress/>
                     </div>
                     <div>
                         <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>

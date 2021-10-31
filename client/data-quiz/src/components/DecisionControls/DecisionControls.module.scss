@@ -1,8 +1,18 @@
+.container {
+  width: 100%;
+}
+
 .button {
   padding: 8px;
 }
 
 .decisionControls {
-  justify-content: center;
+  margin-left: 100px;
   display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.nextQuiz {
+  margin-right: 20px !important;
 }

@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  margin: 0 40px 0 40px;
   display: flex;
   flex: 1 1 auto;
 }
@@ -8,6 +7,7 @@
 .score {
   width: 100px;
   display: inline-block;
+  margin-left: 100px;
 }
 
 .answer {
