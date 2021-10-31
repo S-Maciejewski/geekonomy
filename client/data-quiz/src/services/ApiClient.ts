@@ -4,7 +4,7 @@ import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
 
 export class ApiClient {
-    static API_URL = 'http://127.0.0.1:8080'
+    static API_URL = localStorage.getItem('API_URL') || 'http://127.0.0.1:8080'
     static sessionIdKey = 'sessionId'
 
     static async getQuizGameState(): Promise<void> {
@@ -12,6 +12,9 @@ export class ApiClient {
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
         const res = await axios.get<QuizServerResponse>(ApiClient.getUrl('quiz'), {
             params: {sessionId}
+        }).catch((err) => {
+            console.error('Axios error', err)
+            return {data: {} as QuizServerResponse}
         })
 
         const state = ({...res.data})
@@ -33,6 +36,9 @@ export class ApiClient {
             answer
         }, {
             params: {sessionId}
+        }).catch((err) => {
+            console.error('Axios error', err)
+            return {data: {} as AnswerServerResponse}
         })
 
         store.dispatch(({
@@ -43,6 +49,7 @@ export class ApiClient {
 
     static setApiUrl(url: string) {
         console.log(`Setting API_URL to: ${url}`)
+        localStorage.setItem('API_URL', url)
         ApiClient.API_URL = url
     }
 

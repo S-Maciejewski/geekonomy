@@ -30,7 +30,7 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
 }
 
 export default function reducer(state = initialState, action: Action): GameState {
-    console.log('reducer input: ', state, action)
+    // console.log('Reducer input: ', state, action)
 
     switch (action.type) {
         case ActionType.GET_QUIZ:
