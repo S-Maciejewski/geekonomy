@@ -73,14 +73,16 @@ WDI_COLS = [
     'remarks'
 ]
 
-with open('../server/config/supported_countries.csv', newline='') as file:
+with open('./supported_countries.csv', newline='') as file:
     reader = csv.reader(file)
     SUPPORTED_COUNTRIES = [item[0] for item in list(reader)]
 
-with open('../server/config/supported_metrics.csv', newline='') as file:
+with open('./supported_indicators.csv', newline='') as file:
     reader = csv.reader(file)
-    SUPPORTED_METRICS = [item[0] for item in list(reader)]
+    SUPPORTED_INDICATORS = [item[0] for item in list(reader)]
 
+
+DATA_TABLE_NAME = 'NewData'
 
 def parse():
     conn = None
@@ -90,13 +92,12 @@ def parse():
         conn = psycopg2.connect(**params)
         cur = conn.cursor()
 
-        delete_from_data_statement = 'delete from "Data" where "Country Code" is not null;'
+        delete_from_data_statement = f'delete from "{DATA_TABLE_NAME}" where "Country Code" is not null;'
         cur.execute(delete_from_data_statement)
 
-        for i in range(0, len(SUPPORTED_METRICS)):
-            select_query = 'select * from "WDIData" where "Indicator Code" = \'%s\' and "Country Code" in (%s);' % (
-                SUPPORTED_METRICS[i], str(SUPPORTED_COUNTRIES).replace(
-                    '[', '').replace(']', '')
+        for i in range(0, len(SUPPORTED_INDICATORS)):
+            select_query = f'select * from "WDIData" where "Indicator Code" = \'{SUPPORTED_INDICATORS[i]}\' and "Country Code" in (%s);' % (
+                str(SUPPORTED_COUNTRIES).replace('[', '').replace(']', '')
             )
             cur.execute(select_query)
             fetched_records = cur.fetchall()
@@ -110,13 +111,12 @@ def parse():
 
                 insert_statement = ''
                 for idx, row in values.iterrows():
-                    insert_statement += "insert into \"Data\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (
+                    insert_statement += f"insert into \"{DATA_TABLE_NAME}\" values ('%s', '%s', '%s', '%s', %s, %s);\n" % (
                         record[0].replace("'", "''"), record[1], record[2].replace("'", "''"), record[3], idx, row[0])
 
                 # print(insert_statement)
                 cur.execute(insert_statement)
-            print('%s processed, %d metrics left to process' %
-                  (record[3], len(SUPPORTED_METRICS) - i - 1))
+            print(f'{record[3]} processed, {len(SUPPORTED_INDICATORS) - i - 1} metrics left to process')
             conn.commit()
 
         cur.close()
