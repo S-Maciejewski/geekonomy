@@ -9,6 +9,7 @@ import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
 import {Loading} from "../components/Loading/Loading";
 import styles from './Game.module.scss'
 import {ServerAddress} from "../components/ServerAddress/ServerAddress";
+import {LanguagePicker} from "../components/LanguagePicker/LanguagePicker";
 
 
 export const GameView: React.FC = () => {
@@ -45,6 +46,7 @@ export const GameView: React.FC = () => {
                                         lastAnswer={state.lastAnswer}/>
                     </div>
                     <div className={styles.rightSide}>
+                        <LanguagePicker/>
                         <ServerAddress/>
                     </div>
                     <div>

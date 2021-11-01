@@ -9,6 +9,7 @@ describe('game Engine', () => {
     beforeEach(() => {
         userSession = {
             sessionId: '1',
+            activeAt: Date.now(),
             state: new GameState()
         }
     })
@@ -46,8 +47,8 @@ describe('game Engine', () => {
         await engine.generateQuizData(userSession)
         expect(userSession.state.quizData).not.toBeUndefined()
         const correctCountry = correct ?
-            userSession.state.quizData!.correctCountry.name :
-            userSession.state.quizData!.countries.map((country => country.name)).filter(countryName => countryName !== userSession.state.quizData!.correctCountry.name)[0]
+            userSession.state.quizData!.correctCountry :
+            userSession.state.quizData!.countries.map((country => country)).filter(countryName => countryName !== userSession.state.quizData!.correctCountry)[0]
         return engine.handleAnswer(userSession, correctCountry)
     }
 })

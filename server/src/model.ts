@@ -18,15 +18,9 @@ export interface IndicatorData {
     country?: Country
 }
 
-export interface Country {
-    name: string
-    code: string
-}
+export type Country = string
 
-export interface Indicator {
-    name: string
-    code: string
-}
+export type Indicator = string
 
 export interface ServerResponse {
     sessionId: string

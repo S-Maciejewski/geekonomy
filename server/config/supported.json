@@ -1,346 +1,269 @@
 {
   "countries": [
-    {
-      "code": "ARE",
-      "name": "United Arab Emirates"
-    },
-    {
-      "code": "ARG",
-      "name": "Argentina"
-    },
-    {
-      "code": "AUS",
-      "name": "Australia"
-    },
-    {
-      "code": "AUT",
-      "name": "Austria"
-    },
-    {
-      "code": "BEL",
-      "name": "Belgium"
-    },
-    {
-      "code": "BGD",
-      "name": "Bangladesh"
-    },
-    {
-      "code": "BGR",
-      "name": "Bulgaria"
-    },
-    {
-      "code": "BLR",
-      "name": "Belarus"
-    },
-    {
-      "code": "BRA",
-      "name": "Brazil"
-    },
-    {
-      "code": "CAN",
-      "name": "Canada"
-    },
-    {
-      "code": "CHE",
-      "name": "Switzerland"
-    },
-    {
-      "code": "CHL",
-      "name": "Chile"
-    },
-    {
-      "code": "CHN",
-      "name": "China"
-    },
-    {
-      "code": "COL",
-      "name": "Colombia"
-    },
-    {
-      "code": "CZE",
-      "name": "Czech Republic"
-    },
-    {
-      "code": "DEU",
-      "name": "Germany"
-    },
-    {
-      "code": "DNK",
-      "name": "Denmark"
-    },
-    {
-      "code": "EGY",
-      "name": "Egypt, Arab Rep."
-    },
-    {
-      "code": "ESP",
-      "name": "Spain"
-    },
-    {
-      "code": "EST",
-      "name": "Estonia"
-    },
-    {
-      "code": "EUU",
-      "name": "European Union"
-    },
-    {
-      "code": "FIN",
-      "name": "Finland"
-    },
-    {
-      "code": "FRA",
-      "name": "France"
-    },
-    {
-      "code": "GBR",
-      "name": "United Kingdom"
-    },
-    {
-      "code": "GRC",
-      "name": "Greece"
-    },
-    {
-      "code": "HRV",
-      "name": "Croatia"
-    },
-    {
-      "code": "HUN",
-      "name": "Hungary"
-    },
-    {
-      "code": "IND",
-      "name": "India"
-    },
-    {
-      "code": "ISR",
-      "name": "Israel"
-    },
-    {
-      "code": "ITA",
-      "name": "Italy"
-    },
-    {
-      "code": "JPN",
-      "name": "Japan"
-    },
-    {
-      "code": "KEN",
-      "name": "Kenya"
-    },
-    {
-      "code": "KOR",
-      "name": "Korea, Rep."
-    },
-    {
-      "code": "LTU",
-      "name": "Lithuania"
-    },
-    {
-      "code": "LVA",
-      "name": "Latvia"
-    },
-    {
-      "code": "MDG",
-      "name": "Madagascar"
-    },
-    {
-      "code": "MEX",
-      "name": "Mexico"
-    },
-    {
-      "code": "MLT",
-      "name": "Malta"
-    },
-    {
-      "code": "MOZ",
-      "name": "Mozambique"
-    },
-    {
-      "code": "NGA",
-      "name": "Nigeria"
-    },
-    {
-      "code": "NLD",
-      "name": "Netherlands"
-    },
-    {
-      "code": "NOR",
-      "name": "Norway"
-    },
-    {
-      "code": "NZL",
-      "name": "New Zealand"
-    },
-    {
-      "code": "PAK",
-      "name": "Pakistan"
-    },
-    {
-      "code": "PHL",
-      "name": "Philippines"
-    },
-    {
-      "code": "POL",
-      "name": "Poland"
-    },
-    {
-      "code": "PRT",
-      "name": "Portugal"
-    },
-    {
-      "code": "RUS",
-      "name": "Russian Federation"
-    },
-    {
-      "code": "SVN",
-      "name": "Slovenia"
-    },
-    {
-      "code": "TZA",
-      "name": "Tanzania"
-    },
-    {
-      "code": "UKR",
-      "name": "Ukraine"
-    },
-    {
-      "code": "USA",
-      "name": "United States"
-    },
-    {
-      "code": "VEN",
-      "name": "Venezuela, RB"
-    },
-    {
-      "code": "VNM",
-      "name": "Vietnam"
-    },
-    {
-      "code": "WLD",
-      "name": "World"
-    }
+    "ABW",
+    "AFG",
+    "AGO",
+    "ALB",
+    "AND",
+    "ARE",
+    "ARG",
+    "ARM",
+    "ASM",
+    "ATG",
+    "AUS",
+    "AUT",
+    "AZE",
+    "BDI",
+    "BEL",
+    "BEN",
+    "BFA",
+    "BGD",
+    "BGR",
+    "BHR",
+    "BHS",
+    "BIH",
+    "BLR",
+    "BLZ",
+    "BMU",
+    "BOL",
+    "BRA",
+    "BRB",
+    "BRN",
+    "BTN",
+    "BWA",
+    "CAF",
+    "CAN",
+    "CHE",
+    "CHI",
+    "CHL",
+    "CIV",
+    "COD",
+    "COG",
+    "COM",
+    "CPV",
+    "CRI",
+    "CSS",
+    "CUB",
+    "CUW",
+    "CYM",
+    "CYP",
+    "CZE",
+    "DEU",
+    "DJI",
+    "DMA",
+    "DNK",
+    "DOM",
+    "EMU",
+    "ERI",
+    "ESP",
+    "EST",
+    "ETH",
+    "EUU",
+    "FIN",
+    "FJI",
+    "FRA",
+    "FRO",
+    "GAB",
+    "GBR",
+    "GEO",
+    "GHA",
+    "GIB",
+    "GIN",
+    "GMB",
+    "GNB",
+    "GNQ",
+    "GRC",
+    "GRD",
+    "GRL",
+    "GTM",
+    "GUM",
+    "GUY",
+    "HKG",
+    "HND",
+    "HRV",
+    "HTI",
+    "HUN",
+    "IBD",
+    "IDN",
+    "IMN",
+    "IND",
+    "IRL",
+    "IRN",
+    "IRQ",
+    "ISL",
+    "ISR",
+    "ITA",
+    "JAM",
+    "JOR",
+    "JPN",
+    "KAZ",
+    "KEN",
+    "KHM",
+    "KIR",
+    "KNA",
+    "KOR",
+    "KWT",
+    "LBN",
+    "LBR",
+    "LBY",
+    "LCA",
+    "LIE",
+    "LKA",
+    "LSO",
+    "LTU",
+    "LUX",
+    "LVA",
+    "MAC",
+    "MCO",
+    "MDG",
+    "MDV",
+    "MHL",
+    "MLI",
+    "MLT",
+    "MMR",
+    "MNE",
+    "MNG",
+    "MNP",
+    "MOZ",
+    "MRT",
+    "MUS",
+    "MWI",
+    "MYS",
+    "NAC",
+    "NAM",
+    "NCL",
+    "NER",
+    "NGA",
+    "NIC",
+    "NLD",
+    "NOR",
+    "NPL",
+    "NRU",
+    "NZL",
+    "OMN",
+    "PAK",
+    "PAN",
+    "PHL",
+    "PLW",
+    "PNG",
+    "POL",
+    "PRI",
+    "PRK",
+    "PRT",
+    "PRY",
+    "PSE",
+    "PYF",
+    "QAT",
+    "ROU",
+    "RUS",
+    "RWA",
+    "SAS",
+    "SAU",
+    "SDN",
+    "SEN",
+    "SGP",
+    "SLB",
+    "SLE",
+    "SLV",
+    "SMR",
+    "SOM",
+    "SRB",
+    "SSD",
+    "SSF",
+    "SST",
+    "STP",
+    "SUR",
+    "SVK",
+    "SVN",
+    "SWE",
+    "SWZ",
+    "SYC",
+    "SYR",
+    "TCD",
+    "TGO",
+    "THA",
+    "TJK",
+    "TKM",
+    "TLS",
+    "TON",
+    "TTO",
+    "TUN",
+    "TUR",
+    "TUV",
+    "TZA",
+    "UGA",
+    "UKR",
+    "URY",
+    "USA",
+    "UZB",
+    "VCT",
+    "VEN",
+    "VGB",
+    "VIR",
+    "VNM",
+    "VUT",
+    "WSM",
+    "XKX",
+    "YEM",
+    "ZAF",
+    "ZMB",
+    "ZWE"  
   ],
   "indicators": [
-    {
-      "code": "AG.LND.ARBL.ZS",
-      "name": "Arable land (% of land area)"
-    },
-    {
-      "code": "AG.LND.CROP.ZS",
-      "name": "Permanent cropland (% of land area)"
-    },
-    {
-      "code": "AG.LND.FRST.ZS",
-      "name": "Forest area (% of land area)"
-    },
-    {
-      "code": "EG.ELC.ACCS.ZS",
-      "name": "Access to electricity (% of population)"
-    },
-    {
-      "code": "EN.ATM.CO2E.PC",
-      "name": "CO2 emissions (metric tons per capita)"
-    },
-    {
-      "code": "FP.CPI.TOTL.ZG",
-      "name": "Inflation, consumer prices (annual %)"
-    },
-    {
-      "code": "FR.INR.RINR",
-      "name": "Real interest rate (%)"
-    },
-    {
-      "code": "GB.XPD.RSDV.GD.ZS",
-      "name": "Research and development expenditure (% of GDP)"
-    },
-    {
-      "code": "GC.XPN.TOTL.GD.ZS",
-      "name": "Expense (% of GDP)"
-    },
-    {
-      "code": "IS.RRS.TOTL.KM",
-      "name": "Rail lines (total route-km)"
-    },
-    {
-      "code": "IT.NET.USER.ZS",
-      "name": "Individuals using the Internet (% of population)"
-    },
-    {
-      "code": "MS.MIL.TOTL.P1",
-      "name": "Armed forces personnel, total"
-    },
-    {
-      "code": "NY.GDP.MKTP.CD",
-      "name": "GDP (current US$)"
-    },
-    {
-      "code": "NY.GDP.MKTP.KD.ZG",
-      "name": "GDP growth (annual %)"
-    },
-    {
-      "code": "SE.SEC.ENRR",
-      "name": "School enrollment, secondary (% gross)"
-    },
-    {
-      "code": "SE.XPD.TOTL.GD.ZS",
-      "name": "Government expenditure on education, total (% of GDP)"
-    },
-    {
-      "code": "SG.VAW.REAS.ZS",
-      "name": "Women who believe a husband is justified in beating his wife (any of five reasons) (%)"
-    },
-    {
-      "code": "SH.ALC.PCAP.LI",
-      "name": "Total alcohol consumption per capita (liters of pure alcohol, projected estimates, 15+ years of age)"
-    },
-    {
-      "code": "SH.DTH.IMRT",
-      "name": "Number of infant deaths"
-    },
-    {
-      "code": "SH.MED.BEDS.ZS",
-      "name": "Hospital beds (per 1,000 people)"
-    },
-    {
-      "code": "SH.MED.PHYS.ZS",
-      "name": "Physicians (per 1,000 people)"
-    },
-    {
-      "code": "SI.POV.UMIC.GP",
-      "name": "Poverty gap at $5.50 a day (2011 PPP) (%)"
-    },
-    {
-      "code": "SL.UEM.TOTL.NE.ZS",
-      "name": "Unemployment, total (% of total labor force) (national estimate)"
-    },
-    {
-      "code": "SP.DYN.LE00.IN",
-      "name": "Life expectancy at birth, total (years)"
-    },
-    {
-      "code": "SP.POP.0014.TO",
-      "name": "Population ages 0-14, total"
-    },
-    {
-      "code": "SP.POP.GROW",
-      "name": "Population growth (annual %)"
-    },
-    {
-      "code": "SP.POP.TOTL",
-      "name": "Population, total"
-    },
-    {
-      "code": "SP.RUR.TOTL.ZS",
-      "name": "Rural population (% of total population)"
-    },
-    {
-      "code": "SP.URB.TOTL.IN.ZS",
-      "name": "Urban population (% of total population)"
-    },
-    {
-      "code": "TM.VAL.FOOD.ZS.UN",
-      "name": "Food imports (% of merchandise imports)"
-    }
+    "SP.POP.GROW",
+    "SP.POP.TOTL",
+    "SP.RUR.TOTL.ZS",
+    "SP.URB.TOTL.IN.ZS",
+    "EN.POP.DNST",
+    "SP.POP.0014.TO.ZS",
+    "SP.POP.1564.TO.ZS",
+    "SP.POP.65UP.TO.ZS",
+    "SP.DYN.TO65.FE.ZS",
+    "SP.DYN.TO65.MA.ZS",
+    "IT.CEL.SETS.P2",
+    "SP.DYN.TFRT.IN",
+    "SP.DYN.LE00.IN",
+    "ER.FSH.PROD.MT",
+    "ER.FSH.CAPT.MT",
+    "AG.LND.AGRI.ZS",
+    "AG.LND.ARBL.ZS",
+    "EN.ATM.CO2E.KT",
+    "EN.ATM.CO2E.PC",
+    "TX.VAL.MRCH.CD.WT",
+    "TM.VAL.MRCH.CD.WT",
+    "IT.MLT.MAIN.P2",
+    "EN.ATM.CO2E.GF.KT",
+    "AG.PRD.CREL.MT",
+    "BX.KLT.DINV.CD.WD",
+    "NY.GDP.TOTL.RT.ZS",
+    "NY.GDP.MKTP.CD",
+    "NY.GDP.PCAP.CD",
+    "SP.DYN.IMRT.IN",
+    "EN.ATM.CO2E.KD.GD",
+    "SH.DTH.IMRT",
+    "NY.GDP.MKTP.KD.ZG",
+    "NY.GNP.MKTP.CD",
+    "EG.IMP.CONS.ZS",
+    "NE.EXP.GNFS.ZS",
+    "NE.IMP.GNFS.ZS",
+    "IS.AIR.PSGR",
+    "EG.ELC.HYRO.ZS",
+    "EG.ELC.NUCL.ZS",
+    "EG.ELC.FOSL.ZS",
+    "EG.ELC.RNWX.ZS",
+    "EN.URB.LCTY",
+    "EG.USE.ELEC.KH.PC",
+    "NY.GNP.PCAP.CD",
+    "FP.CPI.TOTL.ZG",
+    "MS.MIL.XPND.GD.ZS",
+    "FP.CPI.TOTL",
+    "SE.PRE.ENRR",
+    "SE.TER.ENRR",
+    "NY.GNS.ICTR.GN.ZS",
+    "SE.PRM.ENRL.TC.ZS",
+    "BN.CAB.XOKA.GD.ZS",
+    "SE.ENR.PRSC.FM.ZS",
+    "NY.GNS.ICTR.ZS",
+    "NY.GNP.PCAP.KD.ZG"
   ]
 }

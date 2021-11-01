@@ -4,6 +4,7 @@ import HighchartsReact from "highcharts-react-official";
 import {IndicatorData} from "../../model";
 import {StandardProps} from "../types";
 import styles from './Plots.module.scss'
+import {useTranslation} from "react-i18next";
 
 export interface PlotProps {
     data: IndicatorData
@@ -11,14 +12,14 @@ export interface PlotProps {
 }
 
 export const Plot: React.FC<PlotProps & StandardProps> = ({data, options}) => {
-
+    const {t} = useTranslation()
     const highchartsOptions: Highcharts.Options = {
         title: {
-            text: data.indicator.name
+            text: t(`indicator.${data.indicator}`)
         },
         series: [
             {
-                name: data.indicator.name,
+                name: data.indicator,
                 // @ts-ignore
                 data: data.series
             }

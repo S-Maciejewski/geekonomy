@@ -48,10 +48,10 @@ export class Engine implements EngineContract {
             sessionId: session.sessionId,
             quizStatus: QuizStatus.QUIZ_ANSWERED,
             country: answer,
-            correctCountry: session.state.quizData.correctCountry.name,
+            correctCountry: session.state.quizData.correctCountry,
         })
 
-        if (answer === session.state.quizData.correctCountry.name) {
+        if (answer === session.state.quizData.correctCountry) {
             session.state.incrementScore()
             return ({
                 ...answerClientResponse,

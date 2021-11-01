@@ -16,20 +16,21 @@ export class Repository {
     }
 
     async fetchSingleCountryQuizData(country: Country, indicators: Indicator[]): Promise<IndicatorData[]> {
-        return await this.getIndicatorData([country.code], indicators.map(indicator => indicator.code))
+        return await this.getIndicatorData([country], indicators)
     }
 
     async getIndicatorData(countries: string[], indicators: string[]): Promise<IndicatorData[]> {
         try {
             const client = await this.pool.connect()
-            const queryResult = await client.query(` select "Country Name", "Indicator Name", "Indicator Code", "Country Code", "Year", "Value"
+            const queryResult = await client.query(` select "Indicator Code", "Country Code", "Year", "Value"
                                                      from "Data"
                                                      where "Country Code" in ('${countries.join("','")}')
-                                                       and "Indicator Code" in ('${indicators.join("','")}')`)
+                                                       and "Indicator Code" in ('${indicators.join("','")}')
+                                                     order by "Country Code", "Indicator Code", "Year";`)
 
             // TODO: Multiple countries
             const indicatorData: IndicatorData[] = indicators.map(indicator => ({
-                indicator: {code: indicator, name: queryResult.rows.find(obj => obj['Indicator Code'] === indicator)['Indicator Name']},
+                indicator,
                 series: queryResult.rows.filter(row => row['Indicator Code'] === indicator).map(row => [row['Year'] as number, row['Value'] as number])
             }))
 
