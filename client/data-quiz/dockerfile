@@ -1,0 +1,9 @@
+FROM node:16
+
+WORKDIR /usr/src/client
+COPY package*.json ./
+RUN npm install
+RUN npm rebuild node-sass
+COPY . .
+EXPOSE 3000
+CMD [ "npm", "start" ]
