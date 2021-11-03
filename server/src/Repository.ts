@@ -19,6 +19,7 @@ export class Repository {
         return await this.getIndicatorData([country], indicators)
     }
 
+    // TODO: Improve how much data is filled. Maybe take number of metrics +2 and discard ones with least fill for the country?
     async getIndicatorData(countries: string[], indicators: string[]): Promise<IndicatorData[]> {
         try {
             const client = await this.pool.connect()

@@ -273,6 +273,6 @@
   "controls.connect": "Połącz",
   "score": "Wynik",
   "score.correct": "Odpoweiedź poprawna!",
-  "score.incorrect.1": "Błedna odpowiedź, kraj, o który chodziło to",
+  "score.incorrect.1": "Błedna odpowiedź. Kraj, o który chodziło to",
   "score.incorrect.2": "- twoja odpowiedź to"
 }

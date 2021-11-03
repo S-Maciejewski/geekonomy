@@ -76,13 +76,15 @@ WDI_COLS = [
 with open('./supported_countries.csv', newline='') as file:
     reader = csv.reader(file)
     SUPPORTED_COUNTRIES = [item[0] for item in list(reader)]
+    print('Supported countries: ', SUPPORTED_COUNTRIES)
 
 with open('./supported_indicators.csv', newline='') as file:
     reader = csv.reader(file)
     SUPPORTED_INDICATORS = [item[0] for item in list(reader)]
+    print('Supported indicators: ', SUPPORTED_INDICATORS)
 
 
-DATA_TABLE_NAME = 'NewData'
+DATA_TABLE_NAME = 'Data'
 
 def parse():
     conn = None
