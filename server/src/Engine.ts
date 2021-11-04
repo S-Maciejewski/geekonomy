@@ -44,24 +44,26 @@ export class Engine implements EngineContract {
         if (!session.state.quizData)
             throw ('Could not find the quiz to answer')
 
-        const answerClientResponse = ({
+        const answerServerResponse = ({
             sessionId: session.sessionId,
             quizStatus: QuizStatus.QUIZ_ANSWERED,
             country: answer,
             correctCountry: session.state.quizData.correctCountry,
+            highscore: session.highscore
         })
 
         if (answer === session.state.quizData.correctCountry) {
             session.state.incrementScore()
             return ({
-                ...answerClientResponse,
+                ...answerServerResponse,
                 score: session.state.score,
                 correct: true
             })
         }
+
         session.state.clearScore()
         return ({
-            ...answerClientResponse,
+            ...answerServerResponse,
             score: session.state.score,
             correct: false
         })

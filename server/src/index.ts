@@ -9,8 +9,7 @@ require('dotenv').config()
 const server = fastify()
 
 server.register(fastifyCors, {
-    origin: '*',
-    credentials: true
+    origin: '*'
 })
 
 const session = new Session(3600)
@@ -50,6 +49,7 @@ server.post('/answer', async (request, reply) => {
     }
     try {
         const response = await engine.handleAnswer(userSession, answer)
+        session.handleHighscore(userSession, response.score)
         reply.code(200).send(response)
     } catch (e) {
         console.error(`Could not process the answer to the quiz question for ${sessionId}`, e)
@@ -57,10 +57,20 @@ server.post('/answer', async (request, reply) => {
     }
 })
 
-server.listen(8080, (err, address) => {
+server.get('/highscore', async (request, reply) => {
+    try {
+        const response = session.getHighscoreList()
+        reply.code(200).send(response)
+    } catch (e) {
+        console.error(`Could not get highscore list`, e)
+        reply.code(500).send('Could not get highscore')
+    }
+})
+
+server.listen(process.env.PORT || 8080, (err, address) => {
     if (err) {
         console.error(err)
         process.exit(1)
     }
-    console.log(`Server listening at ${address}`)
+    console.log(`Server listening at ${process.env.SERVER_ADDRESS || address}`)
 })

@@ -11,6 +11,7 @@ export class Repository {
 
     constructor() {
         this.pool = new Pool({
+            // connectionString: process.env.PG_CONNECTION_STRING || `postgres://${process.env.DWH_USER}:${process.env.DWH_PASSWORD}@${process.env.DWH_HOST}:${process.env.DWH_PORT}/postgres`
             connectionString: process.env.PG_CONNECTION_STRING
         })
     }

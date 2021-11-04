@@ -1,4 +1,4 @@
-import {UserSession} from "./model";
+import {Highscore, UserSession} from "./model";
 import {GameState} from "./GameState";
 import {randomUUID} from "crypto";
 
@@ -6,10 +6,12 @@ export class Session {
     CLEANUP_JOB_PERIOD = 60_000
     SESSION_TIMEOUT_SEC: number
     sessions: UserSession[]
+    highscoreList: Highscore[]
 
     constructor(SESSION_TIMEOUT_SEC: number) {
         this.SESSION_TIMEOUT_SEC = SESSION_TIMEOUT_SEC
         this.sessions = []
+        this.highscoreList = []
         console.log(`Sessions list initialized`)
         this.sessionCleanupJob()
     }
@@ -33,7 +35,10 @@ export class Session {
         const session = {
             sessionId: randomUUID(),
             activeAt: Date.now(),
-            state: new GameState()
+            state: new GameState(),
+            highscore: {
+                score: 0
+            }
         }
         this.sessions.push(session)
         console.log(`Session created: ${session.sessionId}, total sessions: ${this.sessions.length}`)
@@ -43,4 +48,23 @@ export class Session {
         this.sessions = this.sessions.filter(session => session.sessionId !== sessionId)
         console.log(`Session deleted: ${sessionId}, total sessions: ${this.sessions.length}`)
     }
+
+    getHighscoreList(): Highscore[] {
+        return this.highscoreList
+    }
+
+    updateHighscoreList(highscore: Highscore) {
+        this.highscoreList.push(highscore)
+        this.highscoreList = this.highscoreList.sort((a, b) => b.score - a.score).slice(0, 10)
+    }
+
+    handleHighscore(userSession: UserSession, score: number) {
+        if(score > userSession.highscore.score) {
+            userSession.highscore.score = score
+            userSession.highscore.achievedAt = Date.now()
+            userSession.highscore.sessionId = userSession.sessionId
+            this.updateHighscoreList(userSession.highscore)
+        }
+    }
+
 }
