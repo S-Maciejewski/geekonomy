@@ -4,6 +4,7 @@ import {Session} from './Session';
 import {Engine} from "./Engine";
 import {UserSession} from "./model";
 import {QuizStatus} from "./GameState";
+import {Logger} from './Logger';
 
 require('dotenv').config()
 const server = fastify()
@@ -30,10 +31,10 @@ server.get('/quiz', async (request, reply) => {
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
             await engine.generateQuizData(userSession)
-        console.debug(`request sessionId: ${sessionId}, score: ${userSession.state.score}, correct country:`, userSession.state.quizData?.correctCountry)
+        Logger.info(`request sessionId: ${sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}`)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
-        console.error(`Could not fetch quiz data for ${sessionId}`, e)
+        Logger.error(`Could not fetch quiz data for ${sessionId}`, e)
         reply.code(500).send('Could not fetch quiz data')
     }
 })
@@ -52,7 +53,7 @@ server.post('/answer', async (request, reply) => {
         session.handleHighscore(userSession, response.score)
         reply.code(200).send(response)
     } catch (e) {
-        console.error(`Could not process the answer to the quiz question for ${sessionId}`, e)
+        Logger.error(`Could not process the answer to the quiz question for ${sessionId}`, e)
         reply.code(500).send('Could not process the answer to the quiz question')
     }
 })
@@ -62,15 +63,15 @@ server.get('/highscore', async (request, reply) => {
         const response = session.getHighscoreList()
         reply.code(200).send(response)
     } catch (e) {
-        console.error(`Could not get highscore list`, e)
+        Logger.error(`Could not get highscore list`, e)
         reply.code(500).send('Could not get highscore')
     }
 })
 
 server.listen(process.env.PORT || 8080, (err, address) => {
     if (err) {
-        console.error(err)
+        Logger.error(`Could not start server`, err)
         process.exit(1)
     }
-    console.log(`Server listening at ${process.env.SERVER_ADDRESS || address}`)
+    Logger.info(`Server listening at ${process.env.SERVER_ADDRESS || address}`)
 })

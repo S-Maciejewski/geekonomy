@@ -1,4 +1,5 @@
 import {Pool} from 'pg'
+import { Logger } from './Logger';
 import {Country, Indicator, IndicatorData} from "./model";
 
 /*
@@ -39,7 +40,7 @@ export class Repository {
             client.release()
             return indicatorData
         } catch (e) {
-            console.error('Could not fetch data from Postgres', e)
+            Logger.error('Could not fetch data from Postgres', e)
             return []
         }
     }
