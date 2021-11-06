@@ -1,0 +1,49 @@
+name: Build and deploy client on push to master
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'client/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REACT_APP_MAPS_API_KEY: ${{ secrets.REACT_APP_MAPS_API_KEY }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16.x"
+
+      - name: Install and reinstall dependencies
+        run: |
+          npm ci
+          npm rebuild node-sass
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build
+        run: run npm build
+
+      - name: Handle 404 fallback
+        run: cp ./build/index.html ./build/404.html
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.5
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: pages
+          FOLDER: ./build
+          CLEAN: true
+
