@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      REACT_APP_MAPS_API_KEY: ${{ secrets.REACT_APP_MAPS_API_KEY }}
 
     steps:
       - uses: actions/checkout@v2
