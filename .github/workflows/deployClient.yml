@@ -20,6 +20,8 @@ jobs:
         with:
           node-version: "16.x"
 
+        run: cd client/data-quiz
+
       - name: Install and reinstall dependencies
         run: |
           npm ci
