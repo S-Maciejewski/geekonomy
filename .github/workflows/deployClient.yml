@@ -20,9 +20,8 @@ jobs:
         with:
           node-version: "16.x"
 
-        run: cd client/data-quiz
-
-      - name: Install and reinstall dependencies
+      - name: Install and rebuild dependencies
+        working-directory: ./client/data-quiz
         run: |
           npm ci
           npm rebuild node-sass
@@ -36,9 +35,11 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Build
+        working-directory: ./client/data-quiz
         run: run npm build
 
       - name: Handle 404 fallback
+        working-directory: ./client/data-quiz
         run: cp ./build/index.html ./build/404.html
 
       - name: Deploy
@@ -46,6 +47,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: pages
-          FOLDER: ./build
+          FOLDER: .client/data-quiz/build
           CLEAN: true
 
