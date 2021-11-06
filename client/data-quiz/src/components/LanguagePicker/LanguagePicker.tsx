@@ -10,6 +10,10 @@ export const LanguagePicker: React.FC = () => {
         i18n.changeLanguage(event.target.value)
     }
 
+    const normalizeLanguage = (lang: string) => {
+        return lang.split('-')[0]
+    }
+
     const supportedLanguages = [
         {
             code: 'en',
@@ -26,9 +30,7 @@ export const LanguagePicker: React.FC = () => {
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">{t('language')}</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={i18n.language}
+                    value={normalizeLanguage(i18n.language)}
                     label={t('language')}
                     onChange={(value) => handleChange(value)}
                 >
