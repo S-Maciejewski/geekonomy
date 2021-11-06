@@ -36,7 +36,7 @@ jobs:
 
       - name: Build
         working-directory: ./client/data-quiz
-        run: npm build
+        run: npm run build
 
       - name: Handle 404 fallback
         working-directory: ./client/data-quiz
