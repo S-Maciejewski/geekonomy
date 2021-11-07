@@ -1,6 +1,0 @@
-FROM postgres
-
-ENV POSTGRES_PASSWORD=pwd
-
-COPY ./database_scheme.sql /docker-entrypoint-initdb.d/
-COPY ./default_data.sql /docker-entrypoint-initdb.d/
