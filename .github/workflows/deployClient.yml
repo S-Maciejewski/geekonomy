@@ -21,7 +21,7 @@ jobs:
       - name: Install and rebuild dependencies
         working-directory: ./client/data-quiz
         run: |
-          npm ci
+          npm install
           npm rebuild node-sass
 
       - name: Cache dependencies
