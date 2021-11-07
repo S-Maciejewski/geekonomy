@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    CI: '' # TODO remove before proceeding to production
 
     steps:
       - uses: actions/checkout@v2

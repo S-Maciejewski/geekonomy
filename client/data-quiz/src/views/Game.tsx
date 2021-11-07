@@ -16,19 +16,20 @@ export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
     const [loading, setLoading] = useState<Boolean>(true)
 
-    async function getGameState() {
-        try {
-            setLoading(true)
-            await Engine.getGameState()
-            setLoading(false)
-        } catch (e) {
-            console.log('Error on getting game state', e)
-            setTimeout(getGameState, 5000)
-        }
-    }
 
     useEffect(() => {
-        getGameState()
+        const getGameState = async () => {
+            try {
+                setLoading(true)
+                await Engine.getGameState()
+                setLoading(false)
+            } catch (e) {
+                console.log('Error on getting game state', e)
+                setTimeout(getGameState, 5000)
+            }
+        }
+
+        getGameState().catch(e => console.log('Error on getting game state', e))
 
         store.subscribe(() => {
             setState(store.getState())
