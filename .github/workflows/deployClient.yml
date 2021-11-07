@@ -47,6 +47,6 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: pages
-          FOLDER: .client/data-quiz/build
+          FOLDER: client/data-quiz/build
           CLEAN: true
 
