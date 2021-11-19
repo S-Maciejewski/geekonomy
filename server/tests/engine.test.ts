@@ -17,7 +17,7 @@ describe('game Engine', () => {
     test('should generate valid quiz data', async () => {
         await engine.generateQuizData(userSession)
         expect(userSession.state.quizData).not.toBeUndefined()
-        expect(userSession.state.quizData?.indicators).toHaveLength(engine.INDICATORS_COUNT)
+        expect(userSession.state.quizData?.indicators).toHaveLength(engine.INDICATORS_COUNT * engine.COUNTRIES_COUNT)
         expect(userSession.state.quizData?.countries).toHaveLength(engine.COUNTRIES_COUNT)
         expect(userSession.state.quizData?.correctCountry).toBeTruthy()
     })

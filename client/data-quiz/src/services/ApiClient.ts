@@ -1,5 +1,5 @@
 import axios from "axios"
-import {AnswerServerResponse, QuizServerResponse} from "../model";
+import {AnswerServerResponse, IndicatorData, QuizServerResponse} from "../model";
 import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
 
@@ -19,10 +19,7 @@ export class ApiClient {
 
         const state = ({...res.data})
         ApiClient.refreshStoredSession(sessionId, state.sessionId)
-        state.indicators.forEach(indicatorData => {
-            // @ts-ignore
-            indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
-        })
+        ApiClient.normalizeIndicators(state.indicators)
 
         store.dispatch(({
             type: ActionType.GET_QUIZ,
@@ -41,6 +38,8 @@ export class ApiClient {
             return {data: {} as AnswerServerResponse}
         })
 
+        ApiClient.normalizeIndicators(res.data.indicators)
+
         store.dispatch(({
             type: ActionType.POST_ANSWER,
             res: res.data
@@ -55,6 +54,13 @@ export class ApiClient {
 
     static getUrl(path: string) {
         return `${ApiClient.API_URL}/${path}`
+    }
+
+    private static normalizeIndicators(indicators: IndicatorData[]) {
+        indicators.forEach(indicatorData => {
+            // @ts-ignore
+            indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
+        })
     }
 
     private static refreshStoredSession(sessionId: string | null, stateSessionId: string) {

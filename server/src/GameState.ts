@@ -1,4 +1,5 @@
 import {QuizServerResponse, QuizData} from "./model";
+import * as R from 'ramda';
 
 export enum QuizStatus {
     NO_QUIZ = 'NO_QUIZ',
@@ -27,7 +28,9 @@ export class GameState {
         return ({
             sessionId,
             score: this.score,
-            indicators: this.quizData?.indicators,
+            indicators: this.quizData?.indicators
+                .filter(indicator => indicator.country === this.quizData?.correctCountry)
+                .map(indicator => R.omit(['country'], indicator)),
             countries: this.quizData?.countries,
             quizStatus: this.quizStatus
         }) as QuizServerResponse

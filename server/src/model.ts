@@ -38,6 +38,7 @@ export interface AnswerServerResponse extends ServerResponse {
     country: string
     correctCountry: string
     correct: boolean
+    indicators: IndicatorData[]
     highscore: Highscore
 }
 

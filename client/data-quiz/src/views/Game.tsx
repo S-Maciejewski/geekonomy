@@ -40,7 +40,7 @@ export const GameView: React.FC = () => {
         <div>
             {loading && <Loading/>}
             {!loading && <>
-                <Plots indicators={state.indicators}/>
+                <Plots indicators={state.indicators} lastAnswer={state.lastAnswer}/>
                 <div className={styles.bottomContainer}>
                     <div>
                         <ScoreIndicator quizStatus={state.quizStatus} score={state.score}

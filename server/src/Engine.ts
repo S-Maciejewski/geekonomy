@@ -33,7 +33,8 @@ export class Engine implements EngineContract {
         const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, this.INDICATORS_COUNT)
         const correctCountry = _.sample(randomCountries) as Country
         session.state.updateQuizData({
-            indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
+            // indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
+            indicators: await this.repository.fetchQuizData(randomCountries, randomIndicators),
             countries: randomCountries,
             correctCountry
         })
@@ -49,6 +50,7 @@ export class Engine implements EngineContract {
             quizStatus: QuizStatus.QUIZ_ANSWERED,
             country: answer,
             correctCountry: session.state.quizData.correctCountry,
+            indicators: session.state.quizData.indicators,
             highscore: session.highscore
         })
 

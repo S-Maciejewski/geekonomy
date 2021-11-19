@@ -16,6 +16,7 @@ export interface GameState {
 export interface IndicatorData {
     series: [number, number][]
     indicator: Indicator
+    country?: Country
 }
 
 export type Country = string
@@ -40,5 +41,5 @@ export interface QuizServerResponse extends ServerResponse {
 }
 
 export interface AnswerServerResponse extends ServerResponse, LastAnswer {
-
+    indicators: IndicatorData[]
 }

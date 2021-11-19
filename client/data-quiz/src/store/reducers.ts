@@ -20,6 +20,7 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
     return {
         ...state,
         score: action.res.score,
+        indicators: action.res.indicators,
         quizStatus: action.res.quizStatus,
         lastAnswer: {
             country: action.res.country,
