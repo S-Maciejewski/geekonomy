@@ -10,7 +10,10 @@ describe('game Engine', () => {
         userSession = {
             sessionId: '1',
             activeAt: Date.now(),
-            state: new GameState()
+            state: new GameState(),
+            highscore: {
+                score: 0,
+            },
         }
     })
 
