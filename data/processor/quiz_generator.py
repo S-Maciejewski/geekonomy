@@ -1,6 +1,7 @@
 import csv
 
 import psycopg2
+from typing import List
 
 from config import config
 
@@ -22,13 +23,20 @@ class QuizGenerator:
     def get_countries(self):
         pass
 
-    def get_single_quiz(self):
+    def get_single_quiz(self, countries: List[str], indicators: List[str]):
         cursor = self.connection.cursor()
-        #  select "Indicator Code", "Country Code", "Year", "Value"
-        #                                                      from "Data"
-        #                                                      where "Country Code" in ('${countries.join("','")}')
-        #                                                        and "Indicator Code" in ('${indicators.join("','")}')
-        #                                                      order by "Country Code", "Indicator Code", "Year";
+        countries_formatted = "'" + "','".join(countries) + "'"
+        indicators_formatted = "'" + "','".join(indicators) + "'"
+        print(countries_formatted)
 
-        # TODO: translate query
-        # cursor.execute('');
+        query = f'select "Indicator Code", "Country Code", "Year", "Value" from "Data"' \
+                f'where "Country Code" in ({countries_formatted}) and "Indicator Code" in ({indicators_formatted})' \
+                f'order by "Country Code", "Indicator Code", "Year"'
+
+        cursor.execute(query)
+        print(cursor.fetchall())
+
+
+if __name__ == '__main__':
+    quiz_generator = QuizGenerator()
+    quiz_generator.get_single_quiz(['ARG', 'BRA'], ['SP.POP.TOTL'])
