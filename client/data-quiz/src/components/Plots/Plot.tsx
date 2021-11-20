@@ -41,7 +41,6 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
             }
         ]
 
-    console.log(series)
     const highchartsOptions: Highcharts.Options = {
         title: {
             text: t(`indicator.${countriesData[0].indicator}`)

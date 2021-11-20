@@ -7,7 +7,7 @@
 }
 
 .decisionControls {
-  margin-left: 100px;
+  margin-left: 60px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -15,4 +15,14 @@
 
 .nextQuiz {
   margin-right: 20px !important;
+}
+
+.circularProgress {
+  //margin-bottom: 20px;
+}
+
+.loadingIndicatorContainer {
+  //display: flex;
+  width: 40px;
+  height: 100%;
 }

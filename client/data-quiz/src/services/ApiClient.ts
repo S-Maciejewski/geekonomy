@@ -10,6 +10,10 @@ export class ApiClient {
     static async getQuizGameState(): Promise<void> {
         // TODO: Decide whether to store sessionId in localStorage manually or use persisted redux
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
+        store.dispatch({
+            type: ActionType.REQUEST_SENT
+        })
+
         const res = await axios.get<QuizServerResponse>(ApiClient.getUrl('quiz'), {
             params: {sessionId}
         }).catch((err) => {
@@ -29,6 +33,10 @@ export class ApiClient {
 
     static async postQuizAnswer(answer: string): Promise<void> {
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
+        store.dispatch({
+            type: ActionType.REQUEST_SENT
+        })
+
         const res = await axios.post<{ answer: string }, { data: AnswerServerResponse }>(ApiClient.getUrl('answer'), {
             answer
         }, {

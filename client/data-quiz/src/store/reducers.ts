@@ -1,4 +1,4 @@
-import {Action, ActionType, GetQuizAction, PostAnswerAction} from "./actions";
+import {Action, ActionType, GetQuizAction, PostAnswerAction, RequestSentAction} from "./actions";
 import {GameState, QuizStatus} from "../model";
 
 const initialState: GameState = {
@@ -30,6 +30,13 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
     }
 }
 
+const handleRequestSent = (state: GameState): GameState => {
+    return {
+        ...state,
+        quizStatus: QuizStatus.REQUEST_SENT
+    }
+}
+
 export default function reducer(state = initialState, action: Action): GameState {
     // console.log('Reducer input: ', state, action)
 
@@ -39,6 +46,9 @@ export default function reducer(state = initialState, action: Action): GameState
             break
         case ActionType.POST_ANSWER:
             state = handlePostAnswer(state, action as PostAnswerAction)
+            break
+        case ActionType.REQUEST_SENT:
+            state = handleRequestSent(state)
             break
     }
 

@@ -2,6 +2,7 @@ export enum QuizStatus {
     NO_QUIZ = 'NO_QUIZ',
     FRESH_QUIZ = 'FRESH_QUIZ',
     QUIZ_ANSWERED = 'QUIZ_ANSWERED',
+    REQUEST_SENT = 'REQUEST_SENT',
 }
 
 export interface GameState {
