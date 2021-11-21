@@ -1,6 +1,5 @@
-import {AnswerServerResponse, Country, Indicator, UserSession} from "./model";
-import * as _ from 'lodash';
-import {Repository} from "./Repository";
+import {AnswerServerResponse, UserSession} from "./model";
+import {DwhRepository, PreGeneratedRepository, Repository} from "./Repository";
 import {QuizStatus} from "./GameState";
 
 const supported = require('../config/supported.json')
@@ -22,22 +21,15 @@ export class Engine implements EngineContract {
 
     repository: Repository
 
-    constructor(COUNTRIES_COUNT: number, INDICATORS_COUNT: number) {
+    constructor(COUNTRIES_COUNT: number, INDICATORS_COUNT: number, useDwh: boolean = false) {
         this.COUNTRIES_COUNT = COUNTRIES_COUNT
         this.INDICATORS_COUNT = INDICATORS_COUNT
-        this.repository = new Repository()
+        this.repository = useDwh ? new DwhRepository() : new PreGeneratedRepository()
     }
 
     async generateQuizData(session: UserSession): Promise<void> {
-        const randomCountries: Country[] = _.sampleSize(supported.countries, this.COUNTRIES_COUNT)
-        const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, this.INDICATORS_COUNT)
-        const correctCountry = _.sample(randomCountries) as Country
-        session.state.updateQuizData({
-            // indicators: await this.repository.fetchSingleCountryQuizData(correctCountry, randomIndicators),
-            indicators: await this.repository.fetchQuizData(randomCountries, randomIndicators),
-            countries: randomCountries,
-            correctCountry
-        })
+        const quizData = await this.repository.getQuizData(this.COUNTRIES_COUNT, this.INDICATORS_COUNT)
+        session.state.updateQuizData(quizData)
         return
     }
 

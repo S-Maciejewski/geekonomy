@@ -1,13 +1,22 @@
 import {Pool} from 'pg'
 import {Logger} from './Logger';
-import {Country, Indicator, IndicatorData} from "./model";
+import {Country, Indicator, IndicatorData, QuizData} from "./model";
+import * as _ from "lodash";
+import * as fs from "fs";
+
+const supported = require('../config/supported.json')
 
 /*
 The Repository class should eventually be independent from the data source.
 This means that if the approach without database will be used (using pre-defined quiz sets),
 the Repository should have methods to handle this without the Engine knowing about it
  */
-export class Repository {
+
+export abstract class Repository {
+    abstract getQuizData(countriesCount: number, indicatorCount: number): Promise<QuizData>
+}
+
+export class DwhRepository implements Repository {
     pool: Pool
 
     constructor() {
@@ -17,12 +26,15 @@ export class Repository {
         })
     }
 
-    async fetchSingleCountryQuizData(country: Country, indicators: Indicator[]): Promise<IndicatorData[]> {
-        return await this.getIndicatorData([country], indicators)
-    }
-
-    async fetchQuizData(countries: Country[], indicators: Indicator[]): Promise<IndicatorData[]> {
-        return await this.getIndicatorData(countries, indicators)
+    async getQuizData(countriesCount: number, indicatorCount: number): Promise<QuizData> {
+        const randomCountries: Country[] = _.sampleSize(supported.countries, countriesCount)
+        const randomIndicators: Indicator[] = _.sampleSize(supported.indicators, indicatorCount)
+        const correctCountry = _.sample(randomCountries) as Country
+        return ({
+            indicators: await this.getIndicatorData(randomCountries, randomIndicators),
+            countries: randomCountries,
+            correctCountry
+        })
     }
 
     // TODO: Improve how much data is filled. Maybe take number of metrics +2 and discard ones with least fill for the country?
@@ -51,4 +63,24 @@ export class Repository {
             return []
         }
     }
+}
+
+export class PreGeneratedRepository implements Repository {
+    preGeneratedFiles: string[]
+    path: string;
+
+    constructor() {
+        this.path = '../quiz_data'
+        this.preGeneratedFiles = fs.readdirSync(this.path)
+        Logger.info(`Repository running with access to ${this.preGeneratedFiles.length} pre generated quiz files`)
+    }
+
+    getRandomFileName(): string {
+        return _.sampleSize(this.preGeneratedFiles, 1)[0]
+    }
+
+    async getQuizData(countriesCount: number, indicatorCount: number): Promise<QuizData> {
+        return JSON.parse(fs.readFileSync(`${this.path}/${this.getRandomFileName()}`, 'utf8'))
+    }
+
 }
