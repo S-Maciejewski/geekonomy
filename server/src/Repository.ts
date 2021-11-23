@@ -76,7 +76,9 @@ export class PreGeneratedRepository implements Repository {
     }
 
     getRandomFileName(): string {
-        return _.sampleSize(this.preGeneratedFiles, 1)[0]
+        const randomQuiz = _.sampleSize(this.preGeneratedFiles, 1)[0];
+        Logger.info(`Repository - fetching random quiz: ${randomQuiz}`)
+        return randomQuiz
     }
 
     async getQuizData(countriesCount: number, indicatorCount: number): Promise<QuizData> {
