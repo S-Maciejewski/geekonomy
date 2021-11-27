@@ -3,6 +3,7 @@ import random
 import json
 import time
 
+import pandas as pd
 import psycopg2
 from typing import List
 
@@ -70,19 +71,31 @@ class QuizGenerator:
                         filter(lambda x: x[0] == indicator and x[1] == country,
                                query_result)))
 
-    def is_quiz_valid(self, query_result: List[List[str]], correct_country: str):
-        return True
-
     def generate_single_quiz(self):
         countries, indicators = self.get_weighted_random_countries(), self.get_random_indicators()
         cursor = self.connection.cursor()
 
         correct_country = random.choice(countries)
 
+        skipped_indicators = []
+
+        def is_quiz_valid(query_result: List[List[str]]):
+            query_df = pd.DataFrame(query_result, columns=['Indicator Code', 'Country Code', 'Year', 'Value'])
+            correct_country_df = query_df[query_df['Country Code'] == correct_country]
+            null_values_df = correct_country_df[correct_country_df['Value'].isnull()].groupby('Indicator Code').count()[
+                'Year']
+            invalid_indicators = list(null_values_df.index[null_values_df > 30])
+
+            if len(invalid_indicators) > 0:
+                skipped_indicators.extend(invalid_indicators)
+                return False
+            return True
+
         query_result = get_dwh_query_result(cursor, countries, indicators)
-        while not self.is_quiz_valid(query_result, correct_country):
-            # TODO: implement heuristic approach
-            # self.get_random_indicators(skipped_indicators=indicators)
+
+        while not is_quiz_valid(query_result):
+            # print('Quiz not valid, skipping indicators:', set(skipped_indicators))
+            indicators = self.get_random_indicators(skipped_indicators)
             query_result = get_dwh_query_result(cursor, countries, indicators)
 
         indicators_data = []
@@ -110,7 +123,7 @@ class QuizGenerator:
 if __name__ == '__main__':
     quiz_generator = QuizGenerator()
 
-    quiz_generator.generate_quiz_files(5)
+    quiz_generator.generate_quiz_files(1000)
 
     # quiz = quiz_generator.get_single_quiz(quiz_generator.get_weighted_random_countries(),
     #                                       quiz_generator.get_random_indicators())
