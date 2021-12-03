@@ -22,6 +22,9 @@ services:
       - PG_CONNECTION_STRING=postgres://postgres:pwd@dwh:5432/postgres
       - SERVER_ADDRESS=0.0.0.0
       - PORT=8080
+      - QUIZ_PATH=/home/ubuntu/quiz_data
+    volumes:
+      - ./quiz_data:/home/ubuntu/quiz_data
 
   client:
     depends_on:

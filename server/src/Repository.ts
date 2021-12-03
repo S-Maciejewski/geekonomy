@@ -70,7 +70,7 @@ export class PreGeneratedRepository implements Repository {
     path: string;
 
     constructor() {
-        this.path = '../quiz_data'
+        this.path = process.env.QUIZ_PATH || '../quiz_data'
         this.preGeneratedFiles = fs.readdirSync(this.path)
         Logger.info(`Repository running with access to ${this.preGeneratedFiles.length} pre generated quiz files`)
     }
