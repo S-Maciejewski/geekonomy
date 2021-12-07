@@ -1,4 +1,4 @@
-# wb-data-quiz
+# Geekonomy - macroeconomic data quiz 
 
 A quiz-game of guessing which country is described by displayed economic statistics. 
 Data fed by WorldBank's API: https://datahelpdesk.worldbank.org/knowledgebase/topics/125589-developer-information
