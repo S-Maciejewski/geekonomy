@@ -1,40 +1,30 @@
 version: '3.8'
 
 services:
-# The dwh service needs around 5 minutes to start up and build Data table
-  dwh:
-    build:
-      dockerfile: dockerfile
-      context: ./dwh
-    ports:
-      - 5432:5432
-
   server:
-    depends_on:
-      - dwh
     restart: always
     build:
       dockerfile: dockerfile
       context: ./server
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 80:8080
     environment:
-      - PG_CONNECTION_STRING=postgres://postgres:pwd@dwh:5432/postgres
       - SERVER_ADDRESS=0.0.0.0
-      - PORT=8080
-      - QUIZ_PATH=/home/ubuntu/quiz_data
+      - PORT=80
+      - QUIZ_PATH=/quiz_data
     volumes:
-      - ./quiz_data:/home/ubuntu/quiz_data
+      - ./quiz_data:/quiz_data
 
   client:
     depends_on:
-      - dwh
       - server
     restart: always
     build:
       dockerfile: dockerfile
       context: ./client/data-quiz
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 80:80
     environment:
-      - API_URL=http://server:8080
+      - API_URL=http://server
+      - VIRTUAL_HOST=geekonomy.pl,www.geekonomy.pl
+      - LETSENCRYPT_HOST=geekonomy.pl,www.geekonomy.pl
