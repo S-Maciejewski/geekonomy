@@ -3,8 +3,9 @@ import fastifyCors from 'fastify-cors'
 import {Session} from './Session';
 import {Engine} from "./Engine";
 import {UserSession} from "./model";
-import {QuizStatus} from "./GameState";
+import {GameState, QuizStatus} from "./GameState";
 import {Logger} from './Logger';
+import {randomUUID} from "crypto";
 
 require('dotenv').config()
 const server = fastify()
@@ -26,7 +27,16 @@ server.get('/quiz', async (request, reply) => {
     const {sessionId} = request.query as { sessionId: string }
 
     // TODO fix this terrible workaround - it does not guarantee to scale past 1 client
-    const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
+    // const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
+    // Temporary 'fix' just to get the app serving quizzes
+    const userSession = session.getById(sessionId) ?? {
+        sessionId: randomUUID(),
+        activeAt: Date.now(),
+        state: new GameState(),
+        highscore: {
+            score: 0
+        }
+    } as UserSession
 
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
@@ -73,5 +83,5 @@ server.listen(process.env.PORT || 8080, (err, address) => {
         Logger.error(`Could not start server`, err)
         process.exit(1)
     }
-    Logger.info(`Server listening at ${process.env.SERVER_ADDRESS || address}`)
+    Logger.info(`Server listening at ${process.env.SERVER_ADDRESS || address}, port ${process.env.PORT || 8080}`)
 })

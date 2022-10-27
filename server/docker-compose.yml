@@ -11,6 +11,6 @@ services:
       environment:
         # - SERVER_ADDRESS=0.0.0.0
         - PORT=8080
-        - QUIZ_PATH=/home/quiz_data
+        - QUIZ_DATA_PATH=/home/quiz_data
       volumes:
         - ../quiz_data:/home/quiz_data

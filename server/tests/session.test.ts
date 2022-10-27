@@ -7,7 +7,7 @@ describe('server Session tests', () => {
         let sessionId: string
 
         beforeAll(() => {
-            session = new Session()
+            session = new Session(3600)
             session.createSession()
             sessionId = session.sessions[0].sessionId
         })
