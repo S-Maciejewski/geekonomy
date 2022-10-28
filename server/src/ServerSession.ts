@@ -3,15 +3,15 @@ import {GameState} from "./GameState";
 import {randomUUID} from "crypto";
 import {Logger} from "./Logger";
 
-export class Session {
+export class ServerSession {
     CLEANUP_JOB_PERIOD = 60_000
     SESSION_TIMEOUT_SEC: number
-    sessions: UserSession[]
+    userSessions: UserSession[]
     highscoreList: Highscore[]
 
     constructor(SESSION_TIMEOUT_SEC: number) {
         this.SESSION_TIMEOUT_SEC = SESSION_TIMEOUT_SEC
-        this.sessions = []
+        this.userSessions = []
         this.highscoreList = []
         Logger.info(`Sessions list initialized`)
         this.sessionCleanupJob()
@@ -19,7 +19,7 @@ export class Session {
 
     private sessionCleanupJob = () => {
         setTimeout(this.sessionCleanupJob, this.CLEANUP_JOB_PERIOD)
-        const timedOut = this.sessions.filter(session => Date.now() - session.activeAt > this.SESSION_TIMEOUT_SEC * 1_000).map(session => session.sessionId)
+        const timedOut = this.userSessions.filter(session => Date.now() - session.activeAt > this.SESSION_TIMEOUT_SEC * 1_000).map(session => session.sessionId)
         if (timedOut.length) {
             Logger.info('Removing timed out sessions:', timedOut)
             timedOut.forEach(sessionId => this.deleteSession(sessionId))
@@ -27,12 +27,12 @@ export class Session {
     }
 
     getById(sessionId: string): UserSession {
-        const session = this.sessions.filter(session => session.sessionId === sessionId)[0]
+        const session = this.userSessions.filter(session => session.sessionId === sessionId)[0]
         if (session) session.activeAt = Date.now()
         return session
     }
 
-    createSession(): void {
+    createNewSessionAndGetId(): string {
         const session = {
             sessionId: randomUUID(),
             activeAt: Date.now(),
@@ -41,13 +41,14 @@ export class Session {
                 score: 0
             }
         }
-        this.sessions.push(session)
-        Logger.info(`Session created: ${session.sessionId}, total sessions: ${this.sessions.length}`)
+        this.userSessions.push(session)
+        Logger.info(`Session created: ${session.sessionId}, total sessions: ${this.userSessions.length}`)
+        return session.sessionId
     }
 
     deleteSession(sessionId: string): void {
-        this.sessions = this.sessions.filter(session => session.sessionId !== sessionId)
-        Logger.info(`Session deleted: ${sessionId}, total sessions: ${this.sessions.length}`)
+        this.userSessions = this.userSessions.filter(session => session.sessionId !== sessionId)
+        Logger.info(`Session deleted: ${sessionId}, total sessions: ${this.userSessions.length}`)
     }
 
     getHighscoreList(): Highscore[] {
