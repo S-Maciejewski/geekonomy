@@ -1,6 +1,6 @@
-import fastify from 'fastify'
+import fastify, {FastifyRequest} from 'fastify'
 import fastifyCors from 'fastify-cors'
-import {Session} from './Session';
+import {ServerSession} from './ServerSession';
 import {Engine} from "./Engine";
 import {UserSession} from "./model";
 import {QuizStatus} from "./GameState";
@@ -13,35 +13,34 @@ server.register(fastifyCors, {
     origin: '*'
 })
 
-const session = new Session(3600)
+const serverSession = new ServerSession(3600)
 const engine = new Engine(4, 4)
 
-server.addHook('preHandler', (request, reply, next) => {
-    const {sessionId} = request.query as { sessionId: string }
-    if (!session.getById(sessionId)) session.createSession()
-    next()
-})
+const getSession = (request: FastifyRequest): UserSession => {
+    let {sessionId} = request.query as { sessionId: string }
+    if (!sessionId || serverSession.getById(sessionId) === undefined) {
+        Logger.info(`No session for id '${sessionId}', creating new session`)
+        sessionId = serverSession.createNewSessionAndGetId()
+    }
+    return serverSession.getById(sessionId)
+}
 
 server.get('/quiz', async (request, reply) => {
-    const {sessionId} = request.query as { sessionId: string }
-
-    // TODO fix this terrible workaround - it does not guarantee to scale past 1 client
-    const userSession = session.getById(sessionId) ?? session.sessions.at(-1) as UserSession
+    const userSession = getSession(request)
 
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
             await engine.generateQuizData(userSession)
-        Logger.info(`request sessionId: ${sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}`)
+        Logger.info(`request sessionId: ${userSession.sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}`)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
-        Logger.error(`Could not fetch quiz data for ${sessionId}`, e)
+        Logger.error(`Could not fetch quiz data for ${userSession.sessionId}`, e)
         reply.code(500).send('Could not fetch quiz data')
     }
 })
 
 server.post('/answer', async (request, reply) => {
-    const {sessionId} = request.query as { sessionId: string }
-    const userSession = session.getById(sessionId)
+    const userSession = getSession(request)
     const {answer} = request.body as { answer: string }
 
     if (userSession.state.quizStatus !== QuizStatus.FRESH_QUIZ) {
@@ -50,17 +49,17 @@ server.post('/answer', async (request, reply) => {
     }
     try {
         const response = await engine.handleAnswer(userSession, answer)
-        session.handleHighscore(userSession, response.score)
+        serverSession.handleHighscore(userSession, response.score)
         reply.code(200).send(response)
     } catch (e) {
-        Logger.error(`Could not process the answer to the quiz question for ${sessionId}`, e)
+        Logger.error(`Could not process the answer to the quiz question for ${userSession.sessionId}`, e)
         reply.code(500).send('Could not process the answer to the quiz question')
     }
 })
 
 server.get('/highscore', async (request, reply) => {
     try {
-        const response = session.getHighscoreList()
+        const response = serverSession.getHighscoreList()
         reply.code(200).send(response)
     } catch (e) {
         Logger.error(`Could not get highscore list`, e)
@@ -73,5 +72,5 @@ server.listen(process.env.PORT || 8080, (err, address) => {
         Logger.error(`Could not start server`, err)
         process.exit(1)
     }
-    Logger.info(`Server listening at ${process.env.SERVER_ADDRESS || address}`)
+    Logger.info(`Server listening at ${process.env.SERVER_ADDRESS || address}, port ${process.env.PORT || 8080}`)
 })

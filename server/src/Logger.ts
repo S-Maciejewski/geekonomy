@@ -1,7 +1,7 @@
 import pino from 'pino';
 
-// TODO: add multistream support (file, stdout)
-const logger = pino({}, pino.destination(`./logs/server_${new Date().toISOString().slice(0, 19).replace('T', '-')}.log`));
+const logFilePath = `./logs/server_${Date.now()}.log`;
+const logger = pino({}, pino.destination(logFilePath));
 
 export namespace Logger {
     export const info = (msg: string, ...args: any[]) => {

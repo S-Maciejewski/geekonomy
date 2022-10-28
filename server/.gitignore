@@ -3,3 +3,4 @@ database.ini
 .idea
 .env
 coverage
+src/*.js
