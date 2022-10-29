@@ -1,30 +1,26 @@
 version: '3.8'
 
 services:
-  server:
+  api:
     restart: always
     build:
       dockerfile: dockerfile
       context: ./server
-    ports:
-      - 8080:8080
     environment:
       - SERVER_ADDRESS=0.0.0.0
-      - PORT=8080
+      - PORT=80
       - QUIZ_DATA_PATH=/quiz_data
     volumes:
       - ./quiz_data:/quiz_data
 
   client:
     depends_on:
-      - server
+      - api
     restart: always
     build:
       dockerfile: dockerfile
       context: ./client/data-quiz
+    environment:
+      - API_URL=http://api:80
     ports:
       - 80:80
-    environment:
-      - API_URL=http://server:8080
-      # - VIRTUAL_HOST=geekonomy.pl,www.geekonomy.pl
-      # - LETSENCRYPT_HOST=geekonomy.pl,www.geekonomy.pl
