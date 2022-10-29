@@ -21,6 +21,6 @@ services:
       dockerfile: dockerfile
       context: ./client/data-quiz
     environment:
-      - API_URL=http://api:80
+      - API_URL=http://localhost:80/api
     ports:
       - 80:80

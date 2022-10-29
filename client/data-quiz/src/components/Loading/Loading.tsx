@@ -11,10 +11,10 @@ export const Loading: React.FC = () => {
         <div className={styles.loading}>
             <div>
                 <CircularProgress size={80} className={styles.circularProgress}/>
-                <div className={styles.message}>
-                    {t('loading')}
-                    <ServerAddress/>
-                </div>
+                {/*<div className={styles.message}>*/}
+                {/*    {t('loading')}*/}
+                {/*    <ServerAddress/>*/}
+                {/*</div>*/}
             </div>
 
         </div>

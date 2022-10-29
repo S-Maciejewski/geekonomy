@@ -48,7 +48,7 @@ export const GameView: React.FC = () => {
                     </div>
                     <div className={styles.rightSide}>
                         <LanguagePicker/>
-                        <ServerAddress/>
+                        {/*<ServerAddress/>*/}
                     </div>
                     <div>
                         <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>
