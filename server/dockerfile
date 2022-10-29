@@ -4,5 +4,6 @@ WORKDIR /usr/src/server
 COPY package*.json ./
 RUN npm install
 COPY . .
+USER node
 EXPOSE 8080
 CMD [ "npm", "start" ]

@@ -1,10 +1,10 @@
-import fastify, {FastifyRequest} from 'fastify'
+import fastify, { FastifyRequest } from 'fastify'
 import fastifyCors from 'fastify-cors'
-import {ServerSession} from './ServerSession';
-import {Engine} from "./Engine";
-import {UserSession} from "./model";
-import {QuizStatus} from "./GameState";
-import {Logger} from './Logger';
+import { ServerSession } from './ServerSession';
+import { Engine } from "./Engine";
+import { UserSession } from "./model";
+import { QuizStatus } from "./GameState";
+import { Logger } from './Logger';
 
 require('dotenv').config()
 const server = fastify()
@@ -17,7 +17,7 @@ const serverSession = new ServerSession(3600)
 const engine = new Engine(4, 4)
 
 const getSession = (request: FastifyRequest): UserSession => {
-    let {sessionId} = request.query as { sessionId: string }
+    let { sessionId } = request.query as { sessionId: string }
     if (!sessionId || serverSession.getById(sessionId) === undefined) {
         Logger.info(`No session for id '${sessionId}', creating new session`)
         sessionId = serverSession.createNewSessionAndGetId()
@@ -41,7 +41,7 @@ server.get('/quiz', async (request, reply) => {
 
 server.post('/answer', async (request, reply) => {
     const userSession = getSession(request)
-    const {answer} = request.body as { answer: string }
+    const { answer } = request.body as { answer: string }
 
     if (userSession.state.quizStatus !== QuizStatus.FRESH_QUIZ) {
         reply.code(204).send()
@@ -67,7 +67,7 @@ server.get('/highscore', async (request, reply) => {
     }
 })
 
-server.listen(process.env.PORT || 8080, (err, address) => {
+server.listen(process.env.PORT || 8080, process.env.SERVER_ADDRESS || '127.0.0.1', (err, address) => {
     if (err) {
         Logger.error(`Could not start server`, err)
         process.exit(1)
