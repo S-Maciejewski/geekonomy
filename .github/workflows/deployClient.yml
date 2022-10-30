@@ -37,6 +37,8 @@ jobs:
       - name: Build
         working-directory: ./client/data-quiz
         run: npm run build
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
       - name: Handle 404 fallback
         working-directory: ./client/data-quiz
