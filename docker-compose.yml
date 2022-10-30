@@ -11,7 +11,7 @@ services:
       - PORT=80
       - QUIZ_DATA_PATH=/quiz_data
     volumes:
-      - ./quiz_data:/quiz_data
+      - ${QUIZ_REPOSITORY_PATH}:/quiz_data
 
   client:
     depends_on:
@@ -21,6 +21,6 @@ services:
       dockerfile: dockerfile
       context: ./client/data-quiz
     environment:
-      - API_URL=http://localhost:80/api
+      - API_URL=${API_URL}
     ports:
       - 80:80
