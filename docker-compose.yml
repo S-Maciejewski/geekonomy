@@ -21,6 +21,6 @@ services:
       dockerfile: dockerfile
       context: ./client/data-quiz
     environment:
-      - API_URL=${API_URL}
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
     ports:
       - 80:80

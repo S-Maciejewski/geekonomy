@@ -4,7 +4,7 @@ import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
 
 export class ApiClient {
-    static API_URL = process.env.API_URL || localStorage.getItem('API_URL') || 'http://127.0.0.1:80'
+    static API_URL = process.env.REACT_APP_API_URL || localStorage.getItem('API_URL') || 'http://127.0.0.1:80'
     static sessionIdKey = 'sessionId'
 
     static async getQuizGameState(): Promise<void> {
