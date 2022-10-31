@@ -1,22 +1,24 @@
 {
   "files": {
-    "main.css": "./static/css/main.ff98f739.chunk.css",
-    "main.js": "./static/js/main.4fec97ff.chunk.js",
-    "main.js.map": "./static/js/main.4fec97ff.chunk.js.map",
+    "main.css": "./static/css/main.cd7a3384.chunk.css",
+    "main.js": "./static/js/main.5c52a133.chunk.js",
+    "main.js.map": "./static/js/main.5c52a133.chunk.js.map",
     "runtime-main.js": "./static/js/runtime-main.fbe127ff.js",
     "runtime-main.js.map": "./static/js/runtime-main.fbe127ff.js.map",
-    "static/js/2.6b33f153.chunk.js": "./static/js/2.6b33f153.chunk.js",
-    "static/js/2.6b33f153.chunk.js.map": "./static/js/2.6b33f153.chunk.js.map",
+    "static/js/2.d3d967fc.chunk.js": "./static/js/2.d3d967fc.chunk.js",
+    "static/js/2.d3d967fc.chunk.js.map": "./static/js/2.d3d967fc.chunk.js.map",
     "static/js/3.8d7461d8.chunk.js": "./static/js/3.8d7461d8.chunk.js",
     "static/js/3.8d7461d8.chunk.js.map": "./static/js/3.8d7461d8.chunk.js.map",
     "index.html": "./index.html",
-    "static/css/main.ff98f739.chunk.css.map": "./static/css/main.ff98f739.chunk.css.map",
-    "static/js/2.6b33f153.chunk.js.LICENSE.txt": "./static/js/2.6b33f153.chunk.js.LICENSE.txt"
+    "static/css/main.cd7a3384.chunk.css.map": "./static/css/main.cd7a3384.chunk.css.map",
+    "static/js/2.d3d967fc.chunk.js.LICENSE.txt": "./static/js/2.d3d967fc.chunk.js.LICENSE.txt",
+    "static/media/geekonomy-logo-long.c1ea5f56.svg": "./static/media/geekonomy-logo-long.c1ea5f56.svg",
+    "static/media/score-icon.2d06fc3a.svg": "./static/media/score-icon.2d06fc3a.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.fbe127ff.js",
-    "static/js/2.6b33f153.chunk.js",
-    "static/css/main.ff98f739.chunk.css",
-    "static/js/main.4fec97ff.chunk.js"
+    "static/js/2.d3d967fc.chunk.js",
+    "static/css/main.cd7a3384.chunk.css",
+    "static/js/main.5c52a133.chunk.js"
   ]
 }
