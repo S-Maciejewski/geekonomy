@@ -8,7 +8,6 @@ import {Engine} from "../services/Engine";
 import {ScoreIndicator} from "../components/ScoreIndicator/ScoreIndicator";
 import {Loading} from "../components/Loading/Loading";
 import styles from './Game.module.scss'
-import {ServerAddress} from "../components/ServerAddress/ServerAddress";
 import {LanguagePicker} from "../components/LanguagePicker/LanguagePicker";
 
 

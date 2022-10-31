@@ -17,11 +17,13 @@ export const LanguagePicker: React.FC = () => {
     const supportedLanguages = [
         {
             code: 'en',
-            icon: '🇬🇧'
+            icon: '🇬🇧',
+            className: styles["flag:GB"],
         },
         {
             code: 'pl',
-            icon: '🇵🇱'
+            icon: '🇵🇱',
+            className: styles["flag:PL"],
         }
     ]
 
@@ -33,13 +35,17 @@ export const LanguagePicker: React.FC = () => {
                     value={normalizeLanguage(i18n.language)}
                     label={t('language')}
                     onChange={(value) => handleChange(value)}
+                    className={styles.select}
                 >
                     {
                         supportedLanguages.map(language =>
                             <MenuItem value={language.code}>
-                                <span className={styles.flagEmoji}>
-                                    {language.icon}
-                                </span>
+                                <div className={styles.flagEmoji}>
+                                    {/*Language icon is problematic - doesn't work on most browsers including Chrome
+                                    That's why I'm using flags from https://unpkg.com/country-flag-icons@1.5.5/3x2/flags.css
+                                    to avoid installing this package: https://www.npmjs.com/package/country-flag-icons*/}
+                                    <div className={language.className}/>
+                                </div>
                             </MenuItem>
                         )
                     }
