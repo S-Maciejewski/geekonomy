@@ -3,3 +3,4 @@ quiz_data
 # database.ini
 ignored
 .env
+certbot
