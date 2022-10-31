@@ -1,18 +1,28 @@
-.bottomContainer {
+.controlsContainer {
   width: 100%;
   display: grid;
   -webkit-align-items: center;
   align-items: center;
-  margin: 20px 0 20px 0;
+  margin: 0px 0 20px 0;
 
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1.2fr 0.8fr;
   grid-template-areas:
           ". rightSide"
           ". rightSide";
+
   .rightSide {
     grid-area: rightSide;
     display: flex;
     align-items: center;
+    justify-content: end;
+
+    .logo {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px 10px 0px 10px;
+    }
   }
 }
