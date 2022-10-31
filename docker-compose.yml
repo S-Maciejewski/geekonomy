@@ -24,3 +24,11 @@ services:
       - REACT_APP_API_URL=${REACT_APP_API_URL}
     ports:
       - 80:80
+      - 443:443
+    volumes:
+      - ./certbot/www:/var/www/certbot/:ro
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
