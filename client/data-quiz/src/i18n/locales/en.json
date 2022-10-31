@@ -275,5 +275,6 @@
   "score": "Score",
   "score.correct": "Your answer was correct!",
   "score.incorrect.1": "You were incorrect, the country in question was",
-  "score.incorrect.2": "- your answer was"
+  "score.incorrect.2": "- your answer was",
+  "help": "Help"
 }
