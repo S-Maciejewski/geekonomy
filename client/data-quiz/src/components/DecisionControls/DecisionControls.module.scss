@@ -26,3 +26,11 @@
   width: 40px;
   height: 100%;
 }
+
+.correctAnswer {
+  background-color: lightgreen !important;
+}
+
+.incorrectAnswer {
+  background-color: lightcoral !important;
+}

@@ -44,12 +44,13 @@ export const GameView: React.FC = () => {
 
                     <div className={styles.rightSide}>
                         {/*TODO: Help button modal*/}
-                        {/*<HelpButton/>*/}
+                        <HelpButton/>
                         <LanguagePicker/>
                         <img src={GeekonomyLogo} alt="Geekonomy logo" className={styles.logo}/>
                     </div>
                     <div>
-                        <DecisionControls quizStatus={state.quizStatus} countries={state.countries}/>
+                        <DecisionControls quizStatus={state.quizStatus} countries={state.countries}
+                                          lastAnswer={state.lastAnswer}/>
                     </div>
                     <div>
                         <ScoreIndicator quizStatus={state.quizStatus} score={state.score}

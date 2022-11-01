@@ -14,7 +14,7 @@ const prettyPrint = (lastAnswer: LastAnswer, t: Function) => {
     return lastAnswer.correct ?
         <span>{t('score.correct')}</span> :
         <span>{t('score.incorrect.1')} <b>{t(`country.${lastAnswer.correctCountry}`)}</b> {t('score.incorrect.2')}
-            <i>{t(`country.${lastAnswer.country}`)}</i></span>
+            <i> {t(`country.${lastAnswer.country}`)}</i></span>
 }
 
 export const ScoreIndicator: React.FC<ScoreProps> = ({score, lastAnswer, quizStatus}) => {
