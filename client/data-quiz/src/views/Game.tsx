@@ -10,11 +10,11 @@ import {Loading} from "../components/Loading/Loading";
 import styles from './Game.module.scss'
 import {LanguagePicker} from "../components/LanguagePicker/LanguagePicker";
 import GeekonomyLogo from "../assets/geekonomy-logo-long.svg";
-import {HelpButton} from "../components/HelpButton/HelpButton";
+import {HelpModal} from "../components/HelpModal/HelpModal";
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
-    const [loading, setLoading] = useState<Boolean>(true)
+    const [loading, setLoading] = useState<boolean>(true)
 
 
     useEffect(() => {
@@ -43,8 +43,7 @@ export const GameView: React.FC = () => {
                 <div className={styles.controlsContainer}>
 
                     <div className={styles.rightSide}>
-                        {/*TODO: Help button modal*/}
-                        <HelpButton/>
+                        <HelpModal/>
                         <LanguagePicker/>
                         <img src={GeekonomyLogo} alt="Geekonomy logo" className={styles.logo}/>
                     </div>

@@ -1,0 +1,31 @@
+.container {
+  margin: 0 10px 0 10px;
+}
+
+.helpButton {
+  .icon {
+    fill: white;
+    margin-left: 8px;
+  }
+}
+
+.modalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  svg {
+    margin: 0 4px 0 4px;
+  }
+}
+
+.envelopeIcon {
+  margin-bottom: -3px !important;
+}
+
+.copyright {
+  font-weight: bold;
+}
