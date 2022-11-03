@@ -278,16 +278,16 @@
   "score.incorrect.2": "- twoja odpowiedź to",
   "help": {
     "button": "Pomoc",
-    "section-1-title": "What is this?",
-    "section-1-paragraph-1": "Geekonomy is a simple macroeconomic quiz game. It is a fun way to learn about the global economy.",
-    "section-1-paragraph-2": "I believe that data tells a story. I want to help you develop an instinct for understanding how macroeconomics works. Whether you are an investor, a student, or a curious citizen, I hope you will enjoy this game and learn something new.",
-    "section-2-title": "How to play?",
-    "section-2-paragraph-1": "You are presented with a set of metrics about a country - thinks like GDP, population, unemployment rate, etc. Your task is to guess which country is it. You can choose from a list of 4 countries.",
-    "section-2-paragraph-2": "Take your time, analyze the data and make your choice. You get points for each correct guess but lose them all if you're wrong.",
-    "section-3-title": "More information",
-    "section-3-paragraph-1": "The heuristic algorithm behind the game is designed to choose sets of metrics and countries that make guessing an interesting exercise but it's not perfect. The game is designed to be challenging, but not frustrating.",
-    "section-3-paragraph-2": "The data you see might be incomplete or inaccurate but that's the reality of working with macroeconomic data. All of our data is sourced from the World Bank and the International Monetary Fund.",
-    "section-3-contact": "I am always looking for ways to improve the game. If you have any suggestions, please contact me",
-    "section-3-oss": "The project is open source - you can find the code and contribute on"
+    "section-1-title": "Co to jest?",
+    "section-1-paragraph-1": "Geekonomy to gra w zgadywanie danych makroekonomicznych. To sposób na przyjemną naukę i wyrobienie ekonomicznej intuicji.",
+    "section-1-paragraph-2": "Wierzę, że dane potrafią opowiedziec historię. Chcę pomóc rozwinąć twój zmysł ekonomiczny i zrozumieć otaczający cię świat makroekonomii. Niezależnie od tego, czy jesteś inwestorem, studentem, czy ciekawskim obywatelem, mam nadzieję, że z przyjemnością nauczysz się czegoś nowego.",
+    "section-2-title": "Jak grać?",
+    "section-2-paragraph-1": "Widzisz przed sobą dane o metrykach dla pewnego kraju - takich jak PKB, liczebność populacji, bezrobocie itd. Twoje zadanie to zgadnąć który z 4 krajów lub regionów reprezentują te dane.",
+    "section-2-paragraph-2": "Daj sobie czas, przeanalizuj dane i dokonaj wyboru. Otrzymujesz punkty za poprawne odgadnięcie ale tracisz je wszystkie kiedy popełnisz błąd.",
+    "section-3-title": "Więcej informacji",
+    "section-3-paragraph-1": "Algorytm heurystyczny generowania quizów jest zaprojektowany tak, żeby wybierać zbiory metryk i krajów, które sprawią, że odgadywanie będzie interesującym ćwiczeniem jednak nie jest on idealny. Gra ma być wyzwaniem ale nie ma być frustrująca.",
+    "section-3-paragraph-2": "Dane, które zobaczysz mogą być niekompletne lub niedokładne ale taka jest rzeczywistość pracy z danymi makroekonomicznymi. Wszystkie nasze dane pochodzą z Banku Światowego i Międzynarodowego Funduszu Walutowego.",
+    "section-3-contact": "Zawsze szukam sposobów na udoskonalenie tej gry. Jeśli masz pytania lub sugestie, napisz do mnie",
+    "section-3-oss": "Projekt jest otwartoźródłowy - możesz znaleźć kod i zaproponować zmiany na"
   }
 }
