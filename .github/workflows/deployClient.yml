@@ -1,54 +1,56 @@
-name: Build and deploy client on push to master
 
-on:
-  push:
-    branches: [ main ]
-    paths:
-      - 'client/**'
+# # Workflow disabled for now as GH pages is not used anymore
+# name: Build and deploy client on push to master
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      CI: '' # TODO remove before proceeding to production
+# on:
+#   push:
+#     branches: [ main ]
+#     paths:
+#       - 'client/**'
 
-    steps:
-      - uses: actions/checkout@v2
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+#     env:
+#       CI: '' # TODO remove before proceeding to production
 
-      - name: Setup Node
-        uses: actions/setup-node@v1
-        with:
-          node-version: "16.x"
+#     steps:
+#       - uses: actions/checkout@v2
 
-      - name: Install and rebuild dependencies
-        working-directory: ./client/data-quiz
-        run: |
-          npm install
-          npm rebuild node-sass
+#       - name: Setup Node
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: "16.x"
 
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+#       - name: Install and rebuild dependencies
+#         working-directory: ./client/data-quiz
+#         run: |
+#           npm install
+#           npm rebuild node-sass
 
-      - name: Build
-        working-directory: ./client/data-quiz
-        run: npm run build
-        env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+#       - name: Cache dependencies
+#         uses: actions/cache@v2
+#         with:
+#           path: ~/.npm
+#           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+#           restore-keys: |
+#             ${{ runner.os }}-node-
 
-      - name: Handle 404 fallback
-        working-directory: ./client/data-quiz
-        run: cp ./build/index.html ./build/404.html
+#       - name: Build
+#         working-directory: ./client/data-quiz
+#         run: npm run build
+#         env:
+#           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: pages
-          FOLDER: client/data-quiz/build
-          CLEAN: true
+#       - name: Handle 404 fallback
+#         working-directory: ./client/data-quiz
+#         run: cp ./build/index.html ./build/404.html
+
+#       - name: Deploy
+#         uses: JamesIves/github-pages-deploy-action@4.1.5
+#         with:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           BRANCH: pages
+#           FOLDER: client/data-quiz/build
+#           CLEAN: true
 
