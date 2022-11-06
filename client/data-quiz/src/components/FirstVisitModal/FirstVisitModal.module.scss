@@ -1,0 +1,33 @@
+.modalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+
+  svg {
+    margin: 0 4px 0 4px;
+  }
+}
+
+// for screens lower than 500px introduce fixed height and scroll
+@media screen and (max-height: 500px) {
+  .modalBox {
+    width: 80%;
+    height: 80%;
+  }
+}
+
+.cookiesNotice {
+  border: 1px solid gray;
+  border-radius: 8px;
+  background-color: lightgray;
+  padding: 10px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.closeButton{
+  margin-top: 10px !important;
+  border: 1px solid gray !important;
+}

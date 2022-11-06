@@ -279,7 +279,7 @@
   "help": {
     "button": "Pomoc",
     "section-1-title": "Co to jest?",
-    "section-1-paragraph-1": "Geekonomy to gra w zgadywanie danych makroekonomicznych. To sposób na przyjemną naukę i wyrobienie ekonomicznej intuicji.",
+    "section-1-paragraph-1": "Geekonomy to gra polegająca na zgadywaniu danych makroekonomicznych. To sposób na przyjemną naukę i wyrobienie ekonomicznej intuicji.",
     "section-1-paragraph-2": "Wierzę, że dane potrafią opowiedziec historię. Chcę pomóc rozwinąć twój zmysł ekonomiczny i zrozumieć otaczający cię świat makroekonomii. Niezależnie od tego, czy jesteś inwestorem, studentem, czy ciekawskim obywatelem, mam nadzieję, że z przyjemnością nauczysz się czegoś nowego.",
     "section-2-title": "Jak grać?",
     "section-2-paragraph-1": "Widzisz przed sobą dane o metrykach dla pewnego kraju - takich jak PKB, liczebność populacji, bezrobocie itd. Twoje zadanie to zgadnąć który z 4 krajów lub regionów reprezentują te dane.",
@@ -288,6 +288,8 @@
     "section-3-paragraph-1": "Algorytm heurystyczny generowania quizów jest zaprojektowany tak, żeby wybierać zbiory metryk i krajów, które sprawią, że odgadywanie będzie interesującym ćwiczeniem jednak nie jest on idealny. Gra ma być wyzwaniem ale nie ma być frustrująca.",
     "section-3-paragraph-2": "Dane, które zobaczysz mogą być niekompletne lub niedokładne ale taka jest rzeczywistość pracy z danymi makroekonomicznymi. Wszystkie nasze dane pochodzą z Banku Światowego i Międzynarodowego Funduszu Walutowego.",
     "section-3-contact": "Zawsze szukam sposobów na udoskonalenie tej gry. Jeśli masz pytania lub sugestie, napisz do mnie",
-    "section-3-oss": "Projekt jest otwartoźródłowy - możesz znaleźć kod i zaproponować zmiany na"
+    "section-3-oss": "Projekt jest otwartoźródłowy - możesz znaleźć kod i zaproponować zmiany na",
+    "cookies-notice": "Ta strona używa ciasteczek aby przechowywać dane o sesji gry w twojej przeglądarce. Korzystając ze strony zgadzasz się na wykorzystanie ciasteczek.",
+    "close": "Zamknij i nie pokazuj tego więcej"
   }
 }

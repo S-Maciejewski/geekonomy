@@ -288,6 +288,8 @@
     "section-3-paragraph-1": "The heuristic algorithm behind the game is designed to choose sets of metrics and countries that make guessing an interesting exercise but it's not perfect. The game is designed to be challenging, but not frustrating.",
     "section-3-paragraph-2": "The data you see might be incomplete or inaccurate but that's the reality of working with macroeconomic data. All of our data is sourced from the World Bank and the International Monetary Fund.",
     "section-3-contact": "I am always looking for ways to improve the game. If you have any suggestions, please contact me",
-    "section-3-oss": "The project is open source - you can find the code and contribute on"
+    "section-3-oss": "The project is open source - you can find the code and contribute on",
+    "cookies-notice": "This website uses cookies to store data about your game session in your browser. By using this website you agree to the use of cookies.",
+    "close": "Close and don't show this again"
   }
 }
