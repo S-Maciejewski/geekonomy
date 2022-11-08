@@ -25,12 +25,12 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
         }
     }
 
-
+    // Country names length vary from 4 to 30 characters for ENG (VCT) and 33 characters for PL (STP)
     return (
         <div className={styles.container}>
             <div className={styles.decisionControls}>
                 <div className={styles.loadingIndicatorContainer}>
-                    {controlsDisabledForLoading() && <CircularProgress size={25} className={styles.circularProgress}/>}
+                    {controlsDisabledForLoading() && <CircularProgress size={25}/>}
                 </div>
                 <Button disabled={controlsDisabledForLoading() || quizStatus !== QuizStatus.QUIZ_ANSWERED}
                         onClick={() => {
@@ -46,6 +46,9 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
                                     onClick={() => Engine.handleAnswer(country)}
                                     className={getStyle(quizStatus, country)}>
                                 {t(`country.${country}`)}
+
+                                {/*{t(`country.STP`)}*/}
+                                {/*{t(`country.VCT`)}*/}
                             </Button>
                         </div>
                     )

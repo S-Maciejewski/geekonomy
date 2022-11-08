@@ -2,19 +2,32 @@
   width: 100%;
   display: flex;
   flex: 1 1 auto;
+  margin-top: 8px;
 }
 
 .score {
-  width: 100px;
+  width: 120px;
   display: inline-block;
   margin-left: 60px;
+  border: 2px solid gold;
+  padding: 4px;
+  border-radius: 4px;
+  font-weight: 500;
 
   .scoreIcon {
     margin-right: 8px;
   }
 }
 
-.answer {
-  width: calc(100% - 80px);
-  display: inline-block;
+.textExplanation {
+  margin-left: 8px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  div {
+    height: 1.5em;
+    margin-top: 4px;
+    display: inline-block;
+  }
 }

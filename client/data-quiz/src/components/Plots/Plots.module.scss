@@ -11,5 +11,5 @@
   display: grid;
   -webkit-align-items: center;
   align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(calc(max(700px, 100% / 2)), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(calc(max(600px, 100% / 2)), 1fr));
 }

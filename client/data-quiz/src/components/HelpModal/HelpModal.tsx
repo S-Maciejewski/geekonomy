@@ -25,11 +25,8 @@ export const HelpModal: React.FC = () => {
 
     return (
         <div className={styles.container}>
-            <Button onClick={() => handleOpen()} variant="contained" className={styles.helpButton}>
-                    <span>
-                        {t('help.button')}
-                    </span>
-                <QuestionCircleIcon className={styles.icon}/>
+            <Button onClick={() => handleOpen()} variant="contained" endIcon={<QuestionCircleIcon/>}>
+                {t('help.button')}
             </Button>
             <Modal
                 open={open}

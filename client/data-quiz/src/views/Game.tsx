@@ -11,7 +11,7 @@ import styles from './Game.module.scss'
 import {LanguagePicker} from "../components/LanguagePicker/LanguagePicker";
 import GeekonomyLogo from "../assets/geekonomy-logo-long.svg";
 import {HelpModal} from "../components/HelpModal/HelpModal";
-import { FirstVisitModal } from "../components/FirstVisitModal/FirstVisitModal";
+import {FirstVisitModal} from "../components/FirstVisitModal/FirstVisitModal";
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
@@ -43,7 +43,6 @@ export const GameView: React.FC = () => {
             {loading && <Loading/>}
             {!loading && <>
                 <div className={styles.controlsContainer}>
-
                     <div className={styles.rightSide}>
                         <HelpModal/>
                         <LanguagePicker/>
