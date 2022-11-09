@@ -41,19 +41,19 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
 
                 </Button>
                 {
-                    // countries.map(country =>
-                    //     <div className={styles.button}>
-                    //         <Button disabled={controlsDisabledForLoading() || quizStatus !== QuizStatus.FRESH_QUIZ}
-                    //                 variant="contained"
-                    //                 onClick={() => Engine.handleAnswer(country)}
-                    //                 className={getStyle(quizStatus, country)}>
-                    //             {t(`country.${country}`)}
-                    //
-                    //             {/*{t(`country.STP`)}*/}
-                    //             {/*{t(`country.VCT`)}*/}
-                    //         </Button>
-                    //     </div>
-                    // )
+                    countries.map(country =>
+                        <div className={styles.button}>
+                            <Button disabled={controlsDisabledForLoading() || quizStatus !== QuizStatus.FRESH_QUIZ}
+                                    variant="contained"
+                                    onClick={() => Engine.handleAnswer(country)}
+                                    className={getStyle(quizStatus, country)}>
+                                {t(`country.${country}`)}
+
+                                {/*{t(`country.STP`)}*/}
+                                {/*{t(`country.VCT`)}*/}
+                            </Button>
+                        </div>
+                    )
                 }
             </div>
         </div>
