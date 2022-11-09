@@ -2,19 +2,40 @@
   width: 100%;
   display: flex;
   flex: 1 1 auto;
-}
+  margin-top: 8px;
 
-.score {
-  width: 100px;
-  display: inline-block;
-  margin-left: 60px;
+  .score {
+    width: 120px !important;
+    min-width: 120px;
+    display: inline-block;
+    margin-left: 56px;
+    white-space: nowrap;
+    border: 2px solid gold;
+    padding: 4px;
+    border-radius: 4px;
+    font-weight: 500;
+    height: 1.5em;
 
-  .scoreIcon {
+    .scoreIcon {
+      margin-right: 8px;
+    }
+  }
+
+  .textExplanation {
+    white-space: normal;
+    margin-left: 8px;
     margin-right: 8px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: auto;
+
+    div {
+      margin-top: 4px;
+      display: inline-block;
+      height: auto;
+    }
   }
 }
 
-.answer {
-  width: calc(100% - 80px);
-  display: inline-block;
-}
+

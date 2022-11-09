@@ -6,10 +6,22 @@
   width: 100%;
 }
 
-.plots {
-  width: 100%;
-  display: grid;
-  -webkit-align-items: center;
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
+@media (min-width: 600px) {
+  .plots {
+    width: 100%;
+    display: grid;
+    -webkit-align-items: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(calc(max(590px, 100% / 2)), 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .plots {
+    width: 100%;
+    display: grid;
+    -webkit-align-items: center;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(calc(100%), 1fr));
+  }
 }

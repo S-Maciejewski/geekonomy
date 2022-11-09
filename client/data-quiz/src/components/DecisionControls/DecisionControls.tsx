@@ -4,6 +4,7 @@ import {Country, LastAnswer, QuizStatus} from "../../model";
 import styles from './DecisionControls.module.scss'
 import {Engine} from "../../services/Engine";
 import {useTranslation} from "react-i18next";
+import {ReactComponent as FastForwardFillIcon} from "../../assets/fast-forward-fill.svg";
 
 export interface ControlsProps {
     countries: Country[]
@@ -25,18 +26,19 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
         }
     }
 
-
+    // Country names length vary from 4 to 30 characters for ENG (VCT) and 33 characters for PL (STP)
     return (
         <div className={styles.container}>
             <div className={styles.decisionControls}>
                 <div className={styles.loadingIndicatorContainer}>
-                    {controlsDisabledForLoading() && <CircularProgress size={25} className={styles.circularProgress}/>}
+                    {controlsDisabledForLoading() && <CircularProgress size={25}/>}
                 </div>
                 <Button disabled={controlsDisabledForLoading() || quizStatus !== QuizStatus.QUIZ_ANSWERED}
                         onClick={() => {
                             Engine.getGameState()
-                        }} variant={'contained'} className={styles.nextQuiz}>
-                    {t('controls.next_quiz')}
+                        }} variant={'contained'} className={styles.nextQuiz} startIcon={<FastForwardFillIcon/>}>
+                    <span className={styles.nextQuizText}>{t('controls.next_quiz')}</span>
+
                 </Button>
                 {
                     countries.map(country =>
@@ -46,6 +48,9 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
                                     onClick={() => Engine.handleAnswer(country)}
                                     className={getStyle(quizStatus, country)}>
                                 {t(`country.${country}`)}
+
+                                {/*{t(`country.STP`)}*/}
+                                {/*{t(`country.VCT`)}*/}
                             </Button>
                         </div>
                     )

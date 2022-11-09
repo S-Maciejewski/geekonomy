@@ -1,28 +1,91 @@
-.controlsContainer {
-  width: 100%;
-  display: grid;
-  -webkit-align-items: center;
+.languageAndHelpRow {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
   align-items: center;
-  margin: 10px 0 20px 0;
+}
 
-  grid-template-rows: 1fr 1fr;
-  grid-template-columns: 1.2fr 0.8fr;
-  grid-template-areas:
+
+@media (min-width: 1180px) {
+  .controlsContainer {
+    width: 100%;
+    display: grid;
+    -webkit-align-items: center;
+    align-items: center;
+    margin: 10px 0 20px 0;
+
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-areas:
           ". rightSide"
           ". rightSide";
 
-  .rightSide {
-    grid-area: rightSide;
-    display: flex;
-    align-items: center;
-    justify-content: end;
-
-    .logo {
-      width: 50%;
+    .rightSide {
+      grid-area: rightSide;
       display: flex;
-      justify-content: center;
+      flex-direction: row-reverse;
       align-items: center;
-      margin: 0px 10px 0px 10px;
+      justify-content: end;
+
+      .logo {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px 10px 0px 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 600px) {
+  .controlsContainer {
+    width: 100%;
+    margin-bottom: 10px;
+
+    .rightSide {
+      grid-area: rightSide;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      margin-bottom: 10px;
+      min-height: 56px !important;
+
+      .logo {
+        width: 50%;
+        min-width: 358px;
+        max-width: 440px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0px 10px 0px 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .controlsContainer {
+    width: 100%;
+    margin-bottom: 10px;
+
+    .rightSide {
+      grid-area: rightSide;
+      align-items: center;
+      margin-bottom: 10px;
+      min-height: 56px !important;
+
+      .languageAndHelpRow {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo {
+        width: 100%;
+      }
     }
   }
 }

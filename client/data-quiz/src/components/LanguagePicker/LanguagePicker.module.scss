@@ -1,8 +1,9 @@
 .container {
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 80px;
+
+  & > div > div {
+    height: 40px;
+  }
 }
 
 .select > div {

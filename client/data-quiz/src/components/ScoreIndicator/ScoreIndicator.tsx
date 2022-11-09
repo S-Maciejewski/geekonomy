@@ -3,6 +3,7 @@ import {LastAnswer, QuizStatus} from "../../model";
 import styles from './ScoreIndicator.module.scss'
 import {useTranslation} from "react-i18next";
 import ScoreIconSvg from "../../assets/score-icon.svg";
+import {Box} from "@mui/material";
 
 export interface ScoreProps {
     score: number
@@ -22,15 +23,16 @@ export const ScoreIndicator: React.FC<ScoreProps> = ({score, lastAnswer, quizSta
 
     return (
         <div className={styles.container}>
-            <div className={styles.score}>
+            <Box sx={{boxShadow: 5}} className={styles.score}>
                 <span>
                     <img src={ScoreIconSvg} alt="" className={styles.scoreIcon}/>
-                    {t('score')}: <b>{score}</b></span>
-            </div>
-            <div>
+                    {t('score')}: <b>{score}</b>
+                </span>
+            </Box>
+            <div className={styles.textExplanation}>
                 {
                     lastAnswer && quizStatus === QuizStatus.QUIZ_ANSWERED &&
-                    <span>{prettyPrint(lastAnswer, t)}</span>
+                    <div>{prettyPrint(lastAnswer, t)}</div>
                 }
             </div>
         </div>)
