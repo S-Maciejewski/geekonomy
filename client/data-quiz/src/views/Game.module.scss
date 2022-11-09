@@ -1,3 +1,11 @@
+.languageAndHelpRow {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
 @media (min-width: 1180px) {
   .controlsContainer {
     width: 100%;
@@ -30,8 +38,7 @@
   }
 }
 
-//@media (min-width: 768px) and (max-width: 1180px) {
-@media (max-width: 1180px) {
+@media (max-width: 1180px) and (min-width: 600px) {
   .controlsContainer {
     width: 100%;
     margin-bottom: 10px;
@@ -39,7 +46,6 @@
     .rightSide {
       grid-area: rightSide;
       display: flex;
-      //justify-content: space-evenly;
       flex-direction: row-reverse;
       align-items: center;
       margin-bottom: 10px;
@@ -53,6 +59,32 @@
         justify-content: center;
         align-items: center;
         margin: 0px 10px 0px 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .controlsContainer {
+    width: 100%;
+    margin-bottom: 10px;
+
+    .rightSide {
+      grid-area: rightSide;
+      align-items: center;
+      margin-bottom: 10px;
+      min-height: 56px !important;
+
+      .languageAndHelpRow {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+      }
+
+      .logo {
+        width: 100%;
       }
     }
   }
