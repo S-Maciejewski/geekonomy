@@ -44,9 +44,9 @@ export const GameView: React.FC = () => {
             {!loading && <>
                 <div className={styles.controlsContainer}>
                     <div className={styles.rightSide}>
-                        <HelpModal/>
-                        <LanguagePicker/>
                         <img src={GeekonomyLogo} alt="Geekonomy logo" className={styles.logo}/>
+                        <LanguagePicker/>
+                        <HelpModal/>
                     </div>
                     <div>
                         <DecisionControls quizStatus={state.quizStatus} countries={state.countries}

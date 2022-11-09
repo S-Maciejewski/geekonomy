@@ -4,6 +4,7 @@ import {Country, LastAnswer, QuizStatus} from "../../model";
 import styles from './DecisionControls.module.scss'
 import {Engine} from "../../services/Engine";
 import {useTranslation} from "react-i18next";
+import {ReactComponent as FastForwardFillIcon} from "../../assets/fast-forward-fill.svg";
 
 export interface ControlsProps {
     countries: Country[]
@@ -35,8 +36,9 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
                 <Button disabled={controlsDisabledForLoading() || quizStatus !== QuizStatus.QUIZ_ANSWERED}
                         onClick={() => {
                             Engine.getGameState()
-                        }} variant={'contained'} className={styles.nextQuiz}>
-                    {t('controls.next_quiz')}
+                        }} variant={'contained'} className={styles.nextQuiz} startIcon={<FastForwardFillIcon/>}>
+                    <span className={styles.nextQuizText}>{t('controls.next_quiz')}</span>
+
                 </Button>
                 {
                     countries.map(country =>

@@ -1,9 +1,23 @@
-.container {
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+@media (min-width: 1180px) {
+  .container {
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
+@media (max-width: 1180px) {
+  .container {
+    width: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > div > div {
+      height: 40px;
+    }
+  }
+}
+
 
 .select > div {
   display: flex;

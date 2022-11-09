@@ -23,7 +23,7 @@ export const ScoreIndicator: React.FC<ScoreProps> = ({score, lastAnswer, quizSta
 
     return (
         <div className={styles.container}>
-            <Box sx={{boxShadow: 10}} className={styles.score}>
+            <Box sx={{boxShadow: 5}} className={styles.score}>
                 <span>
                     <img src={ScoreIconSvg} alt="" className={styles.scoreIcon}/>
                     {t('score')}: <b>{score}</b>

@@ -20,6 +20,17 @@
 .nextQuiz {
   margin-right: 16px !important;
 }
+@media (max-width: 1180px) {
+  .nextQuiz {
+    margin-right: 16px !important;
+    & > span {
+      margin: 0 !important;
+    }
+    .nextQuizText {
+      display: none;
+    }
+  }
+}
 
 .loadingIndicatorContainer {
   width: 40px;
