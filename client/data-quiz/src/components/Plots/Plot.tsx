@@ -22,10 +22,10 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
             type: 'line',
             color: indicator.country === lastAnswer.correctCountry ? '#006ABD' : undefined,
             lineWidth: indicator.country === lastAnswer.correctCountry ? 2 : 1,
-        marker: {
-            enabled: indicator.country === lastAnswer?.correctCountry,
-            symbol: 'circle',
-        }
+            marker: {
+                enabled: indicator.country === lastAnswer?.correctCountry,
+                symbol: 'circle',
+            }
         })) :
         [
             {
@@ -41,6 +41,7 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
             }
         ]
 
+    // TODO: Better formatter for yAxis labels (tys, mln, bln etc.) https://api.highcharts.com/highcharts/yAxis.labels.formatter
     const highchartsOptions: Highcharts.Options = {
         title: {
             text: t(`indicator.${countriesData[0].indicator}`)
@@ -49,6 +50,11 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
         series: series,
         legend: {
             enabled: false
+        },
+        yAxis: {
+            title: {
+                text: undefined,
+            }
         },
         ...options
     }

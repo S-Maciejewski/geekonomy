@@ -38,7 +38,6 @@ export const DecisionControls: React.FC<ControlsProps> = ({countries, lastAnswer
                             Engine.getGameState()
                         }} variant={'contained'} className={styles.nextQuiz} startIcon={<FastForwardFillIcon/>}>
                     <span className={styles.nextQuizText}>{t('controls.next_quiz')}</span>
-
                 </Button>
                 {
                     countries.map(country =>

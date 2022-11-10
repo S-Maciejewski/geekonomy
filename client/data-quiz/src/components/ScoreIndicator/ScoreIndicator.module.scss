@@ -38,4 +38,13 @@
   }
 }
 
+@media (max-width: 600px) {
+  .container {
+    display: block;
+
+    .score {
+      margin-left: 0;
+    }
+  }
+}
 

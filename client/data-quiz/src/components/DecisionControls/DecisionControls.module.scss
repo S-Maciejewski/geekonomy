@@ -1,47 +1,70 @@
 .container {
   width: 100%;
-}
 
-.button {
-  padding: 4px;
-  button {
-    font-size: 0.775rem;
-    line-height: 1.45;
+  .decisionControls {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .loadingIndicatorContainer {
+      width: 40px;
+      height: 100%;
+      margin-right: 10px;
+    }
+
+    .nextQuiz {
+      margin-right: 16px !important;
+    }
+
+    .button {
+      padding: 4px;
+
+      .correctAnswer {
+        background-color: lightgreen !important;
+      }
+
+      .incorrectAnswer {
+        background-color: lightcoral !important;
+      }
+
+      button {
+        font-size: 0.775rem;
+        line-height: 1.45;
+      }
+    }
   }
 }
 
-.decisionControls {
-  margin-left: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-
-.nextQuiz {
-  margin-right: 16px !important;
-}
 @media (max-width: 1180px) {
   .nextQuiz {
-    margin-right: 16px !important;
     & > span {
       margin: 0 !important;
     }
+
     .nextQuizText {
       display: none;
     }
   }
 }
 
-.loadingIndicatorContainer {
-  width: 40px;
-  height: 100%;
-  margin-right: 10px;
-}
+@media (max-width: 600px) {
+  .container {
+    .decisionControls {
+      flex-direction: column;
+      margin-left: 0;
+      .loadingIndicatorContainer {
+        width: 40px;
+        height: 100%;
+        margin-right: 0px;
+        display: inline-block;
+      }
 
-.correctAnswer {
-  background-color: lightgreen !important;
-}
 
-.incorrectAnswer {
-  background-color: lightcoral !important;
+      .nextQuiz {
+        margin-right: 0px !important;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }
