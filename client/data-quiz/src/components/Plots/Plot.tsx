@@ -6,6 +6,7 @@ import {StandardProps} from "../types";
 import styles from './Plots.module.scss'
 import {useTranslation} from "react-i18next";
 import {XrangePointOptionsObject} from "highcharts";
+import {getWindowDimensions} from "../../services/utils";
 
 export interface PlotProps {
     countriesData: IndicatorData[]
@@ -15,6 +16,17 @@ export interface PlotProps {
 
 export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, options, lastAnswer}) => {
     const {t} = useTranslation()
+    const {width} = getWindowDimensions()
+
+    const getMarkerRadius = () => {
+        if (width >= 1180) {
+            return 4
+        } else if (width >= 600) {
+            return 3
+        } else {
+            return 2
+        }
+    }
 
     const series = lastAnswer && countriesData.length > 1 ? countriesData.map((indicator: IndicatorData) => ({
             name: t(`country.${indicator.country}`),
@@ -25,6 +37,7 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
             marker: {
                 enabled: indicator.country === lastAnswer?.correctCountry,
                 symbol: 'circle',
+                radius: getMarkerRadius(),
             }
         })) :
         [
@@ -36,7 +49,8 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
                 lineWidth: 2,
                 marker: {
                     enabled: true,
-                    symbol: 'circle'
+                    symbol: 'circle',
+                    radius: getMarkerRadius(),
                 }
             }
         ]
