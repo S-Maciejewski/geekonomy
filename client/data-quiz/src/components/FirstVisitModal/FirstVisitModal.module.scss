@@ -8,26 +8,37 @@
   svg {
     margin: 0 4px 0 4px;
   }
-}
 
-// for screens lower than 500px introduce fixed height and scroll
-@media screen and (max-height: 500px) {
-  .modalBox {
-    width: 80%;
-    height: 80%;
+  .cookiesNotice {
+    border: 1px solid gray;
+    border-radius: 8px;
+    background-color: lightgray;
+    padding: 10px;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .closeButton {
+    margin-top: 10px !important;
+    border: 1px solid gray !important;
   }
 }
 
-.cookiesNotice {
-  border: 1px solid gray;
-  border-radius: 8px;
-  background-color: lightgray;
-  padding: 10px;
-  font-weight: 500;
-  font-style: italic;
+// for screens lower than 600px introduce fixed height and scroll
+@media (max-height: 600px) {
+  .modalBox {
+    width: 80%;
+    height: auto;
+    max-height: 90%;
+    overflow: scroll;
+  }
 }
 
-.closeButton{
-  margin-top: 10px !important;
-  border: 1px solid gray !important;
+@media (max-width: 1000px) {
+  .modalBox {
+    width: 70%;
+    height: auto;
+    max-height: 90%;
+    overflow: scroll;
+  }
 }
