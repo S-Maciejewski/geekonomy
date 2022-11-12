@@ -10,8 +10,11 @@ services:
       - SERVER_ADDRESS=0.0.0.0
       - PORT=80
       - QUIZ_DATA_PATH=/quiz_data
+      - LOGS_PATH=/logs
     volumes:
       - ${QUIZ_REPOSITORY_PATH}:/quiz_data
+      - ${LOGS_PATH}:/logs
+
 
   client:
     depends_on:

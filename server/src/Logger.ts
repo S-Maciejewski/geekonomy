@@ -1,7 +1,8 @@
 import pino from 'pino';
 
-const logFilePath = `./logs/server_${Date.now()}.log`;
-const logger = pino({}, pino.destination(logFilePath));
+const logsPath = process.env.LOGS_PATH || './logs'
+const logFilePath = `${logsPath}/server_${Date.now()}.log`
+const logger = pino({}, pino.destination(logFilePath))
 
 export namespace Logger {
     export const info = (msg: string, ...args: any[]) => {
