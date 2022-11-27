@@ -2,19 +2,23 @@ import {Highscore, UserSession} from "./model";
 import {GameState} from "./GameState";
 import {randomUUID} from "crypto";
 import {Logger} from "./Logger";
+import {deserializeFromFile, serializeToFile} from "./utils";
 
 export class ServerSession {
     CLEANUP_JOB_PERIOD = 60_000
-    SESSION_TIMEOUT_SEC: number
+    CACHING_JOB_PERIOD = 10_000
+    CACHE_FILE_PATH = process.env.CACHE_FILE_PATH || './cache/sessions.json'
+    SESSION_TIMEOUT_SEC = 3_600
     userSessions: UserSession[]
     highscoreList: Highscore[]
 
-    constructor(SESSION_TIMEOUT_SEC: number) {
-        this.SESSION_TIMEOUT_SEC = SESSION_TIMEOUT_SEC
-        this.userSessions = []
+    constructor() {
+        this.SESSION_TIMEOUT_SEC = process.env.SESSION_TIMEOUT_SEC ? parseInt(process.env.SESSION_TIMEOUT_SEC) : this.SESSION_TIMEOUT_SEC
+        this.userSessions = this.getUserSessionsFromCache()
+        Logger.info(`Sessions list initialized - got ${this.userSessions.length} sessions from cache`)
         this.highscoreList = []
-        Logger.info(`Sessions list initialized`)
         this.sessionCleanupJob()
+        this.sessionCachingJob()
     }
 
     private sessionCleanupJob = () => {
@@ -24,6 +28,23 @@ export class ServerSession {
             Logger.info('Removing timed out sessions:', timedOut)
             timedOut.forEach(sessionId => this.deleteSession(sessionId))
         }
+        // TODO: fix problem with server throwing error on startup due to conflict with access to cache file
+        this.serializeSessionsToCache()
+    }
+
+    private sessionCachingJob = () => {
+        setTimeout(this.sessionCachingJob, this.CACHING_JOB_PERIOD)
+        this.serializeSessionsToCache()
+    }
+
+    private serializeSessionsToCache() {
+        serializeToFile(this.CACHE_FILE_PATH, this.userSessions)
+        Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+    }
+
+    private getUserSessionsFromCache(): UserSession[] {
+        const deserializedSessions = deserializeFromFile(this.CACHE_FILE_PATH)
+        return Array.isArray(deserializedSessions) ? deserializedSessions : []
     }
 
     getById(sessionId: string): UserSession {

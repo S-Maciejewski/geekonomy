@@ -13,7 +13,7 @@ server.register(fastifyCors, {
     origin: '*'
 })
 
-const serverSession = new ServerSession(3600)
+const serverSession = new ServerSession()
 const engine = new Engine(4, 4)
 
 const getSession = (request: FastifyRequest): UserSession => {
