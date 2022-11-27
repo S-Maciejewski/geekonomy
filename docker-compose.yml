@@ -11,9 +11,11 @@ services:
       - PORT=80
       - QUIZ_DATA_PATH=/quiz_data
       - LOGS_PATH=/logs
+      - CACHE_FILE_PATH=/cache/sessions.json
     volumes:
       - ${QUIZ_REPOSITORY_PATH}:/quiz_data
       - ${LOGS_PATH}:/logs
+      - ${CACHE_FILE_PATH}:/cache/sessions.json
 
 
   client:
