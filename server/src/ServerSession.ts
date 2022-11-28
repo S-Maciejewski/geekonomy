@@ -28,8 +28,6 @@ export class ServerSession {
             Logger.info('Removing timed out sessions:', timedOut)
             timedOut.forEach(sessionId => this.deleteSession(sessionId))
         }
-        // TODO: fix problem with server throwing error on startup due to conflict with access to cache file
-        this.serializeSessionsToCache()
     }
 
     private sessionCachingJob = () => {
