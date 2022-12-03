@@ -37,7 +37,10 @@ export class ServerSession {
 
     private serializeSessionsToCache() {
         serializeToFile(this.CACHE_FILE_PATH, this.userSessions).then(() => {
-            Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+            if (this.userSessions.length > 0) {
+                // To avoid logging on every caching job even when there are no sessions
+                Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+            }
         })
     }
 
