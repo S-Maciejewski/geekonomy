@@ -9,7 +9,7 @@ describe('main server controller tests', () => {
     const app = fastify().server
 
     beforeEach(() => {
-        serverSession = new ServerSession()
+        serverSession = new ServerSession(true)
         engine = new Engine(4, 4)
     })
 

@@ -12,9 +12,9 @@ export class ServerSession {
     userSessions: UserSession[]
     highscoreList: Highscore[]
 
-    constructor() {
+    constructor(clearUserSessions: boolean = false) {
         this.SESSION_TIMEOUT_SEC = process.env.SESSION_TIMEOUT_SEC ? parseInt(process.env.SESSION_TIMEOUT_SEC) : this.SESSION_TIMEOUT_SEC
-        this.userSessions = this.getUserSessionsFromCache()
+        this.userSessions = clearUserSessions ? [] : this.getUserSessionsFromCache()
         Logger.info(`Sessions list initialized - got ${this.userSessions.length} sessions from cache`)
         this.highscoreList = []
         this.sessionCleanupJob()

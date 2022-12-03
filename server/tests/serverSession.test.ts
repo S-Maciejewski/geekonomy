@@ -6,7 +6,7 @@ describe('server Session tests', () => {
         let serverSession: ServerSession
 
         beforeAll(() => {
-            serverSession = new ServerSession()
+            serverSession = new ServerSession(true)
         })
 
         test('should create user session', async () => {
