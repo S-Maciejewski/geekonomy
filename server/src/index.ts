@@ -48,7 +48,7 @@ server.post('/answer', async (request, reply) => {
         return
     }
     try {
-        const response = await engine.handleAnswer(userSession, answer)
+        const response = engine.handleAnswer(userSession, answer)
         serverSession.handleHighscore(userSession, response.score)
         reply.code(200).send(response)
     } catch (e) {

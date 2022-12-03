@@ -1,7 +1,7 @@
 import {Engine} from "../src/Engine";
 import supertest from "supertest";
 import fastify from "fastify";
-import { ServerSession } from "../src/ServerSession";
+import {ServerSession} from "../src/ServerSession";
 
 describe('main server controller tests', () => {
     let serverSession: ServerSession
@@ -32,6 +32,22 @@ describe('main server controller tests', () => {
             .then(res => {
                 expect(serverSession.userSessions).toHaveLength(1)
                 expect(res.body.sessionId).toEqual(serverSession.userSessions[0].sessionId)
+            })
+    })
+
+    test('/answer should handle a correct answer', async () => {
+        const sessionId = serverSession.createNewSessionAndGetId()
+        const userSession = serverSession.getById(sessionId)
+        await engine.generateQuizData(userSession)
+        const correctCountry = userSession.state.quizData?.correctCountry
+
+        supertest(app)
+            .post('/answer')
+            .send({answer: `${correctCountry}`})
+            .expect(200)
+            .then(res => {
+                expect(res.body.score).toEqual(1)
+                expect(res.body.correctAnswer).toEqual(true)
             })
     })
 })

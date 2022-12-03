@@ -36,13 +36,20 @@ export class ServerSession {
     }
 
     private serializeSessionsToCache() {
-        serializeToFile(this.CACHE_FILE_PATH, this.userSessions)
-        Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+        serializeToFile(this.CACHE_FILE_PATH, this.userSessions).then(() => {
+            Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+        })
     }
 
     private getUserSessionsFromCache(): UserSession[] {
         const deserializedSessions = deserializeFromFile(this.CACHE_FILE_PATH)
-        return Array.isArray(deserializedSessions) ? deserializedSessions : []
+        if (Array.isArray(deserializedSessions)) {
+            for (const session of deserializedSessions) {
+                session.state = Object.assign(new GameState(), session.state)
+            }
+            return deserializedSessions
+        }
+        return []
     }
 
     getById(sessionId: string): UserSession {
