@@ -291,5 +291,8 @@
     "section-3-oss": "The project is open source - you can find the code and contribute on",
     "cookies-notice": "This website uses cookies to store data about your game session in your browser. By using this website you agree to the use of cookies.",
     "close": "Close and don't show this again"
+  },
+  "glossary": {
+    "button": "Glossary"
   }
 }

@@ -1,0 +1,19 @@
+.container {
+  margin: 0 0px 0 10px;
+  button {
+    width: 165px;
+  }
+}
+
+.modalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+  svg {
+    margin: 0 4px 0 4px;
+  }
+}
