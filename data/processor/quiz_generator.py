@@ -9,7 +9,8 @@ from typing import List
 
 from config import config
 
-QUIZ_DIRECTORY_PATH = '../../quiz_data'
+# QUIZ_DIRECTORY_PATH = '../../quiz_data'
+QUIZ_DIRECTORY_PATH = './test_quiz_data'
 
 
 def get_dwh_query_result(cursor, countries: List[str], indicators: List[str]):
@@ -39,6 +40,10 @@ class QuizGenerator:
         with open('./supported_indicators.csv', newline='') as file:
             reader = csv.reader(file)
             self.supported_indicators = [item[0] for item in list(reader)]
+
+        with open('./banned_metric_groups.csv', newline='') as file:
+            reader = csv.reader(file)
+            self.banned_metric_groups = [[metric for metric in group if metric != ''] for group in list(reader)]
 
     def __del__(self):
         self.connection.close()
@@ -81,6 +86,13 @@ class QuizGenerator:
 
         def is_quiz_valid(query_result: List[List[str]]):
             query_df = pd.DataFrame(query_result, columns=['Indicator Code', 'Country Code', 'Year', 'Value'])
+            # check if indicator codes do not belong to banned metric groups
+            for group in self.banned_metric_groups:
+                if set(group).issubset(set(query_df['Indicator Code'])):
+                    print(f'Indicator group {group} found in quiz, skipping {set(query_df["Indicator Code"])}')
+                    return False
+
+            # Check if there aren't too many nulls in the correct country's data
             correct_country_df = query_df[query_df['Country Code'] == correct_country]
             null_values_df = correct_country_df[correct_country_df['Value'].isnull()].groupby('Indicator Code').count()[
                 'Year']
@@ -123,7 +135,7 @@ class QuizGenerator:
 if __name__ == '__main__':
     quiz_generator = QuizGenerator()
 
-    quiz_generator.generate_quiz_files(1000)
+    quiz_generator.generate_quiz_files(5)
 
     # quiz = quiz_generator.get_single_quiz(quiz_generator.get_weighted_random_countries(),
     #                                       quiz_generator.get_random_indicators())
