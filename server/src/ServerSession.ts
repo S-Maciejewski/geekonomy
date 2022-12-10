@@ -11,6 +11,7 @@ export class ServerSession {
     SESSION_TIMEOUT_SEC = 3_600
     userSessions: UserSession[]
     highscoreList: Highscore[]
+    lastCachingSessionCount = 0
 
     constructor(clearUserSessions: boolean = false) {
         this.SESSION_TIMEOUT_SEC = process.env.SESSION_TIMEOUT_SEC ? parseInt(process.env.SESSION_TIMEOUT_SEC) : this.SESSION_TIMEOUT_SEC
@@ -37,9 +38,10 @@ export class ServerSession {
 
     private serializeSessionsToCache() {
         serializeToFile(this.CACHE_FILE_PATH, this.userSessions).then(() => {
-            if (this.userSessions.length > 0) {
-                // To avoid logging on every caching job even when there are no sessions
+            if (this.userSessions.length !== this.lastCachingSessionCount) {
+                // To avoid logging on every caching job even when there are no changes in number of sessions
                 Logger.info(`Sessions (${this.userSessions.length}) cached to ${this.CACHE_FILE_PATH}`)
+                this.lastCachingSessionCount = this.userSessions.length
             }
         })
     }

@@ -1,10 +1,10 @@
-import fastify, { FastifyRequest } from 'fastify'
+import fastify, {FastifyRequest} from 'fastify'
 import fastifyCors from 'fastify-cors'
-import { ServerSession } from './ServerSession';
-import { Engine } from "./Engine";
-import { UserSession } from "./model";
-import { QuizStatus } from "./GameState";
-import { Logger } from './Logger';
+import {ServerSession} from './ServerSession';
+import {Engine} from "./Engine";
+import {UserSession} from "./model";
+import {QuizStatus} from "./GameState";
+import {Logger} from './Logger';
 
 require('dotenv').config()
 const server = fastify()
@@ -17,7 +17,7 @@ const serverSession = new ServerSession()
 const engine = new Engine(4, 4)
 
 const getSession = (request: FastifyRequest): UserSession => {
-    let { sessionId } = request.query as { sessionId: string }
+    let {sessionId} = request.query as { sessionId: string }
     if (!sessionId || serverSession.getById(sessionId) === undefined) {
         Logger.info(`No session for id '${sessionId}', creating new session`)
         sessionId = serverSession.createNewSessionAndGetId()
@@ -31,7 +31,7 @@ server.get('/quiz', async (request, reply) => {
     try {
         if (userSession.state.quizStatus === QuizStatus.NO_QUIZ || userSession.state.quizStatus === QuizStatus.QUIZ_ANSWERED)
             await engine.generateQuizData(userSession)
-        Logger.info(`request sessionId: ${userSession.sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}`)
+        Logger.info(`GET /quiz sessionId: ${userSession.sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}`)
         reply.code(200).send(userSession.state.getStateForClient(userSession.sessionId))
     } catch (e) {
         Logger.error(`Could not fetch quiz data for ${userSession.sessionId}`, e)
@@ -41,7 +41,7 @@ server.get('/quiz', async (request, reply) => {
 
 server.post('/answer', async (request, reply) => {
     const userSession = getSession(request)
-    const { answer } = request.body as { answer: string }
+    const {answer} = request.body as { answer: string }
 
     if (userSession.state.quizStatus !== QuizStatus.FRESH_QUIZ) {
         reply.code(204).send()
@@ -50,6 +50,7 @@ server.post('/answer', async (request, reply) => {
     try {
         const response = engine.handleAnswer(userSession, answer)
         serverSession.handleHighscore(userSession, response.score)
+        Logger.info(`POST /answer sessionId: ${userSession.sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}, answer: ${answer}`)
         reply.code(200).send(response)
     } catch (e) {
         Logger.error(`Could not process the answer to the quiz question for ${userSession.sessionId}`, e)

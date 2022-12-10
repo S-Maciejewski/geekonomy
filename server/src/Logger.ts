@@ -1,22 +1,22 @@
 import pino from 'pino';
 
-const logsPath = process.env.LOGS_PATH || './logs'
-const logFilePath = `${logsPath}/server_${Date.now()}.log`
-const logger = pino({}, pino.destination(logFilePath))
+export class Logger {
+    static logsPath = process.env.LOGS_PATH || './logs'
+    static logFilePath = `${Logger.logsPath}/server_${Date.now()}.log`
+    static logger = pino({}, pino.destination(Logger.logFilePath))
 
-export namespace Logger {
-    export const info = (msg: string, ...args: any[]) => {
-        logger.info({msg, args})
+    static info = (msg: string, ...args: any[]) => {
+        Logger.logger.info({msg, args})
         console.log(msg, ...args)
     }
 
-    export const error = (msg: string, ...args: any[]) => {
-        logger.error({msg, args})
+    static error = (msg: string, ...args: any[]) => {
+        Logger.logger.error({msg, args})
         console.log(msg, ...args)
     }
 
-    export const warn = (msg: string, ...args: any[]) => {
-        logger.warn({msg, args})
+    static warn = (msg: string, ...args: any[]) => {
+        Logger.logger.warn({msg, args})
         console.log(msg, ...args)
     }
 }
