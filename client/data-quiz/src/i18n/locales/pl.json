@@ -293,6 +293,8 @@
     "close": "Zamknij i nie pokazuj tego więcej"
   },
   "glossary": {
-    "button": "Słownik pojęć"
+    "button": "Słownik pojęć",
+    "title": "Słownik pojęć",
+    "learn-more": "Dowiedz się więcej"
   }
 }

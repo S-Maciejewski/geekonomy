@@ -1,5 +1,6 @@
 .container {
   margin: 0 0px 0 10px;
+
   button {
     width: 165px;
   }
@@ -10,10 +11,19 @@
   top: 50%;
   left: 50%;
   width: 60%;
-  height: 60%;
+  max-height: 70%;
   transform: translate(-50%, -50%);
   overflow: auto;
-  svg {
-    margin: 0 4px 0 4px;
+  & > :first-child {
+    margin-bottom: 10px;
+  }
+  //& > * {
+  //  margin-bottom: 10px !important;
+  //}
+
+  .glossaryEntry {
+    .linkContainer {
+      margin-top: 40px !important;
+    }
   }
 }

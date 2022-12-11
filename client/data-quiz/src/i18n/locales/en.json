@@ -293,6 +293,8 @@
     "close": "Close and don't show this again"
   },
   "glossary": {
-    "button": "Glossary"
+    "button": "Glossary",
+    "title": "Glossary",
+    "learn-more": "Learn more"
   }
 }

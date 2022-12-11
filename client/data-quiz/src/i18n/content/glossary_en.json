@@ -1,0 +1,14 @@
+[
+  {
+    "term": "GDP",
+    "shortDefinition": "Gross domestic product of an economy",
+    "description": "A measure of the total value of goods and services produced by an economy.",
+    "wikiLink": "https://en.wikipedia.org/wiki/Gross_domestic_product"
+  },
+  {
+    "term": "GNI",
+    "shortDefinition": "Gross national income",
+    "description": "The total domestic and foreign income of residents of a country. Consists of gross domestic product (GDP) plus incomes earned by foreign residents, minus income earned in the domestic economy by nonresidents.",
+    "wikiLink": "https://en.wikipedia.org/wiki/Gross_national_income"
+  }
+]
