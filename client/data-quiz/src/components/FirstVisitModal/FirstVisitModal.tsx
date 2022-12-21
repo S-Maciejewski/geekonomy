@@ -16,7 +16,7 @@ export const FirstVisitModal: React.FC = () => {
 
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => {
-        if (localStorage.getItem('firstVisit') != 'false') {
+        if (localStorage.getItem('firstVisit') !== 'false') {
             setOpen(true)
         }
     }

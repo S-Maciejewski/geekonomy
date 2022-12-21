@@ -12,6 +12,7 @@ import {LanguagePicker} from "../components/LanguagePicker/LanguagePicker";
 import GeekonomyLogo from "../assets/geekonomy-logo-long.svg";
 import {HelpModal} from "../components/HelpModal/HelpModal";
 import {FirstVisitModal} from "../components/FirstVisitModal/FirstVisitModal";
+import {GlossaryModal} from "../components/Glossary/GlossaryModal";
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
@@ -47,7 +48,10 @@ export const GameView: React.FC = () => {
                         <img src={GeekonomyLogo} alt="Geekonomy logo" className={styles.logo}/>
                         <div className={styles.languageAndHelpRow}>
                             <LanguagePicker/>
-                            <HelpModal/>
+                            <div className={styles.stackedHelpButtons}>
+                                <HelpModal/>
+                                <GlossaryModal/>
+                            </div>
                         </div>
                     </div>
                     <div>

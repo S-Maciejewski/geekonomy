@@ -291,5 +291,10 @@
     "section-3-oss": "Projekt jest otwartoźródłowy - możesz znaleźć kod i zaproponować zmiany na",
     "cookies-notice": "Ta strona używa ciasteczek aby przechowywać dane o sesji gry w twojej przeglądarce. Korzystając ze strony zgadzasz się na wykorzystanie ciasteczek.",
     "close": "Zamknij i nie pokazuj tego więcej"
+  },
+  "glossary": {
+    "button": "Słownik pojęć",
+    "title": "Słownik pojęć",
+    "learn-more": "Dowiedz się więcej"
   }
 }

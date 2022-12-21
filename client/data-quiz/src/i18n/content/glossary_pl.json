@@ -1,0 +1,38 @@
+[
+  {
+    "term": "PKB",
+    "shortDefinition": "Produkt krajowy brutto",
+    "description": "Miernik efektów pracy społeczeństwa danego kraju, ukazuje wielkość gospodarki",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Produkt_krajowy_brutto"
+  },
+  {
+    "term": "Dochód narodowy",
+    "shortDefinition": "",
+    "description": "Suma dochodów w roku z wytworzenia produktów, które powiększyły bogactwo kraju",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Dochód_narodowy"
+  },
+  {
+    "term": "Grunty orne",
+    "shortDefinition": "",
+    "description": "Grunty uprawiane w celu produkcji roślinnej lub obszary dostępne dla produkcji roślinnej",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Grunty_orne"
+  },
+  {
+    "term": "Inflacja",
+    "shortDefinition": "",
+    "description": "Proces wzrostu przeciętnego poziomu cen w gospodarce",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Inflacja"
+  },
+  {
+    "term": "Indeks cen konsumpcyjnych",
+    "shortDefinition": "",
+    "description": "Najpopularniejsza na świecie miara inflacji",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Wskaźnik_cen_towarów_i_usług_konsumpcyjnych"
+  },
+  {
+    "term": "Saldo rachunku bieżącego",
+    "shortDefinition": "",
+    "description": "Część bilansu płatniczego, na którą składa się m.in. wartość eksportu minus wartość importu towarów i usług",
+    "wikiLink": "https://pl.wikipedia.org/wiki/Rachunek_bie%C5%BC%C4%85cy_bilansu_p%C5%82atniczego"
+  }
+]

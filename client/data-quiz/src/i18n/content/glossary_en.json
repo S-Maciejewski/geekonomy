@@ -1,0 +1,38 @@
+[
+  {
+    "term": "GDP",
+    "shortDefinition": "Gross domestic product of an economy",
+    "description": "A measure of the total value of goods and services produced by an economy.",
+    "wikiLink": "https://en.wikipedia.org/wiki/Gross_domestic_product"
+  },
+  {
+    "term": "GNI",
+    "shortDefinition": "Gross national income",
+    "description": "The total domestic and foreign income of residents of a country. Consists of gross domestic product (GDP) plus incomes earned by foreign residents, minus income earned in the domestic economy by nonresidents.",
+    "wikiLink": "https://en.wikipedia.org/wiki/Gross_national_income"
+  },
+  {
+    "term": "Arable land",
+    "shortDefinition": "Land suitable for growing crops",
+    "description": "Any land capable of being ploughed and used to grow crops",
+    "wikiLink": "https://en.wikipedia.org/wiki/Arable_land"
+  },
+  {
+    "term": "Inflation",
+    "shortDefinition": "",
+    "description": "A sustained increase in the general level of prices for goods and services",
+    "wikiLink": "https://en.wikipedia.org/wiki/Inflation"
+  },
+  {
+    "term": "CPI",
+    "shortDefinition": "Consumer price index",
+    "description": "Index of changes in prices of consumer standards and services, measure of inflation",
+    "wikiLink": "https://en.wikipedia.org/wiki/Consumer_price_index"
+  },
+  {
+    "term": "Current account balance",
+    "shortDefinition": "",
+    "description": "Records the value of exports and imports of both goods and services and international transfers of capital",
+    "wikiLink": "https://en.wikipedia.org/wiki/Current_account_(balance_of_payments)"
+  }
+]
