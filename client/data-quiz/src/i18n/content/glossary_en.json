@@ -26,13 +26,13 @@
   {
     "term": "CPI",
     "shortDefinition": "Consumer price index",
-    "description": "",
+    "description": "Index of changes in prices of consumer standards and services, measure of inflation",
     "wikiLink": "https://en.wikipedia.org/wiki/Consumer_price_index"
   },
   {
     "term": "Current account balance",
     "shortDefinition": "",
-    "description": "",
+    "description": "Records the value of exports and imports of both goods and services and international transfers of capital",
     "wikiLink": "https://en.wikipedia.org/wiki/Current_account_(balance_of_payments)"
   }
 ]
