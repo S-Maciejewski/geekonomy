@@ -48,8 +48,10 @@ export const GameView: React.FC = () => {
                         <img src={GeekonomyLogo} alt="Geekonomy logo" className={styles.logo}/>
                         <div className={styles.languageAndHelpRow}>
                             <LanguagePicker/>
-                            <HelpModal/>
-                            <GlossaryModal/>
+                            <div className={styles.stackedHelpButtons}>
+                                <HelpModal/>
+                                <GlossaryModal/>
+                            </div>
                         </div>
                     </div>
                     <div>

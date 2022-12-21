@@ -15,7 +15,7 @@
     margin: 10px 0 20px 0;
 
     grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
           ". rightSide"
           ". rightSide";
@@ -26,15 +26,72 @@
       flex-direction: row-reverse;
       align-items: center;
       justify-content: end;
-
-      .logo {
-        width: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0px 10px 0px 10px;
-      }
+      height: 100%;
     }
+
+    .languageAndHelpRow {
+      height: 100%;
+    }
+
+    .logo {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0px 10px 0px 10px;
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .stackedHelpButtons {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+@media (max-width: 1600px) and (min-width: 1180px) {
+  .stackedHelpButtons {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px 0 10px;
+    align-items: center;
+
+    button {
+      margin-bottom: 8px;
+    }
+  }
+}
+
+@media (max-width: 1180px) and (min-width: 760px) {
+  .stackedHelpButtons {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
+
+@media (max-width: 760px) and (min-width: 600px) {
+  .stackedHelpButtons {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 10px 0 10px;
+    align-items: center;
+
+    button {
+      margin-bottom: 8px;
+      font-size: 10px;
+      max-width: 134px !important;
+    }
+  }
+
+}
+
+@media (max-width: 600px) {
+  .stackedHelpButtons {
+    display: flex;
+    flex-direction: row-reverse;
   }
 }
 
