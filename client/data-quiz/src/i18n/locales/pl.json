@@ -197,7 +197,7 @@
     "NOR": "Norwegia",
     "NPL": "Nepal",
     "NRU": "Nauru",
-    "NZL": "New Zealand",
+    "NZL": "Nowa Zelandia",
     "OMN": "Oman",
     "PAK": "Pakistan",
     "PAN": "Panama",
@@ -273,7 +273,7 @@
   "controls.server_address": "Adres serwera",
   "controls.connect": "Połącz",
   "score": "Wynik",
-  "score.correct": "Odpoweiedź poprawna!",
+  "score.correct": "Odpowiedź poprawna!",
   "score.incorrect.1": "Błedna odpowiedź. Kraj, o który chodziło to",
   "score.incorrect.2": "- twoja odpowiedź to",
   "help": {
