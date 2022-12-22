@@ -30,7 +30,7 @@ export const GlossaryModal: React.FC = () => {
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
-    const content = i18n.language === 'en' ? glossary_en : glossary_pl
+    const content = i18n.language.includes('en') ? glossary_en : glossary_pl
 
     const GlossaryEntryComponent: React.FC<GlossaryEntry> = (entry: GlossaryEntry) => {
         return (
