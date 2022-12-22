@@ -88,7 +88,8 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
 
     const highchartsOptions: Highcharts.Options = {
         title: {
-            text: t(`indicator.${countriesData[0].indicator}`)
+            // TODO: investigate a bizzare bug with translation of indicator.FP.CPI.TOTL.ZG not loading
+            text: countriesData[0].indicator.includes('FP.CPI.TOTL.ZG') ? t('indicator.FP.CPI.TOTL.ZG') : t(`indicator.${countriesData[0].indicator}`)
         },
         // @ts-ignore
         series: series,
