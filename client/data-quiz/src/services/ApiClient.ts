@@ -64,10 +64,14 @@ export class ApiClient {
         return `${ApiClient.API_URL}/${path}`
     }
 
+    private static formatIndicatorValue(value: string) {
+        return parseFloat(value) > 1_000 ? parseFloat(parseFloat(value).toFixed(0)) : parseFloat(parseFloat(value).toFixed(4))
+    }
+
     private static normalizeIndicators(indicators: IndicatorData[]) {
         indicators.forEach(indicatorData => {
             // @ts-ignore
-            indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), parseFloat(entry[1])])
+            indicatorData.series = indicatorData.series.map(entry => [parseFloat(entry[0]), ApiClient.formatIndicatorValue(entry[1])])
         })
     }
 
