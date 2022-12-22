@@ -7,6 +7,7 @@ import styles from './Plots.module.scss'
 import {useTranslation} from "react-i18next";
 import {XrangePointOptionsObject} from "highcharts";
 import {getWindowDimensions} from "../../services/utils";
+import i18n from 'i18next'
 
 export interface PlotProps {
     countriesData: IndicatorData[]
@@ -26,6 +27,36 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
         } else {
             return 2
         }
+    }
+
+    const divideLabelValue = (value: number, divider: number) => {
+        return parseFloat((value / divider).toFixed(1))
+    }
+    const axisLabelFormatter = (itemValue: number | string): string => {
+        const currentLanguage = i18n.language
+        const value = itemValue as number
+        if (currentLanguage === 'en') {
+            if (value >= 1_000_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000_000)} T`
+            } else if (value >= 1_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000)} B`
+            } else if (value >= 1_000_000) {
+                return `${divideLabelValue(value, 1_000_000)} M`
+            } else if (value >= 1_000) {
+                return `${divideLabelValue(value, 1_000)} K`
+            }
+        } else if (currentLanguage === 'pl') {
+            if (value >= 1_000_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000_000)} t`
+            } else if (value >= 1_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000)} mld`
+            } else if (value >= 1_000_000) {
+                return `${divideLabelValue(value, 1_000_000)} mln`
+            } else if (value >= 1_000) {
+                return `${divideLabelValue(value, 1_000)} tys`
+            }
+        }
+        return itemValue.toString()
     }
 
     const series = lastAnswer && countriesData.length > 1 ? countriesData.map((indicator: IndicatorData) => ({
@@ -55,7 +86,6 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
             }
         ]
 
-    // TODO: Better formatter for yAxis labels (tys, mln, bln etc.) https://api.highcharts.com/highcharts/yAxis.labels.formatter
     const highchartsOptions: Highcharts.Options = {
         title: {
             text: t(`indicator.${countriesData[0].indicator}`)
@@ -68,6 +98,9 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
         yAxis: {
             title: {
                 text: undefined,
+            },
+            labels: {
+                formatter: (item) => axisLabelFormatter(item.value)
             }
         },
         ...options
