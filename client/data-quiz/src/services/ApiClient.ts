@@ -62,6 +62,18 @@ export class ApiClient {
         return res.data
     }
 
+    static async postHighscore(name: string): Promise<void> {
+        let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
+        await axios.post(ApiClient.getUrl('highscore'), {name}, {
+            params: {sessionId}
+        }).then(() => {
+            store.dispatch({
+                type: ActionType.HIGHSCORE_POSTED
+            })
+        }).catch((err) => {
+            console.error('Axios error', err)
+        })
+    }
 
     static setApiUrl(url: string) {
         console.log(`Setting API_URL to: ${url}`)

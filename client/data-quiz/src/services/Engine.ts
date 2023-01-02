@@ -16,4 +16,8 @@ export class Engine {
     static async getHighscores() {
         return ApiClient.getHighscores()
     }
+
+    static async handleHighscore(name: string) {
+        await ApiClient.postHighscore(name)
+    }
 }

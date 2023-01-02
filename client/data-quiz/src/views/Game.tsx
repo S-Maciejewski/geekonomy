@@ -13,6 +13,7 @@ import GeekonomyLogo from "../assets/geekonomy-logo-long.svg";
 import {HelpModal} from "../components/HelpModal/HelpModal";
 import {FirstVisitModal} from "../components/FirstVisitModal/FirstVisitModal";
 import {GlossaryModal} from "../components/Glossary/GlossaryModal";
+import {TagEntryModal} from "../components/Highscore/TagEntryModal";
 
 export const GameView: React.FC = () => {
     const [state, setState] = useState<GameState>({} as GameState)
@@ -41,6 +42,7 @@ export const GameView: React.FC = () => {
     return (
         <div>
             <FirstVisitModal/>
+            <TagEntryModal open={!!state.achievedHighscore}/>
             {loading && <Loading/>}
             {!loading && <>
                 <div className={styles.controlsContainer}>

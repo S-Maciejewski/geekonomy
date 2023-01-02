@@ -303,6 +303,9 @@
     "score": "Wynik",
     "date": "Data",
     "no-highscores": "Brak wyników",
-    "explanation": "10 najlepszych i najnowszych wyników."
+    "explanation": "10 najlepszych i najnowszych wyników.",
+    "congratulations": "Gratulacje! Twój wynik jest na liście najlepszych wyników!",
+    "prompt": "Podaj swój 3 literowy tag",
+    "submit": "Zatwierdź"
   }
 }

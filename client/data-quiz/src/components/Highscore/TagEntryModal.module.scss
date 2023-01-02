@@ -1,10 +1,3 @@
-.container {
-  margin: 0 10px 0 10px;
-  button {
-    margin-top: 4px;
-  }
-}
-
 .modalBox {
   position: absolute;
   top: 50%;
@@ -19,8 +12,19 @@
   & > *:not(:first-child) {
     margin-top: 10px;
   }
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .textField {
+      width: 140px;
+    }
+    button {
+      margin-top: 8px;
+    }
+  }
 }
 
-.tableContainer {
-  //margin-top: 10px;
-}
+
