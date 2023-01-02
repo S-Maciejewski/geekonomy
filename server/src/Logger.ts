@@ -1,3 +1,4 @@
+// @ts-ignore
 import pino from 'pino';
 
 export class Logger {

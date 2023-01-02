@@ -296,5 +296,13 @@
     "button": "Glossary",
     "title": "Glossary",
     "learn-more": "Learn more"
+  },
+  "highscores": {
+    "title": "Highscores",
+    "tag": "Player",
+    "score": "Score",
+    "date": "Date",
+    "no-highscores": "No highscores yet",
+    "explanation": "The highscores list is limited to the top 10 players, newest first."
   }
 }

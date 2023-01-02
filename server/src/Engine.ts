@@ -37,6 +37,9 @@ export class Engine implements EngineContract {
     }
 
     handleAnswer(serverSession: ServerSession, userSession: UserSession, answer: string): AnswerServerResponse {
+        // TODO: investigate error Could not process the answer to the quiz question for 8b08b8ff-e27c-4b54-9d4b-3c77091414c7 TypeError: Cannot read property 'quizData' of undefined
+        // at Engine.handleAnswer
+
         if (!userSession.state.quizData)
             throw ('Could not find the quiz to answer')
 

@@ -296,5 +296,13 @@
     "button": "Słownik pojęć",
     "title": "Słownik pojęć",
     "learn-more": "Dowiedz się więcej"
+  },
+  "highscores": {
+    "title": "Najlepsze wyniki",
+    "tag": "Gracz",
+    "score": "Wynik",
+    "date": "Data",
+    "no-highscores": "Brak wyników",
+    "explanation": "10 najlepszych i najnowszych wyników."
   }
 }

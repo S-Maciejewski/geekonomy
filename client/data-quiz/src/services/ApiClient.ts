@@ -2,13 +2,13 @@ import axios from "axios"
 import {AnswerServerResponse, IndicatorData, QuizServerResponse} from "../model";
 import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
+import {Highscore} from "../components/types";
 
 export class ApiClient {
     static API_URL = process.env.REACT_APP_API_URL || localStorage.getItem('API_URL') || 'http://127.0.0.1:80'
     static sessionIdKey = 'sessionId'
 
     static async getQuizGameState(): Promise<void> {
-        // TODO: Decide whether to store sessionId in localStorage manually or use persisted redux
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
         store.dispatch({
             type: ActionType.REQUEST_SENT
@@ -53,6 +53,15 @@ export class ApiClient {
             res: res.data
         }))
     }
+
+    static async getHighscores(): Promise<Highscore[]> {
+        const res = await axios.get<Highscore[]>(ApiClient.getUrl('highscore')).catch((err) => {
+            console.error('Axios error', err)
+            return {data: [] as Highscore[]}
+        })
+        return res.data
+    }
+
 
     static setApiUrl(url: string) {
         console.log(`Setting API_URL to: ${url}`)

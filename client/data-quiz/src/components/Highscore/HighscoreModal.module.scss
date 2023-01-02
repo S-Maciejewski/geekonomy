@@ -1,0 +1,23 @@
+.container {
+  margin: 0 10px 0 10px;
+}
+
+.modalBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  max-width: 500px;
+  min-width: 300px;
+  max-height: 60%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+
+  & > *:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+.tableContainer {
+  //margin-top: 10px;
+}
