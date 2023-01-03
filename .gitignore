@@ -4,3 +4,5 @@ quiz_data
 ignored
 .env
 certbot
+restart.sh
+server/logs/latest_pretty.sh
