@@ -4,6 +4,7 @@ export enum ActionType {
     GET_QUIZ = 'GET_QUIZ',
     POST_ANSWER = 'POST_ANSWER',
     REQUEST_SENT = 'REQUEST_SENT',
+    HIGHSCORE_POSTED = 'HIGHSCORE_POSTED'
 }
 
 export interface Action {
@@ -22,4 +23,8 @@ export interface PostAnswerAction extends Action {
 
 export interface RequestSentAction extends Action {
     type: ActionType.REQUEST_SENT
+}
+
+export interface HighscorePostedAction extends Action {
+    type: ActionType.HIGHSCORE_POSTED
 }

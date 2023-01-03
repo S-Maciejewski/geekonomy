@@ -12,4 +12,12 @@ export class Engine {
         await ApiClient.postQuizAnswer(answer)
         store.getState()
     }
+
+    static async getHighscores() {
+        return ApiClient.getHighscores()
+    }
+
+    static async handleHighscore(name: string) {
+        await ApiClient.postHighscore(name)
+    }
 }

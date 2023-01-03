@@ -11,12 +11,14 @@ export class GameState {
     score: number
     quizData: QuizData | undefined
     quizStatus: QuizStatus
+    highscore: boolean
 
 
     constructor() {
         this.score = 0
         this.quizData = undefined
         this.quizStatus = QuizStatus.NO_QUIZ
+        this.highscore = false
     }
 
     updateQuizData(quizData: QuizData) {

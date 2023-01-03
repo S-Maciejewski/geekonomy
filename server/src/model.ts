@@ -4,7 +4,6 @@ export interface UserSession {
     sessionId: string
     activeAt: number
     state: GameState
-    highscore: Highscore
 }
 
 export interface QuizData {
@@ -39,11 +38,12 @@ export interface AnswerServerResponse extends ServerResponse {
     correctCountry: string
     correct: boolean
     indicators: IndicatorData[]
-    highscore: Highscore
+    achievedHighscore?: boolean
 }
 
 export interface Highscore {
-    sessionId?: string
-    achievedAt?: number
+    sessionId: string
+    achievedAt: number
     score: number
+    playerTag: string
 }

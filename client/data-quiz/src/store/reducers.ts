@@ -1,4 +1,4 @@
-import {Action, ActionType, GetQuizAction, PostAnswerAction, RequestSentAction} from "./actions";
+import {Action, ActionType, GetQuizAction, PostAnswerAction} from "./actions";
 import {GameState, QuizStatus} from "../model";
 
 const initialState: GameState = {
@@ -26,7 +26,8 @@ const handlePostAnswer = (state: GameState, action: PostAnswerAction): GameState
             country: action.res.country,
             correctCountry: action.res.correctCountry,
             correct: action.res.correct
-        }
+        },
+        achievedHighscore: action.res.achievedHighscore
     }
 }
 
@@ -34,6 +35,13 @@ const handleRequestSent = (state: GameState): GameState => {
     return {
         ...state,
         quizStatus: QuizStatus.REQUEST_SENT
+    }
+}
+
+const handleHighscorePosted = (state: GameState): GameState => {
+    return {
+        ...state,
+        achievedHighscore: false
     }
 }
 
@@ -49,6 +57,9 @@ export default function reducer(state = initialState, action: Action): GameState
             break
         case ActionType.REQUEST_SENT:
             state = handleRequestSent(state)
+            break
+        case ActionType.HIGHSCORE_POSTED:
+            state = handleHighscorePosted(state)
             break
     }
 

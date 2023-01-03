@@ -296,5 +296,16 @@
     "button": "Glossary",
     "title": "Glossary",
     "learn-more": "Learn more"
+  },
+  "highscores": {
+    "title": "High scores",
+    "tag": "Player",
+    "score": "Score",
+    "date": "Date",
+    "no-highscores": "No high scores yet",
+    "explanation": "The high scores list is limited to the top 10 players, newest first.",
+    "congratulations": "Congratulations! Your score belongs on high score list!",
+    "prompt": "Enter your 3 letter tag",
+    "submit": "Submit"
   }
 }

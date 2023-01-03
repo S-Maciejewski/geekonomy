@@ -48,8 +48,7 @@ server.post('/answer', async (request, reply) => {
         return
     }
     try {
-        const response = engine.handleAnswer(userSession, answer)
-        serverSession.handleHighscore(userSession, response.score)
+        const response = engine.handleAnswer(serverSession, userSession, answer)
         Logger.info(`POST /answer sessionId: ${userSession.sessionId}, score: ${userSession.state.score}, correct country: ${userSession.state.quizData?.correctCountry}, answer: ${answer}`)
         reply.code(200).send(response)
     } catch (e) {
@@ -65,6 +64,20 @@ server.get('/highscore', async (request, reply) => {
     } catch (e) {
         Logger.error(`Could not get highscore list`, e)
         reply.code(500).send('Could not get highscore')
+    }
+})
+
+server.post('/highscore', async (request, reply) => {
+    const userSession = getSession(request)
+    const {name} = request.body as { name: string }
+
+    try {
+        engine.setHighscoreTag(serverSession, userSession, name)
+        Logger.info(`POST /highscore sessionId: ${userSession.sessionId}, tag: ${name}`)
+        reply.code(200).send()
+    } catch (e) {
+        Logger.error(`Could not add highscore for ${userSession.sessionId}`, e)
+        reply.code(500).send('Could not add highscore')
     }
 })
 

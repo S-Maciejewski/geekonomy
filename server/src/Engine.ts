@@ -1,6 +1,7 @@
-import {AnswerServerResponse, UserSession} from "./model";
+import {AnswerServerResponse, Highscore, UserSession} from "./model";
 import {DwhRepository, PreGeneratedRepository, Repository} from "./Repository";
 import {QuizStatus} from "./GameState";
+import {ServerSession} from "./ServerSession";
 
 const supported = require('../config/supported.json')
 
@@ -12,7 +13,9 @@ only handling the state changes for user session for which Engine methods are ca
 export interface EngineContract {
     generateQuizData(session: UserSession): Promise<void>
 
-    handleAnswer(session: UserSession, answer: string): AnswerServerResponse
+    handleAnswer(serverSession: ServerSession, session: UserSession, answer: string): AnswerServerResponse
+
+    handleHighscore(serverSession: ServerSession, session: UserSession): boolean
 }
 
 export class Engine implements EngineContract {
@@ -33,33 +36,62 @@ export class Engine implements EngineContract {
         return
     }
 
-    handleAnswer(session: UserSession, answer: string): AnswerServerResponse {
-        if (!session.state.quizData)
+    handleAnswer(serverSession: ServerSession, userSession: UserSession, answer: string): AnswerServerResponse {
+        // TODO: investigate error Could not process the answer to the quiz question for 8b08b8ff-e27c-4b54-9d4b-3c77091414c7 TypeError: Cannot read property 'quizData' of undefined
+        // at Engine.handleAnswer
+
+        if (!userSession.state.quizData)
             throw ('Could not find the quiz to answer')
 
         const answerServerResponse = ({
-            sessionId: session.sessionId,
+            sessionId: userSession.sessionId,
             quizStatus: QuizStatus.QUIZ_ANSWERED,
             country: answer,
-            correctCountry: session.state.quizData.correctCountry,
-            indicators: session.state.quizData.indicators,
-            highscore: session.highscore
+            correctCountry: userSession.state.quizData.correctCountry,
+            indicators: userSession.state.quizData.indicators,
         })
 
-        if (answer === session.state.quizData.correctCountry) {
-            session.state.incrementScore()
+        if (answer === userSession.state.quizData.correctCountry) {
+            userSession.state.incrementScore()
             return ({
                 ...answerServerResponse,
-                score: session.state.score,
+                score: userSession.state.score,
                 correct: true
             })
         }
 
-        session.state.clearScore()
+        const achievedHighscore = this.handleHighscore(serverSession, userSession)
+        userSession.state.clearScore()
         return ({
             ...answerServerResponse,
-            score: session.state.score,
-            correct: false
+            score: userSession.state.score,
+            correct: false,
+            achievedHighscore
         })
+    }
+
+    handleHighscore(serverSession: ServerSession, userSession: UserSession): boolean {
+        const currentHighscores = serverSession.getHighscoreList()
+        if ((currentHighscores.find(entry => entry.score <= userSession.state.score) === undefined && currentHighscores.length >= serverSession.MAX_HIGHSCORES) ||
+            currentHighscores.find(entry => entry.sessionId === userSession.sessionId && entry.score > userSession.state.score) !== undefined) {
+            return false
+        }
+        const newHighscore: Highscore = {
+            sessionId: userSession.sessionId,
+            score: userSession.state.score,
+            achievedAt: Date.now(),
+            playerTag: serverSession.DEFAULT_PLAYER_TAG,
+        }
+        serverSession.updateHighscoreList(newHighscore)
+        return true
+    }
+
+    setHighscoreTag(serverSession: ServerSession, userSession: UserSession, tag: string): void {
+        const currentHighscores = serverSession.getHighscoreList()
+        const playerHighscore = currentHighscores.find(entry => entry.sessionId === userSession.sessionId)
+        if (playerHighscore === undefined)
+            throw Error('Could not find the highscore to update')
+        playerHighscore.playerTag = tag
+        serverSession.updateHighscoreList(playerHighscore)
     }
 }
