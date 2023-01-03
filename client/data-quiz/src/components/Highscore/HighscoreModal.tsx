@@ -25,12 +25,19 @@ const boxModalStyle = {
     p: 4,
 };
 
+type HighscoreTableProps = {
+    currentHighscores: Highscore[]
+}
+
 export const HighscoreModal: React.FC = () => {
     const {t} = useTranslation()
 
     const [open, setOpen] = React.useState(false)
     const handleOpen = () => {
-        getHighscores().then(() => setOpen(true))
+        getHighscores().then((highscores) => {
+            setHighscores(highscores)
+            setOpen(true)
+        })
     }
     const handleClose = () => setOpen(false)
 
@@ -51,7 +58,7 @@ export const HighscoreModal: React.FC = () => {
             .catch(e => console.log('Error while getting highscores', e))
     }, [])
 
-    const HighscoreTableComponent: React.FC = () => {
+    const HighscoreTableComponent: React.FC<HighscoreTableProps> = ({currentHighscores}) => {
         return (
             <TableContainer component={Paper} className={styles.tableContainer}>
                 <Table sx={{minWidth: 300}} aria-label="simple table">
@@ -63,7 +70,7 @@ export const HighscoreModal: React.FC = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {highscores.map((entry) => (
+                        {currentHighscores.map((entry) => (
                             <TableRow
                                 key={entry.sessionId}
                                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
@@ -100,7 +107,7 @@ export const HighscoreModal: React.FC = () => {
                     <Typography>
                         {t('highscores.explanation')}
                     </Typography>
-                    <HighscoreTableComponent/>
+                    <HighscoreTableComponent currentHighscores={highscores}/>
                 </Box>
             </Modal>
         </div>

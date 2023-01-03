@@ -72,7 +72,8 @@ server.post('/highscore', async (request, reply) => {
     const {name} = request.body as { name: string }
 
     try {
-        // TODO
+        engine.setHighscoreTag(serverSession, userSession, name)
+        Logger.info(`POST /highscore sessionId: ${userSession.sessionId}, tag: ${name}`)
         reply.code(200).send()
     } catch (e) {
         Logger.error(`Could not add highscore for ${userSession.sessionId}`, e)

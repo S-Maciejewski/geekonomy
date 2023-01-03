@@ -72,8 +72,10 @@ export class Engine implements EngineContract {
 
     handleHighscore(serverSession: ServerSession, userSession: UserSession): boolean {
         const currentHighscores = serverSession.getHighscoreList()
-        if (currentHighscores.find(entry => entry.score <= userSession.state.score) === undefined && currentHighscores.length >= serverSession.MAX_HIGHSCORES)
+        if ((currentHighscores.find(entry => entry.score <= userSession.state.score) === undefined && currentHighscores.length >= serverSession.MAX_HIGHSCORES) ||
+            currentHighscores.find(entry => entry.sessionId === userSession.sessionId && entry.score > userSession.state.score) !== undefined) {
             return false
+        }
         const newHighscore: Highscore = {
             sessionId: userSession.sessionId,
             score: userSession.state.score,
@@ -82,5 +84,14 @@ export class Engine implements EngineContract {
         }
         serverSession.updateHighscoreList(newHighscore)
         return true
+    }
+
+    setHighscoreTag(serverSession: ServerSession, userSession: UserSession, tag: string): void {
+        const currentHighscores = serverSession.getHighscoreList()
+        const playerHighscore = currentHighscores.find(entry => entry.sessionId === userSession.sessionId)
+        if (playerHighscore === undefined)
+            throw Error('Could not find the highscore to update')
+        playerHighscore.playerTag = tag
+        serverSession.updateHighscoreList(playerHighscore)
     }
 }
