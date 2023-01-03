@@ -21,6 +21,7 @@ export class ServerSession {
         this.userSessions = clearUserSessions ? [] : this.getUserSessionsFromCache()
         Logger.info(`Sessions list initialized - got ${this.userSessions.length} sessions from cache`)
         this.highscoreList = clearHighscores ? [] : this.getHighscoresFromCache()
+        Logger.info(`Highscores list initialized - got ${this.highscoreList.length} entries from cache`)
         this.sessionCleanupJob()
         this.cachingJob()
     }
