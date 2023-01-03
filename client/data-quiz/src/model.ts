@@ -12,6 +12,7 @@ export interface GameState {
     countries: Country[]
     quizStatus: QuizStatus
     lastAnswer?: LastAnswer
+    achievedHighscore?: boolean
 }
 
 export interface IndicatorData {
@@ -43,4 +44,5 @@ export interface QuizServerResponse extends ServerResponse {
 
 export interface AnswerServerResponse extends ServerResponse, LastAnswer {
     indicators: IndicatorData[]
+    achievedHighscore?: boolean
 }

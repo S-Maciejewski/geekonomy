@@ -2,13 +2,13 @@ import axios from "axios"
 import {AnswerServerResponse, IndicatorData, QuizServerResponse} from "../model";
 import {store} from "../store/store";
 import {ActionType, GetQuizAction} from "../store/actions";
+import {Highscore} from "../components/types";
 
 export class ApiClient {
     static API_URL = process.env.REACT_APP_API_URL || localStorage.getItem('API_URL') || 'http://127.0.0.1:80'
     static sessionIdKey = 'sessionId'
 
     static async getQuizGameState(): Promise<void> {
-        // TODO: Decide whether to store sessionId in localStorage manually or use persisted redux
         let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
         store.dispatch({
             type: ActionType.REQUEST_SENT
@@ -52,6 +52,27 @@ export class ApiClient {
             type: ActionType.POST_ANSWER,
             res: res.data
         }))
+    }
+
+    static async getHighscores(): Promise<Highscore[]> {
+        const res = await axios.get<Highscore[]>(ApiClient.getUrl('highscore')).catch((err) => {
+            console.error('Axios error', err)
+            return {data: [] as Highscore[]}
+        })
+        return res.data
+    }
+
+    static async postHighscore(name: string): Promise<void> {
+        let sessionId = localStorage.getItem(ApiClient.sessionIdKey)
+        await axios.post(ApiClient.getUrl('highscore'), {name}, {
+            params: {sessionId}
+        }).then(() => {
+            store.dispatch({
+                type: ActionType.HIGHSCORE_POSTED
+            })
+        }).catch((err) => {
+            console.error('Axios error', err)
+        })
     }
 
     static setApiUrl(url: string) {
