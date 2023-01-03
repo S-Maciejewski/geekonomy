@@ -35,17 +35,7 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
     const axisLabelFormatter = (itemValue: number | string): string => {
         const currentLanguage = i18n.language
         const value = itemValue as number
-        if (currentLanguage === 'en') {
-            if (value >= 1_000_000_000_000) {
-                return `${divideLabelValue(value, 1_000_000_000_000)} T`
-            } else if (value >= 1_000_000_000) {
-                return `${divideLabelValue(value, 1_000_000_000)} B`
-            } else if (value >= 1_000_000) {
-                return `${divideLabelValue(value, 1_000_000)} M`
-            } else if (value >= 1_000) {
-                return `${divideLabelValue(value, 1_000)} K`
-            }
-        } else if (currentLanguage === 'pl') {
+        if (currentLanguage.includes('pl')) {
             if (value >= 1_000_000_000_000) {
                 return `${divideLabelValue(value, 1_000_000_000_000)} t`
             } else if (value >= 1_000_000_000) {
@@ -54,6 +44,16 @@ export const Plot: React.FC<PlotProps & StandardProps> = ({countriesData, option
                 return `${divideLabelValue(value, 1_000_000)} mln`
             } else if (value >= 1_000) {
                 return `${divideLabelValue(value, 1_000)} tys`
+            }
+        } else {
+            if (value >= 1_000_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000_000)} T`
+            } else if (value >= 1_000_000_000) {
+                return `${divideLabelValue(value, 1_000_000_000)} B`
+            } else if (value >= 1_000_000) {
+                return `${divideLabelValue(value, 1_000_000)} M`
+            } else if (value >= 1_000) {
+                return `${divideLabelValue(value, 1_000)} K`
             }
         }
         return itemValue.toString()
