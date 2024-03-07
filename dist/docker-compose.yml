@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  api:
+    restart: always
+    image: geekonomy-api
+    environment:
+      - SERVER_ADDRESS=0.0.0.0
+      - PORT=80
+      - QUIZ_DATA_PATH=/quiz_data
+      - LOGS_PATH=/logs
+      - SESSIONS_CACHE_FILE_PATH=/cache/sessions.json
+      - HIGHSCORES_CACHE_FILE_PATH=/cache/highscores.json
+    volumes:
+      - ${QUIZ_REPOSITORY_PATH}:/quiz_data
+      - ${LOGS_PATH}:/logs
+      - ${SESSIONS_CACHE_FILE_PATH}:/cache/sessions.json
+      - ${HIGHSCORES_CACHE_FILE_PATH}:/cache/highscores.json
+
+
+  client:
+    depends_on:
+      - api
+    restart: always
+    image: geekonomy-client
+    environment:
+      - REACT_APP_API_URL=${REACT_APP_API_URL}
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+
+  certbot:
+    image: geekonomy-certbot
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw

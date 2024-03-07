@@ -6,5 +6,4 @@ Indicators can be explored here: https://databank.worldbank.org/source/world-dev
 
 Features planned in the future:
 - country (or countries if metrics for them are shown) is highlighted on the map upon clicking answer
-- highscores (stored on client's side?)
 - mutiple quiz difficulty levels, i.e. 4 metrics 4 countries, 6 metrics 4 countries, 8 metrics 3 countries etc.

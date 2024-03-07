@@ -3,6 +3,6 @@ quiz_data
 # database.ini
 ignored
 .env
+.env.local
 certbot
-restart.sh
 server/logs/latest_pretty.sh
