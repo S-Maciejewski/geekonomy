@@ -19,4 +19,4 @@ echo "Copying dist to server..."
 # Create the dist folder on remote if it doesn't exist
 ssh -i $env:SSH_KEY_PATH $env:SSH_USER@${env:VPS_ADDRESS} "mkdir -p /home/$env:SSH_USER/geekonomy"
 scp -i $env:SSH_KEY_PATH -pr ./dist $env:SSH_USER@${env:VPS_ADDRESS}:/home/$env:SSH_USER/geekonomy
-ssh -i $env:SSH_KEY_PATH $env:SSH_USER@${env:VPS_ADDRESS} "cd /home/$env:SSH_USER/geekonomy/dist && chmod +x load_images.sh restart.sh && ./load_images.sh"
+ssh -i $env:SSH_KEY_PATH $env:SSH_USER@${env:VPS_ADDRESS} "cd /home/$env:SSH_USER/geekonomy/dist && ./load_images.sh"
