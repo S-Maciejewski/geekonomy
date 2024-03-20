@@ -18,7 +18,8 @@ services:
       - ${LOGS_PATH}:/logs
       - ${SESSIONS_CACHE_FILE_PATH}:/cache/sessions.json
       - ${HIGHSCORES_CACHE_FILE_PATH}:/cache/highscores.json
-
+    ports:
+      - 8080:80
 
   client:
     depends_on:

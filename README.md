@@ -24,3 +24,5 @@ It essentially turns the WB data into something like a data warehouse with a sta
 ## Deployment
 For cost reasons the project is built off-site and then deployed to a VPS. The deployment process is essentially filling out a proper `.env` running the `build_and_ship.sh` script which builds the docker images and then pushes them to the VPS. The VPS then pulls the images and runs them with docker-compose. 
 > Note: You'll need to generate the quiz data and move it to the server separately. There might also be some problems with certbot since it requires any certificates to be present and it requires a DNS record to be present. You can skip that by modifying nginx.conf to use http instead of https and removing the certbot container from the docker-compose file.
+
+> Note: **For some reason the client's REACT_APP_API_URL is not being set properly in the docker-compose file. You'll need to set it manually in the `client/data_quiz/.env` file before building!.**

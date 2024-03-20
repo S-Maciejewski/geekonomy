@@ -40,6 +40,11 @@ export class Engine implements EngineContract {
         // TODO: investigate error Could not process the answer to the quiz question for 8b08b8ff-e27c-4b54-9d4b-3c77091414c7 TypeError: Cannot read property 'quizData' of undefined
         // at Engine.handleAnswer
 
+        if(!userSession || !userSession.state) {
+            console.log('userSession', userSession)
+            throw ('No user session or state found.')
+        }
+
         if (!userSession.state.quizData)
             throw ('Could not find the quiz to answer')
 

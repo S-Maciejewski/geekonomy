@@ -4,5 +4,6 @@ quiz_data
 ignored
 .env
 .env.local
+.env.prod
 certbot
 server/logs/latest_pretty.sh
